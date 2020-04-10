@@ -1,1 +1,357 @@
-<p>sitterid works!</p>
+<div class="container bg-white w-100 p-3 mt-5 card-header " style="box-shadow: rgba(0, 0, 0, 0.75) 10px 10px 5px 0; ">
+
+  <ul class="nav nav-tabs mb-1" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active font-weight-bold text-info" data-toggle="tab" href="#AccountSettings">Account Settings</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link font-weight-bold text-info" data-toggle="tab" href="#Availability">Availability</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link font-weight-bold text-info" data-toggle="tab" href="#Jobs">Jobs</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link font-weight-bold text-info" data-toggle="tab" href="#Reviews">Reviews</a>
+    </li>
+  </ul>
+
+  <!-- ================================= ACCOUNT SETTINGS CASE ==================================-->
+
+  <div class="tab-content">
+    <div id="AccountSettings" class="container tab-pane active" style="position: relative"><br>
+
+      <div class="text-center mb-2 " style="position: absolute; top: 10px ;right: 10px">
+        <img id="profileImage" [src]="url ? url : 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'" width="150px" height="150px" class="avatar rounded-circle img-thumbnail " alt="avatar" (click)="clickPic()">
+        <input type='file' id="imageUpload" name="profilePictureUpload" style="display: none" (change)="onSelectFile( $event);">
+      </div>
+
+      <h1> <i class="fas fa-user-cog"></i> Modify my settings</h1>
+      <div class="col mt-4 ml-1">
+
+        <form>
+          <h3 class="text-info">Personal Information</h3>
+          <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" class="form-control" id="firstName" placeholder="Exp: Ouss..">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" class="form-control" id="lastName" placeholder="Exp: Ben Fredj ..">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email Address:</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Exp: example@gmail.com">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" class="form-control" id="phoneNumber" placeholder="Exp: 24772681 ...">
+          </div>
+          <div class="form-group">
+            <label for="jobStatus">Job/Education:</label>
+            <input class="form-control" type="text" id="jobStatus" name="jobStatus" placeholder="Exp: studying , doctor , etc...">
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" (change)="checkBoxChange()">
+            <label class="form-check-label" for="exampleCheck1">Check me out </label>
+          </div>
+          <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px" [disabled]="!checkBoxChecked">Save</button>
+        </form>
+        <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
+        <form class="mt-4">
+          <h3 class="text-info">New Password</h3>
+          <div class="form-group">
+            <label for="oldPassword">Your Old Password</label>
+            <input type="password" class="form-control" id="oldPassword" >
+          </div>
+          <div class="form-group">
+            <label for="newPassword">Your New Password</label>
+            <input type="password" class="form-control" id="newPassword" >
+          </div>
+          <div class="form-group">
+            <label for="confirmNewPassword">Confirm Your New Password</label>
+            <input type="password" class="form-control" id="confirmNewPassword">
+          </div>
+          <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px">Save</button>
+        </form>
+        <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
+
+        <form class="mt-4">
+          <h3 class="text-info">Job Informations</h3>
+          <div class="form-group">
+            <label for ="numberOfChildrenHandling">how many children can you take care of :</label>
+            <select id="numberOfChildrenHandling" class="custom-select" name="numberOfChildrenHandling">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <label> age of children you can take care of</label>
+          <fieldset class="form-group mb-4 mt-2 ">
+            <div class="row">
+              <div class="col-sm">
+                <div class="col">
+                  <div><img src="assets/img/infant.svg" width="150px" height="150px" alt="infantPicture"></div>
+                  <div><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="infant" value="infant" ></div>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="col">
+                  <div><img src="assets/img/toddler.svg" width="150px" height="150px" alt="toddlerPicture"></div>
+                  <div ><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="toddler" value="toddler" ></div>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="col">
+                  <div><img src="assets/img/preschool.svg" width="150px" height="150px" alt="preschoolerPicture"></div>
+                  <div><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="preschool" value="preschool" ></div>
+                </div>
+              </div>
+              <div class="col-sm ">
+                <div class="col">
+                  <div><img src="assets/img/school.svg" width="150px" height="150px" alt="schoolerPicture"></div>
+                  <div><input class="form-check-input " style="margin-left:70px;" type="checkbox" name="childAge" id="school" value="school" ></div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-group mt-4">
+            <label for ="displacement">are you able to make displacements :</label>
+            <select id="displacement" class="form-control" name="displacement">
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="experienceYears"> how many years of experience do you have on this job</label>
+            <input class="form-control" id="experienceYears" type="number" name="experienceYears" min="0" max="60" value="0" >
+          </div>
+          <div class="form-group">
+            <label>Certificates:</label>
+            <div class="checkbox">
+              <label><input type="checkbox" value="CPR"> CPR</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="firstAid"> First Aid</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="waterSafety"> Water Safety</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="driverLicence"> Driver's license</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="cooking"> Nutrition and cooking courses</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="fitnessEducation"> Fitness Education </label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="specialNeedCare"> Special Needs Care </label>
+            </div>
+
+          </div>
+        </form>
+
+        <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
+        <form class="mt-4">
+          <h3 class="text-info">Notifications</h3>
+          <div class="form-group col">
+            <div class="form-group">
+              <label class="ml-n2" for="subscribeEmail">Subscribe  To NewsLetter:</label>
+              <div class="row">
+                <input  type="email" class="form-control" id="subscribeEmail" aria-describedby="subEmail" placeholder="Exp: example@gmail.com" style="width: 90%">
+                <ui-switch class="col-sm-1" color="#17a2b8" [checked]="newsLetterChecked" (change)="subscribeChange()" ></ui-switch>
+              </div>
+            </div>
+            <label class="ml-n2">Your email notifications</label>
+            <ul class="list-group ml-n3">
+              <li class="list-group-item font-weight-bold" style="height: 50px">Jobs Request <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" checked [disabled]="!newsLetterChecked"></ui-switch></li>
+              <li class="list-group-item font-weight-bold" style="height: 50px">Favourites Availability <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" checked [disabled]="!newsLetterChecked"></ui-switch></li>
+            </ul>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ================================= END ACCOUNT SETTINGS CASE ==================================-->
+
+    <!-- ===================================== Availability CASE ======================================-->
+
+    <div id="Availability" class="container tab-pane fade"><br>
+      <form>
+        <div class="form-group card-header">
+          <label for="available" style="font-size: 28px;font-weight: 500"> Are You Available</label><ui-switch class="col-sm-1 mt-2" color="#17a2b8" style="float: right" id="available" (change)="changeAvailability()" ></ui-switch>
+        </div>
+        <div class="form-group mt-2" *ngIf="available">
+          <div class="form-group">
+            <label for="availabilityDate">when are you available</label>
+            <select id="availabilityDate" class="form-control" name="availabilityDate">
+              <option value="0">Today</option>
+              <option value="1">Tomorrow</option>
+              <option value="2">In Two Days</option>
+              <option value="3">In Three Days</option>
+              <option value="4">In Four Days</option>
+              <option value="5">In Five Days</option>
+              <option value="6">In Six Days</option>
+              <option value="7">In A Week</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="interval" > For How Many Days Do you Intend To BabySit</label>
+            <select id="interval" class="form-control" name="interval">
+              <option value="1">One Day</option>
+              <option value="2">Two Days</option>
+              <option value="3">Three Days</option>
+              <option value="4">Four Days</option>
+              <option value="5">Five Days</option>
+              <option value="6">Six Days</option>
+              <option value="7">Seven Days</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="openJob">Are you Open For a Regular job:</label>
+            <select id="openJob" name="openJob" class="form-control">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="availabilityAdditionalInfo">Additional Info:</label>
+            <textarea id="availabilityAdditionalInfo" class="form-control" placeholder=""></textarea>
+            <small class="form-text text-muted">Maximum 300 Caracters.</small>
+          </div>
+          <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px">Save</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ===================================== END AVAILABILITY CASE ======================================-->
+
+
+    <!-- =========================================== Jobs CASE ============================================-->
+
+
+    <div id="Jobs" class="container tab-pane fade"><br>
+      <h3 class="text-center" *ngIf="!jobs.length">No Jobs Have Been Found.</h3>
+      <div class="container mb-2 " *ngFor="let job of jobs; let  i = index">
+        <div class="card-header">
+          <button type="button" class="close" aria-label="Close" (click)="deleteJob(i)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5><span class="text-info">{{job.nameSender}}</span> requested you for a job:</h5>
+        </div>
+        <div class="border border-top-0 p-2">
+          <p style="position:relative;">Phone Number :<span style="position: absolute;left: 200px">{{job.phoneNumber}}</span></p>
+          <p style="position:relative;">Job Date :<span style="position: absolute;left: 200px">{{job.jobDate}}</span></p>
+          <p style="position:relative;">Job Length :<span style="position: absolute;left: 200px">{{job.jobLength}}</span></p>
+          <p style="position:relative;">Location :<span style="position: absolute;left: 200px">{{job.jobLocation}}</span></p>
+          <p style="position:relative;">Number Of Children :<span style="position: absolute;left: 200px">{{job.numChildren}}</span></p>
+          <p style="position:relative;">Needs A Regular Job :<span style="position: absolute;left: 200px">{{job.openForRegularJob}}</span></p>
+        </div>
+          <div class="card-header col border-right border-left">
+            <button type="button" class="btn btn-success" *ngIf="!(job.accepted || job.rejected)" (click)="acceptClick(i)" >Accept</button>
+            <button type="button" class="btn btn-danger ml-2" *ngIf="!(job.accepted || job.rejected)" (click)="rejectClick(i)" >Reject</button>
+            <button type="button" class="btn" [ngClass]="{'btn-success':job.accepted , 'btn-danger':job.rejected}" disabled *ngIf="job.accepted || job.rejected" ><span *ngIf="job.accepted">Accepted</span><span *ngIf="job.rejected">Rejected</span></button>
+            <!--ADD AN IGNORED BUTTON (black) WHICH APPEARS IF THE DEADLANE OF ACCEPTING OR REJECTING IS PASSED-->
+
+            <a href="#" class="float-right mt-2">details</a>
+          </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================== END JOBS CASE ==========================================-->
+
+
+    <!-- ========================================== REVIEWS CASE ===========================================-->
+
+
+    <div id="Reviews" class="container tab-pane fade"><br>
+      <h3 class="text-center" *ngIf="!ratings.length">No reviews Have Been Found.</h3>
+      <div class="row">
+          <div class="text-center col-4 ">
+            <h1 style="font-size: 70px">4.0</h1>
+            <p>out of 5</p>
+            <p><i class="fas fa-user pr-1"></i>100 total</p>
+            <div class="text-center mb-2">
+                <span class="fa fa-star mx-1 text-info"> </span>
+                <span class="fa fa-star mx-1 text-info"></span>
+                <span class="fa fa-star mx-1 text-info"></span>
+                <span class="fa fa-star mx-1 text-info"></span>
+                <span class="far fa-star mx-1 text-info "></span>
+            </div>
+          </div>
+
+          <div class="col-8">
+              <div class="row mt-2 ">
+                <p class=" mt-n1 mr-2">5</p>
+                <div class="progress " style="width: 82%">
+                  <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            <div class="row mt-2 ">
+              <p class=" mt-n1 mr-2">4</p>
+              <div class="progress " style="width: 82%">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            <div class="row mt-2 ">
+              <p class=" mt-n1 mr-2">3</p>
+              <div class="progress " style="width: 82%">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            <div class="row mt-2 ">
+              <p class=" mt-n1 mr-2">2</p>
+              <div class="progress " style="width: 82%">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <p class=" mt-n1 mr-2">1</p>
+              <div class="progress " style="width: 82%">
+                <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div>
+
+
+      </div>
+      <div class="mx-auto row mt-3 p-2 bg-light mb-2" style="width: 870px; position:relative ;border: 1px solid #EAEAEA; border-radius: 2px" *ngFor="let rating of ratings ; let i= index">
+        <div class="col-2 position-relative ">
+          <img class="rounded-circle position-relative top" src="assets/img/oussama.jpg" width="70px" height="70px" alt="reviewerPicture">
+          <a href="#" style="text-underline: none; color: black" class="text-center">Oussama</a>
+          <div class="mb-2 ml-n2" style="width: 90px ;font-size: 9px">
+            <i class="fa fa-star mx-1 text-info" > </i>
+            <i class="fa fa-star mx-1 text-info" ></i>
+            <i class="fa fa-star mx-1 text-info" ></i>
+            <i class="fa fa-star mx-1 text-info" ></i>
+            <i class="far fa-star mx-1 text-info"></i>
+          </div>
+          <p>24/7/2020</p>
+        </div>
+        <div class="col-10 text-left pl-4 pt-2">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <!-- ========================================== END REVIEWS CASE =========================================-->
+
+
+  </div>
+
+</div>
+

@@ -1,1 +1,231 @@
-<p>parent-id works!</p>
+<div class="container bg-white w-100 p-3 mt-5 card-header " style="box-shadow: rgba(0, 0, 0, 0.75) 10px 10px 5px 0px; ">
+  <div class="row">
+    <div class="col-3">
+      <div>
+      </div>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs mb-1" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active font-weight-bold text-info" data-toggle="tab" href="#AccountSettings">Account Settings</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link font-weight-bold text-info" data-toggle="tab" href="#Kids">Kids</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link font-weight-bold text-info" data-toggle="tab" href="#Messages">Messages</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link font-weight-bold text-info" data-toggle="tab" href="#Favourite">Favourites</a>
+    </li>
+  </ul>
+
+  <!-- ================================= ACCOUNT SETTINGS CASE ==================================-->
+
+  <div class="tab-content">
+    <div id="AccountSettings" class="container tab-pane active" style="position: relative"><br>
+
+      <div class="text-center mb-2 " style="position: absolute; top: 10px ;right: 30px">
+        <img id="profileImage" [src]="url ? url : 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'" width="150px" height="150px" class="avatar rounded-circle img-thumbnail " alt="avatar" (click)="clickPic()">
+        <input type='file' id="imageUpload" name="profilePictureUpload" style="display: none" (change)="onSelectFile( $event);">
+      </div>
+
+      <h1> <i class="fas fa-user-cog"></i> Modify my settings</h1>
+      <div class="col mt-4 ml-1">
+
+        <form>
+          <h3 class="text-info">Personal Information</h3>
+          <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" class="form-control" id="firstName" placeholder="Exp: Ouss..">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" class="form-control" id="lastName" placeholder="Exp: Ben Fredj ..">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email Address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Exp: example@gmail.com">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" class="form-control" id="phoneNumber" placeholder="Exp: 24772681 ..">
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" (change)="checkBoxChange()">
+            <label class="form-check-label" for="exampleCheck1">Check me out </label>
+          </div>
+          <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px" [disabled]="!checkBoxChecked">Save</button>
+        </form>
+        <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
+        <form class="mt-4">
+          <h3 class="text-info">New Password</h3>
+          <div class="form-group">
+            <label for="oldPassword">Your Old Password</label>
+            <input type="password" class="form-control" id="oldPassword" >
+          </div>
+          <div class="form-group">
+            <label for="newPassword">Your New Password</label>
+            <input type="password" class="form-control" id="newPassword" >
+          </div>
+          <div class="form-group">
+            <label for="confirmNewPassword">Confirm Your New Password</label>
+            <input type="password" class="form-control" id="confirmNewPassword">
+          </div>
+          <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px">Save</button>
+        </form>
+        <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
+        <form class="mt-4">
+          <h3 class="text-info">Notifications</h3>
+          <div class="form-group col">
+            <div class="form-group">
+              <label class="ml-n2" for="subscribeEmail">Subscribe  To NewsLetter:</label>
+              <div class="row">
+                <input  type="email" class="form-control" id="subscribeEmail" aria-describedby="subEmail" placeholder="Exp: example@gmail.com" style="width: 90%">
+                <ui-switch class="col-sm-1" color="#17a2b8" [checked]="newsLetterChecked" (change)="subscribeChange()" ></ui-switch>
+              </div>
+            </div>
+            <label class="ml-n2">Your email notifications</label>
+            <ul class="list-group ml-n3">
+              <li class="list-group-item font-weight-bold" style="height: 50px">Message Received <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" checked [disabled]="!newsLetterChecked"></ui-switch></li>
+              <li class="list-group-item font-weight-bold" style="height: 50px">Favourites Availability <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" checked [disabled]="!newsLetterChecked"></ui-switch></li>
+            </ul>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="Messages" class="container tab-pane fade"><br>
+      <h2 *ngIf="!messages.length" class="font-weight-bold text-center"> No Messages Have Been Found.</h2>
+      <div class="container card-header border" style="position:relative;" *ngFor="let message of messages; let i =index">
+        <button type="button" class="close" aria-label="Close" (click)="deleteMessage(i)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="row">
+          <div><img src="assets/img/standardImage.jpg" width="70px " height="70px"></div>
+
+          <div class="ml-2 mt-1">
+            <h5>Name : {{message.sender}}</h5>
+            <h5>Status : <span [ngStyle]="{'color':message.status === 'Accepted' ? 'green' : 'red' }">{{message.status}}</span></h5>
+          </div>
+        </div>
+        <a href="#" style="position: absolute ; bottom: 10px ;right: 20px">view Profile</a> <!--to be modified to get the real Url-->
+      </div>
+    </div>
+
+ <!-- ============================================== KIDS TABLE ===========================================-->
+    <div id="Kids" class="container tab-pane fade"><br>
+      <form>
+        <div class="container card-header border mb-2" *ngFor="let child of ArrayofkidsId; let i = index; ">
+          <button type="button" class="close" aria-label="Close" *ngIf="!(ArrayofkidsId.length === 1)" (click)="deleteChild(i)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            <div class="form-group">
+              <label for="kidName">Input Your Kid's Name:</label>
+              <input type="text" id="KidNAme" class="form-control" placeholder="EXP: achoik">
+            </div>
+            <div class="form-group">
+              <label for="kidAge">Input Your Kid's Age:</label>
+              <select id="kidAge" class="form-control">
+                <option value="l1">less than 1 year</option>
+                <option value="1">1 year</option>
+                <option value="2">2 years</option>
+                <option value="3">3 years</option>
+                <option value="4">4 years</option>
+                <option value="5">5 years</option>
+                <option value="6">6 years</option>
+                <option value="7">7 years</option>
+                <option value="8">8 years</option>
+                <option value="9">9 years</option>
+                <option value="10">10 years</option>
+                <option value="11">11 years</option>
+                <option value="12">12 years</option>
+                <option value="13">13 years</option>
+                <option value="14">14 years</option>
+                <option value="15">15 years</option>
+              </select>
+            </div>
+          <label>Your Kid Is a:</label>
+          <fieldset class="form-group mb-4 mt-2 ">
+            <div class="row">
+              <div class="col-sm">
+                <div class="col">
+                  <div><img src="assets/img/infant.svg" width="150px" height="150px"></div>
+                  <div><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="infant" value="infant" checked ></div>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="col">
+                  <div><img src="assets/img/toddler.svg" width="150px" height="150px"></div>
+                  <div ><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="toddler" value="toddler" ></div>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="col">
+                  <div><img src="assets/img/preschool.svg" width="150px" height="150px"></div>
+                  <div><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="preschool" value="preschool" ></div>
+                </div>
+              </div>
+              <div class="col-sm ">
+                <div class="col">
+                  <div><img src="assets/img/school.svg" width="150px" height="150px"></div>
+                  <div><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="school" value="school" ></div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-group">
+              <label>Special Needs:</label>
+              <div class="checkbox">
+                <label><input type="checkbox" value="deaf"> deaf</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" value="blind"> blind</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" value="handicapped"> handicapped</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" value="mute"> mute</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" value="autistic"> autistic</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" value="others" (change)="othersSelectedChange()"> others...</label>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" id="otherHandicaps" placeholder="Please Describe Here..." *ngIf="otherSelectedChecked"></textarea>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <label for="Comments">Tel Us Something About Your Kid:</label>
+              <textarea id="comments" class="form-control" placeholder="EXP: Hobbies , favourite food , etc ..."></textarea>
+              <small class="form-text text-muted">Maximum 300 Caracters.</small>
+            </div>
+
+        </div>
+        <button class="btn btn-info btn-md form-control mb-2 mt-2" (click)="addKid()"> Add Another Kid</button>
+        <input type="submit" id="submitKids" value="Save" class="btn btn-info btn-md form-control">
+      </form>
+
+    </div>
+    <!-- ===================================== END KIDS TABLE =======================================-->
+
+
+    <div id="Favourite" class="container tab-pane fade"><br>
+      <h2 class="font-weight-bold text-center">No Favourites Have Been Found.</h2>
+    </div>
+
+  </div>
+
+</div>
+
