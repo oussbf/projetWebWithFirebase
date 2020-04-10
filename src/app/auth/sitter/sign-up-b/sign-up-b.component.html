@@ -1,1 +1,207 @@
-<p>sign-up-b works!</p>
+<style></style>
+<div class="container py-5" >
+  <div>
+    <div class="card" style="width: 600px; margin: 15px auto auto;">
+      <div class="card-header" style="background-color: white; box-shadow: rgba(0, 0, 0, 0.75) 10px 11px 5px 0px" >
+        <h1 class="text-uppercase text-center text-info font-weight-bold">Registration</h1>
+      </div>
+      <div class="card-body" style="background-color: white; box-shadow: rgba(0, 0, 0, 0.75) 10px 10px 5px 0px">
+        <div class="row">
+          <!-- ===================================== FIRST NAME INPUT ===================================== -->
+
+          <div class="col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+              <label class="text-info">First Name:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-user"></i>
+                </span>
+                </div>
+                <input id="name" type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <!-- =====================================END FIRST NAME INPUT ===================================== -->
+
+          <!-- ===================================== LAST NAME INPUT ===================================== -->
+
+          <div class="col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+              <label class="text-info">Last Name:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-user"></i>
+                </span>
+                </div>
+                <input id="lastName" type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================================== END LAST NAME INPUT ===================================== -->
+
+        <div class="row">
+          <!-- ===================================== PHONE NUMBER INPUT ===================================== -->
+
+          <div class="col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+              <label class="text-info">Phone Number:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-phone"></i>
+                  </span>
+                </div>
+                <input id="phoneNumber" type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+          <!-- ===================================== END PHONE NUMBER INPUT ===================================== -->
+
+          <!-- ===================================== EMAIL INPUT ===================================== -->
+
+          <div class="col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+              <label class="text-info">Email:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </div>
+                <input id="email" type="email" class="form-control">
+              </div>
+            </div>
+          </div>
+          <!-- ===================================== END EMAIL INPUT ===================================== -->
+
+        </div>
+        <div class="row">
+          <!-- ===================================== PASSWORD INPUT ===================================== -->
+
+          <div class="col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+              <label class="text-info">Password:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+                <input id="password" type="password" class="form-control">
+              </div>
+            </div>
+          </div>
+          <!-- ===================================== END PASSWORD INPUT ===================================== -->
+
+          <!-- ===================================== CONFIRM PASSWORD INPUT ===================================== -->
+
+          <div class="col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+              <label class="text-info">Confirm Password:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+                <input id="confirmedPassword" type="password" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <!-- ===================================== END CONFIRM INPUT ===================================== -->
+        </div>
+
+        <div class="row">
+          <!-- ===================================== BIRTHDAY INPUT ===================================== -->
+
+          <div class="col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+              <label class="text-info">Birthday:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                <span class="input-group-text" style="height: 38px">
+                  <i class="fas fa-calendar-alt"></i>
+                </span>
+                </div>
+                <input id="birthday" class="form-control" [matDatepicker]="myDatepicker" placeholder="DD/MM/YYYY">
+                <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #myDatepicker [startAt]="startDate"></mat-datepicker>
+              </div>
+            </div>
+          </div>
+
+          <!-- =====================================END BIRTHDAY INPUT ===================================== -->
+
+          <!-- ===================================== GENDER INPUT ===================================== -->
+
+          <div class="col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+              <label class="text-info">Gender:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-venus-mars"></i>
+                </span>
+                </div>
+                <select id="gender" class="form-control" name="gender">
+                  <option value="female">Female</option>
+                  <option value="male">Male</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================================== END GENDER INPUT ===================================== -->
+
+        <div class="row">
+          <!-- ===================================== CITY INPUT ===================================== -->
+          <div class="col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+              <label class="text-info">City/Town:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="fas fa-city"></i>
+                    </span>
+                </div>
+                <select id="city" class="form-control" name="city">
+                  <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ===================================== END CITY INPUT ===================================== -->
+          </div>
+          <!-- ===================================== END CONFIRM INPUT ===================================== -->
+
+          <div class="col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
+              <label class="text-info">Zip / Postal Code:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="fas fa-mail-bulk"></i>
+                    </span>
+                </div>
+                <input id="ZIP" type="text" name="ZIP" placeholder="Zip or Postal Code" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <!-- ===================================== END ZIP INPUT ===================================== -->
+        </div>
+        <button type="submit" class="btn btn-info btn-md float-left form-control">
+          <i class="fas fa-user-plus"></i>
+          Register
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
