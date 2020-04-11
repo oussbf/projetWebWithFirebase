@@ -13,13 +13,20 @@ export class ParentIdComponent implements OnInit {
   checkBoxChecked = false;
   otherSelectedChecked = false;
 
- messages = [
-  {
-    IDSender : '1',
-    sender: 'Oussama',
-    status : 'Declined'
-  }
-];
+  messages = [
+    {
+      IDSender : '1',
+      sender: 'Oussama',
+      status : 'Declined',
+      phoneNumber : '24772681'
+    },
+    {
+      IDSender : '2',
+      sender: 'Anis',
+      status : 'Accepted',
+      phoneNumber : '24772681'
+    }
+  ];
 
   addKid() {
     this.ArrayofkidsId.push('oussama');

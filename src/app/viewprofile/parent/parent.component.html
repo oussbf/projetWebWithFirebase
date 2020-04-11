@@ -1,0 +1,36 @@
+<div class="container bg-white w-100 p-3 mt-5 card-header " style="box-shadow: rgba(0, 0, 0, 0.75) 10px 10px 5px 0; ">
+
+
+  <div class="row">
+    <div class="col-3 text-center">
+      <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" width="247px" height="247px" alt="profilePicture" class="mx-auto">
+    </div>
+    <div class="col-9">
+      <div id="profileDetails" style="height: 220px">
+        <a class="text-danger float-right" style="font-size: 25px"> <i class="fas fa-flag"> Report Profile</i></a>
+        <h1>Oussama Ben fredj</h1>
+        <div class="mt-3">
+          <h5>Location: khzema gharbia sousse , ZIP Code</h5>
+          <h5>I have 4 Kids</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Varius duis at consectetur lorem donec massa sapien faucibus. Amet cursus sit amet dictum sit amet justo donec. Diam maecenas sed enim ut sem viverra.</p>
+        </div>
+      </div>
+      <div class="border mt-2 mb-4 mx-auto"></div>
+      <h3 class="mb-5">My Kids Details</h3>
+      <div *ngFor="let kid of kidsArray; let i = index">
+        <h4>Name: {{kid.name}}</h4>
+        <h4>Age: {{kid.age}} , {{kid.ageChoice}}  <i class="fas text-info" [ngClass]="{'fa-running': kid.ageChoice === 'preschooler' , 'fa-child': kid.ageChoice === 'infant', 'fa-chalkboard-teacher' : kid.ageChoice === 'schooler' , 'fa-baby': kid.ageChoice === 'toddler'}"></i></h4>
+        <h4>Special Needs:</h4>
+        <ul>
+          <li *ngFor="let specialNeed of kid.specialNeeds" class="font-weight-bold text-info">{{specialNeed}}</li>
+        </ul>
+        <h4>Additional Info:</h4>
+        <p>{{kid.otherInfo}}</p>
+        <div class="border mt-4 mb-4 mx-auto"></div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
