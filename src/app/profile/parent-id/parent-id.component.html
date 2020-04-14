@@ -103,7 +103,7 @@
 
     <div id="Messages" class="container tab-pane fade"><br>
       <h2 *ngIf="!messages.length" class="font-weight-bold text-center"> No Messages Have Been Found.</h2>
-      <div class="container card-header border mb-2" style="position:relative;" *ngFor="let message of messages; let i =index">
+      <div class="container card-header  mb-4 shadow" style="position:relative; border-radius: 10px" *ngFor="let message of messages; let i =index">
         <button type="button" class="close" aria-label="Close" (click)="deleteMessage(i)">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -225,7 +225,38 @@
 
 
     <div id="Favourite" class="container tab-pane fade"><br>
-      <h2 class="font-weight-bold text-center">No Favourites Have Been Found.</h2>
+      <h2 class="font-weight-bold text-center" *ngIf="!favSitters.length">No Favourites Have Been Found.</h2>
+      <div class=" bg-white mx-auto" >
+        <div class="card-header shadow mb-4" style="background-color: rgb(247, 247, 247); border-radius: 10px" *ngFor="let sitter of favSitters  let i = index">
+          <div class="row">
+            <div class="col-2" >
+              <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="rounded-circle" width="100%" alt="sitterPicture">
+            </div>
+            <div class="col-7">
+              <h1 class="text-left">{{sitter.firstName}} {{sitter.lastName}}</h1>
+              <small class="text-left">{{sitter.experience}} Years Of Experience / Location: {{sitter.location}} / {{sitter.distance}} KM</small>
+              <p>{{sitter.describtion}}</p>
+              <h5>Certificates: <span class="text-info" *ngFor="let certif of sitter.certificates , let j = index">{{certif}} . </span></h5>
+            </div>
+            <div class="col-3 border-left position-relative">
+              <button type="button" class="close position-absolute" style="top: 5px;right: 5px" aria-label="Close" (click)="deleteFavourite(i)">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="row h-100">
+                <div class="col-12 my-auto" style="margin-left: 20%">
+                  <span class="fa fa-star mx-1 text-info"> </span>
+                  <span class="fa fa-star mx-1 text-info"></span>
+                  <span class="fa fa-star mx-1 text-info"></span>
+                  <span class="fa fa-star mx-1 text-info"></span>
+                  <span class="far fa-star mx-1 text-info "></span>
+                  <button class="mt-3 btn btn-danger mx-auto">Request Job</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>

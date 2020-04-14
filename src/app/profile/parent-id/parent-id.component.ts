@@ -27,6 +27,31 @@ export class ParentIdComponent implements OnInit {
       phoneNumber : '24772681'
     }
   ];
+  favSitters = [
+    {
+      firstName : 'Oussama',
+      lastName : 'Ben Fredj',
+      experience: '5',
+      distance: '2',
+      location: 'Sousse , Sousse 4004',
+      // tslint:disable-next-line:max-line-length
+      describtion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+      rating : '4',
+      certificates: ['CPR' , 'Special Needs Care']
+    },
+    {
+      firstName : 'anis',
+      lastName : 'Ben Ghanem',
+      experience: '3',
+      distance: '5',
+      location: 'Tunis , Hay Khadra 1003',
+      // tslint:disable-next-line:max-line-length
+      describtion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      rating : '4',
+      certificates: ['CPR' , 'Special Needs Care']
+    }
+  ];
+
 
   addKid() {
     this.ArrayofkidsId.push('oussama');
@@ -39,6 +64,10 @@ export class ParentIdComponent implements OnInit {
 
   deleteChild( i) {
     this.ArrayofkidsId.splice(i, 1);
+  }
+
+  deleteFavourite(i) {
+    this.favSitters.splice(i, 1);
   }
 
   subscribeChange() {
