@@ -22,6 +22,7 @@ import { SearchComponent } from './search/search.component';
 import { SitterComponent } from './viewprofile/sitter/sitter.component';
 import { ParentComponent } from './viewprofile/parent/parent.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 const appRoutes: Routes = [
@@ -57,16 +58,17 @@ const appRoutes: Routes = [
     ParentComponent,
     PageNotFoundComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    RouterModule.forRoot(appRoutes),
-    UiSwitchModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        RouterModule.forRoot(appRoutes),
+        UiSwitchModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        ReactiveFormsModule,
+    ],
   providers: [
     AuthService
   ],

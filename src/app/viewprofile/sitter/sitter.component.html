@@ -129,8 +129,8 @@
       </div>
 
       <div class="bg-light mx-auto " style="width: 870px; height: 148px ;position:relative ;border: 1px solid #EAEAEA; border-radius: 2px">
-        <form class="p-2">
-          <textarea class="form-control mb-1" id="reviewText" name="reviewText" placeholder="Enter your review here..."></textarea>
+        <form class="p-2" [formGroup]="reviewForm" (ngSubmit)="onSubmitReview(reviewForm.value)" >
+          <textarea class="form-control mb-1" id="reviewText" name="reviewText" placeholder="Enter your review here..." [class.btn-outline-danger]="reviewForm.controls.reviewText.invalid && changedReview" (change)="changedReview=true" formControlName="reviewText"></textarea>
           <div>
             <i class="fa-star text-info" [ngClass]="{far: !star1 , fa: star1}" (click)="star1Click()"></i>
             <i class="fa-star text-info" [ngClass]="{far: !star2 , fa: star2}" (click)="star2Click()"></i>
@@ -140,7 +140,7 @@
 
           </div>
           <div class="form-group float-right">
-            <input type="submit" value="submit" name="submitReview" id="submitReview" class="btn btn-success" >
+            <button type="submit" name="submitReview" id="submitReview" class="btn btn-success"  >Submit</button>
           </div>
         </form>
       </div>

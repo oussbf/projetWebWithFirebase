@@ -49,7 +49,7 @@
           </div>
 
 
-          <div style="letter-spacing: 0.5px;padding:15px 15px 15px 15px">
+          <div style=";padding:15px 15px 15px 15px">
             <h2 class="text-center">Oussama Ben Fredj</h2>
             <div style="border-bottom-style: solid;border-bottom-color: rgb(226,226,226);border-bottom-width: 1px"></div>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.
@@ -89,7 +89,7 @@
 
             </div>
           </div>
-          <div style="letter-spacing: 0.5px;padding:15px 15px 15px 15px">
+          <div style="padding:15px 15px 15px 15px">
             <h2 class="text-center">Anis Ben Ghanem</h2>
             <div style="border-bottom-style: solid;border-bottom-color: rgb(226,226,226);border-bottom-width: 1px"></div>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.
@@ -129,7 +129,7 @@
 
             </div>
           </div>
-          <div style="letter-spacing: 0.5px;padding:15px 15px 15px 15px">
+          <div style="padding:15px 15px 15px 15px">
             <h2 class="text-center">Mahdi Ben Zina</h2>
             <div style="border-bottom-style: solid;border-bottom-color: rgb(226,226,226);border-bottom-width: 1px"></div>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.
@@ -150,7 +150,7 @@
 
         <!--Form with header-->
 
-        <form action="" method="post" style="background-color: white;box-shadow: rgba(0, 0, 0, 0.75) 10px 10px 5px 0px " >
+        <form style="background-color: white;box-shadow: rgba(0, 0, 0, 0.75) 10px 10px 5px 0 " [formGroup]="contactForm" (ngSubmit)="onSend(contactForm.value)">
           <div class="rounded-0">
             <div class="card-header p-0">
               <div class="bg-info text-white text-center py-2">
@@ -166,7 +166,7 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-user text-info"></i></div>
                   </div>
-                  <input type="text" class="form-control" id="FullName" name="fullName" placeholder="Full Name" required>
+                  <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Full Name" [class.btn-outline-danger]="contactForm.controls.fullName.invalid && changedContact[0]" (change)="changedContact[0]=true" formControlName="fullName">
                 </div>
               </div>
               <div class="form-group">
@@ -174,7 +174,7 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-envelope text-info"></i></div>
                   </div>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com" required>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com" [class.btn-outline-danger]="contactForm.controls.email.invalid && changedContact[1]" (change)="changedContact[1]=true" formControlName="email">
                 </div>
               </div>
 
@@ -183,7 +183,7 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-comment text-info"></i></div>
                   </div>
-                  <textarea class="form-control" placeholder="Send us your message." required></textarea>
+                  <textarea name="message" id="message" class="form-control" placeholder="Send us your message." maxlength="300" [class.btn-outline-danger]="contactForm.controls.message.invalid && changedContact[2]" (change)="changedContact[2]=true" formControlName="message"></textarea>
                 </div>
               </div>
 

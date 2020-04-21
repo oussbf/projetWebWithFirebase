@@ -1,4 +1,4 @@
-<div class="container bg-white w-100 p-3 mt-5 card-header " style="box-shadow: rgba(0, 0, 0, 0.75) 10px 10px 5px 0px; ">
+<div class="container bg-white w-100 p-3 mt-5 card-header " style="box-shadow: rgba(0, 0, 0, 0.75) 10px 10px 5px 0; ">
   <div class="row">
     <div class="col-3">
       <div>
@@ -31,30 +31,30 @@
 
       <div class="text-center mb-2 " style="position: absolute; top: 10px ;right: 30px">
         <img id="profileImage" [src]="url ? url : 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'" width="150px" height="150px" class="avatar rounded-circle img-thumbnail " alt="avatar" (click)="clickPic()">
-        <input type='file' id="imageUpload" name="profilePictureUpload" style="display: none" (change)="onSelectFile( $event);">
+        <input type='file' id="imageUpload" name="profilePictureUpload" style="display: none" (change)="onUploadPicture( $event);">
       </div>
 
       <h1> <i class="fas fa-user-cog"></i> Modify my settings</h1>
       <div class="col mt-4 ml-1">
 
-        <form>
+        <form [formGroup]="personalInfoForm" (ngSubmit)="onSavePI(personalInfoForm.value)">
           <h3 class="text-info">Personal Information</h3>
           <div class="form-group">
             <label for="firstName">First Name:</label>
-            <input type="text" class="form-control" id="firstName" placeholder="Exp: Ouss..">
+            <input type="text" class="form-control" id="firstName" placeholder="Exp: Ouss.." [class.btn-outline-danger]="personalInfoForm.controls.firstName.invalid && changedPI[0]" (change)="changedPI[0]=true" formControlName="firstName">
           </div>
           <div class="form-group">
             <label for="lastName">Last Name:</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Exp: Ben Fredj ..">
+            <input type="text" class="form-control" id="lastName" placeholder="Exp: Ben Fredj .." [class.btn-outline-danger]="personalInfoForm.controls.lastName.invalid && changedPI[1]" (change)="changedPI[1]=true" formControlName="lastName">
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Email Address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Exp: example@gmail.com">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Exp: example@gmail.com" [class.btn-outline-danger]="personalInfoForm.controls.email.invalid && changedPI[2]" (change)="changedPI[2]=true" formControlName="email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div class="form-group">
             <label for="phoneNumber">Phone Number:</label>
-            <input type="text" class="form-control" id="phoneNumber" placeholder="Exp: 24772681 ..">
+            <input type="text" class="form-control" id="phoneNumber" placeholder="Exp: 24772681 .." [class.btn-outline-danger]="personalInfoForm.controls.phoneNumber.invalid && changedPI[3]" (change)="changedPI[3]=true" formControlName="phoneNumber">
           </div>
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1" (change)="checkBoxChange()">
@@ -63,37 +63,37 @@
           <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px" [disabled]="!checkBoxChecked">Save</button>
         </form>
         <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
-        <form class="mt-4">
+        <form class="mt-4" [formGroup]="newPasswordForm" (ngSubmit)="onSaveNP(newPasswordForm.value)">
           <h3 class="text-info">New Password</h3>
           <div class="form-group">
             <label for="oldPassword">Your Old Password</label>
-            <input type="password" class="form-control" id="oldPassword" >
+            <input type="password" class="form-control" id="oldPassword" [class.btn-outline-danger]="newPasswordForm.controls.oldPassword.invalid && changedNP[0]" (change)="changedNP[0]=true" formControlName="oldPassword" >
           </div>
           <div class="form-group">
             <label for="newPassword">Your New Password</label>
-            <input type="password" class="form-control" id="newPassword" >
+            <input type="password" class="form-control" id="newPassword" [class.btn-outline-danger]="newPasswordForm.controls.newPassword.invalid && changedNP[1]" (change)="changedNP[1]=true" formControlName="newPassword" >
           </div>
           <div class="form-group">
             <label for="confirmNewPassword">Confirm Your New Password</label>
-            <input type="password" class="form-control" id="confirmNewPassword">
+            <input type="password" class="form-control" id="confirmNewPassword" [class.btn-outline-danger]="newPasswordForm.controls.confirmNewPassword.invalid && changedNP[2]" (change)="changedNP[2]=true" formControlName="confirmNewPassword">
           </div>
           <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px">Save</button>
         </form>
         <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
-        <form class="mt-4">
+        <form class="mt-4" [formGroup]="notificationForm">
           <h3 class="text-info">Notifications</h3>
           <div class="form-group col">
-            <div class="form-group">
+            <div class="form-group" >
               <label class="ml-n2" for="subscribeEmail">Subscribe  To NewsLetter:</label>
               <div class="row">
-                <input  type="email" class="form-control" id="subscribeEmail" aria-describedby="subEmail" placeholder="Exp: example@gmail.com" style="width: 90%">
-                <ui-switch class="col-sm-1" color="#17a2b8" [checked]="newsLetterChecked" (change)="subscribeChange()" ></ui-switch>
+                <input  type="email" class="form-control" id="subscribeEmail" aria-describedby="subEmail" placeholder="Exp: Example@gmail.com" style="width: 90%" [class.btn-outline-danger]="notificationForm.controls.emailSub.invalid && changedNotif" (change)="changedNotif=true" formControlName="emailSub">
+                <ui-switch class="col-sm-1" color="#17a2b8" id="emailSubCheck" [disabled]="notificationForm.controls.emailSub.invalid" [checked]="newsLetterChecked" (change)="subscribeChange(notificationForm.value)" formControlName="emailSubCheck" ></ui-switch>
               </div>
             </div>
             <label class="ml-n2">Your email notifications</label>
             <ul class="list-group ml-n3">
-              <li class="list-group-item font-weight-bold" style="height: 50px">Message Received <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" checked [disabled]="!newsLetterChecked"></ui-switch></li>
-              <li class="list-group-item font-weight-bold" style="height: 50px">Favourites Availability <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" checked [disabled]="!newsLetterChecked"></ui-switch></li>
+              <li class="list-group-item font-weight-bold" style="height: 50px">Jobs Request <ui-switch class="col-sm-1" color="#17a2b8" style="float: right"   [checked]="true" [disabled]="!newsLetterChecked" (change)="onUpdateNotifications(notificationForm.value)"  formControlName="jobReqNotif"></ui-switch></li>
+              <li class="list-group-item font-weight-bold" style="height: 50px">Favourites Availability <ui-switch class="col-sm-1" color="#17a2b8" style="float: right"  [disabled]="!newsLetterChecked" (change)="onUpdateNotifications(notificationForm.value)" formControlName="favsAvailability"></ui-switch></li>
             </ul>
 
           </div>
@@ -109,7 +109,7 @@
         </button>
         <div class="row">
           <div class="col-1 my-auto">
-            <img src="assets/img/standardImage.jpg" width="70px " height="70px" class="rounded-circle m-auto">
+            <img src="assets/img/standardImage.jpg" width="70px " height="70px" class="rounded-circle m-auto" alt="profilePicture">
           </div>
 
           <div class="ml-2 mt-1 col-10">
@@ -124,18 +124,19 @@
 
     <!-- ============================================== KIDS TABLE ===========================================-->
     <div id="Kids" class="container tab-pane fade"><br>
-      <form>
+      <form [formGroup]="kidsForm" (ngSubmit)="onSaveKid(kidsForm.value)">
         <div class="container card-header border mb-2" *ngFor="let child of ArrayofkidsId; let i = index; ">
           <button type="button" class="close" aria-label="Close" *ngIf="!(ArrayofkidsId.length === 1)" (click)="deleteChild(i)">
             <span aria-hidden="true">&times;</span>
           </button>
           <div class="form-group">
             <label for="kidName">Input Your Kid's Name:</label>
-            <input type="text" id="KidNAme" class="form-control" placeholder="EXP: achoik">
+            <input type="text" id="kidName" class="form-control" placeholder="EXP: achoik" [class.btn-outline-danger]="kidsForm.controls.kidName.invalid && changedKid[0]" (change)="changedKid[0]=true" formControlName="kidName">
           </div>
           <div class="form-group">
             <label for="kidAge">Input Your Kid's Age:</label>
-            <select id="kidAge" class="form-control">
+            <select id="kidAge" class="form-control" [class.btn-outline-danger]="kidsForm.controls.kidAge.invalid && changedKid[1]" (change)="changedKid[1]=true" formControlName="kidAge">
+              <option disabled>Chose...</option>
               <option value="l1">less than 1 year</option>
               <option value="1">1 year</option>
               <option value="2">2 years</option>
@@ -159,26 +160,26 @@
             <div class="row">
               <div class="col-sm">
                 <div class="col">
-                  <div><img src="assets/img/infant.svg" width="150px" height="150px"></div>
-                  <div><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="infant" value="infant" checked ></div>
+                  <div><img src="assets/img/infant.svg" width="150px" height="150px" alt="infantImage"></div>
+                  <div><input class="form-check-input " style="margin-left:70px;" type="radio" name="childAge" id="infant" value="infant" formControlName="childAge" ></div>
                 </div>
               </div>
               <div class="col-sm">
                 <div class="col">
-                  <div><img src="assets/img/toddler.svg" width="150px" height="150px"></div>
-                  <div ><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="toddler" value="toddler" ></div>
+                  <div><img src="assets/img/toddler.svg" width="150px" height="150px" alt="toddlerImage"></div>
+                  <div ><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="toddler" value="toddler" formControlName="childAge"></div>
                 </div>
               </div>
               <div class="col-sm">
                 <div class="col">
-                  <div><img src="assets/img/preschool.svg" width="150px" height="150px"></div>
-                  <div><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="preschool" value="preschool" ></div>
+                  <div><img src="assets/img/preschool.svg" width="150px" height="150px" alt="preschoolerImage"></div>
+                  <div><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="preschool" value="preschool" formControlName="childAge" ></div>
                 </div>
               </div>
               <div class="col-sm ">
                 <div class="col">
-                  <div><img src="assets/img/school.svg" width="150px" height="150px"></div>
-                  <div><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="school" value="school" ></div>
+                  <div><img src="assets/img/school.svg" width="150px" height="150px" alt="schoolerImage"></div>
+                  <div><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="school" value="school" formControlName="childAge"></div>
                 </div>
               </div>
             </div>
@@ -186,38 +187,38 @@
           <div class="form-group">
             <label>Special Needs:</label>
             <div class="checkbox">
-              <label><input type="checkbox" value="deaf"> deaf</label>
+              <label><input type="checkbox" value="deaf" formControlName="specialNeeds"> deaf</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="blind"> blind</label>
+              <label><input type="checkbox" value="blind" formControlName="specialNeeds"> blind</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="handicapped"> handicapped</label>
+              <label><input type="checkbox" value="handicapped" formControlName="specialNeeds"> handicapped</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="mute"> mute</label>
+              <label><input type="checkbox" value="mute" formControlName="specialNeeds"> mute</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="autistic"> autistic</label>
+              <label><input type="checkbox" value="autistic" formControlName="specialNeeds"> autistic</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="others" (change)="othersSelectedChange()"> others...</label>
+              <label><input type="checkbox"  (change)="othersSelectedChange()"> others...</label>
             </div>
             <div class="form-group">
-              <textarea class="form-control" id="otherHandicaps" placeholder="Please Describe Here..." *ngIf="otherSelectedChecked"></textarea>
+              <textarea class="form-control" id="otherHandicaps" placeholder="Please Describe Here..." *ngIf="otherSelectedChecked" [class.btn-outline-danger]="kidsForm.controls.otherHandicaps.invalid && changedKid[2]" (change)="changedKid[2]=true" formControlName="otherHandicaps"></textarea>
             </div>
 
           </div>
 
           <div class="form-group">
-            <label for="Comments">Tel Us Something About Your Kid:</label>
-            <textarea id="comments" class="form-control" placeholder="EXP: Hobbies , favourite food , etc ..."></textarea>
+            <label for="comments">Tel Us Something About Your Kid:</label>
+            <textarea id="comments" class="form-control" placeholder="EXP: Hobbies , favourite food , etc ..." [class.btn-outline-danger]="kidsForm.controls.comments.invalid && changedKid[3]" (change)="changedKid[3]=true" formControlName="comments"></textarea>
             <small class="form-text text-muted">Maximum 300 Caracters.</small>
           </div>
 
         </div>
-        <button class="btn btn-info btn-md form-control mb-2 mt-2" (click)="addKid()"> Add Another Kid</button>
-        <input type="submit" id="submitKids" value="Save" class="btn btn-info btn-md form-control">
+        <button class="btn btn-info btn-md form-control mb-2 mt-2" (click)="addKid()" *ngIf="ArrayofkidsId.length <5"> Add Another Kid</button>
+        <button type="submit" id="submitKids" class="btn btn-info btn-md form-control" >save</button>
       </form>
 
     </div>

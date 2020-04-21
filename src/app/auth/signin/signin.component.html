@@ -1,17 +1,17 @@
 <div class="container card-header bg-white w-50 pt-1" style="box-shadow: rgba(0, 0, 0, 0.75) 10px 11px 5px 0; margin-top: 200px">
   <h1 class="text-info font-weight-bold text-center "> SIGN IN</h1>
-  <form>
+  <form [formGroup]="signInForm" (ngSubmit)="onSubmitSignIn(signInForm.value)">
     <div class="form-group">
       <label for="email">Email:</label>
-      <input id="email" type="email" name="email" class="form-control">
+      <input id="email" type="email" name="email" class="form-control" [class.btn-outline-danger]="signInForm.controls.email.invalid && changed[0]" (change)="changed[0]=true" formControlName="email" >
     </div>
     <div class="form-group">
-      <label for="passwd">Password:</label>
-      <input id="passwd" type="password" name="passwd" class="form-control">
+      <label for="password">Password:</label>
+      <input id="password" type="password" name="password" class="form-control" [class.btn-outline-danger]="signInForm.controls.password.invalid && changed[1]" (change)="changed[1]=true" formControlName="password">
     </div>
     <div class="form-group">
       <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
-      <button type="submit" class="btn btn-info btn-md form-control ">
+      <button type="submit" class="btn btn-info btn-md form-control" >
         <i class="fas fa-sign-in-alt"></i>
         Submit
       </button>

@@ -31,28 +31,28 @@
       <h1> <i class="fas fa-user-cog"></i> Modify my settings</h1>
       <div class="col mt-4 ml-1">
 
-        <form>
+        <form [formGroup]="personalInfoForm" (ngSubmit)="onSavePI(personalInfoForm.value)">
           <h3 class="text-info">Personal Information</h3>
           <div class="form-group">
             <label for="firstName">First Name:</label>
-            <input type="text" class="form-control" id="firstName" placeholder="Exp: Ouss..">
+            <input type="text" class="form-control" id="firstName" placeholder="Exp: Ouss.." [class.btn-outline-danger]="personalInfoForm.controls.firstName.invalid && changedPI[0]" (change)="changedPI[0]=true" formControlName="firstName">
           </div>
           <div class="form-group">
             <label for="lastName">Last Name:</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Exp: Ben Fredj ..">
+            <input type="text" class="form-control" id="lastName" placeholder="Exp: Ben Fredj .." [class.btn-outline-danger]="personalInfoForm.controls.lastName.invalid && changedPI[1]" (change)="changedPI[1]=true" formControlName="lastName" >
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Email Address:</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Exp: example@gmail.com">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Exp: example@gmail.com" [class.btn-outline-danger]="personalInfoForm.controls.email.invalid && changedPI[2]" (change)="changedPI[2]=true" formControlName="email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div class="form-group">
             <label for="phoneNumber">Phone Number:</label>
-            <input type="text" class="form-control" id="phoneNumber" placeholder="Exp: 24772681 ...">
+            <input type="text" class="form-control" id="phoneNumber" placeholder="Exp: 24772681 ..." [class.btn-outline-danger]="personalInfoForm.controls.phoneNumber.invalid && changedPI[3]" (change)="changedPI[3]=true" formControlName="phoneNumber">
           </div>
           <div class="form-group">
             <label for="jobStatus">Job/Education:</label>
-            <input class="form-control" type="text" id="jobStatus" name="jobStatus" placeholder="Exp: studying , doctor , etc...">
+            <input class="form-control" type="text" id="jobStatus" name="jobStatus" placeholder="Exp: studying , doctor , etc..." [class.btn-outline-danger]="personalInfoForm.controls.jobStatus.invalid && changedPI[4]" (change)="changedPI[4]=true" formControlName="jobStatus">
           </div>
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1" (change)="checkBoxChange()">
@@ -61,29 +61,30 @@
           <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px" [disabled]="!checkBoxChecked">Save</button>
         </form>
         <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
-        <form class="mt-4">
+        <form class="mt-4" [formGroup]="newPasswordForm" (ngSubmit)="onSaveNP(newPasswordForm.value)">
           <h3 class="text-info">New Password</h3>
           <div class="form-group">
             <label for="oldPassword">Your Old Password</label>
-            <input type="password" class="form-control" id="oldPassword" >
+            <input type="password" class="form-control" id="oldPassword" [class.btn-outline-danger]="newPasswordForm.controls.oldPassword.invalid && changedNP[0]" (change)="changedNP[0]=true" formControlName="oldPassword"  >
           </div>
           <div class="form-group">
             <label for="newPassword">Your New Password</label>
-            <input type="password" class="form-control" id="newPassword" >
+            <input type="password" class="form-control" id="newPassword" [class.btn-outline-danger]="newPasswordForm.controls.newPassword.invalid && changedNP[1]" (change)="changedNP[1]=true" formControlName="newPassword">
           </div>
           <div class="form-group">
             <label for="confirmNewPassword">Confirm Your New Password</label>
-            <input type="password" class="form-control" id="confirmNewPassword">
+            <input type="password" class="form-control" id="confirmNewPassword" [class.btn-outline-danger]="newPasswordForm.controls.confirmNewPassword.invalid && changedNP[2]" (change)="changedNP[2]=true" formControlName="confirmNewPassword">
           </div>
           <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px">Save</button>
         </form>
         <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
 
-        <form class="mt-4">
+        <form class="mt-4" [formGroup]="jobInformationForm" (ngSubmit)="onSaveJI(jobInformationForm.value)">
           <h3 class="text-info">Job Informations</h3>
           <div class="form-group">
             <label for ="numberOfChildrenHandling">how many children can you take care of :</label>
-            <select id="numberOfChildrenHandling" class="custom-select" name="numberOfChildrenHandling">
+            <select id="numberOfChildrenHandling" class="custom-select" name="numberOfChildrenHandling" [class.btn-outline-danger]="jobInformationForm.controls.numberOfChildrenHandling.invalid && changedJI[0]" (change)="changedJI[0]=true" formControlName="numberOfChildrenHandling">
+              <option disabled>Chose...</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -97,91 +98,94 @@
               <div class="col-sm">
                 <div class="col">
                   <div><img src="assets/img/infant.svg" width="150px" height="150px" alt="infantPicture"></div>
-                  <div><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="infant" value="infant" ></div>
+                  <div><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="infant" value="infant" formControlName="childAge" ></div>
                 </div>
               </div>
               <div class="col-sm">
                 <div class="col">
                   <div><img src="assets/img/toddler.svg" width="150px" height="150px" alt="toddlerPicture"></div>
-                  <div ><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="toddler" value="toddler" ></div>
+                  <div ><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="toddler" value="toddler" formControlName="childAge"></div>
                 </div>
               </div>
               <div class="col-sm">
                 <div class="col">
                   <div><img src="assets/img/preschool.svg" width="150px" height="150px" alt="preschoolerPicture"></div>
-                  <div><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="preschool" value="preschool" ></div>
+                  <div><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="preschool" value="preschool" formControlName="childAge" ></div>
                 </div>
               </div>
               <div class="col-sm ">
                 <div class="col">
                   <div><img src="assets/img/school.svg" width="150px" height="150px" alt="schoolerPicture"></div>
-                  <div><input class="form-check-input " style="margin-left:70px;" type="checkbox" name="childAge" id="school" value="school" ></div>
+                  <div><input class="form-check-input " style="margin-left:70px;" type="checkbox" name="childAge" id="school" value="school" formControlName="childAge"></div>
                 </div>
               </div>
             </div>
           </fieldset>
           <div class="form-group mt-4">
             <label for ="displacement">are you able to make displacements :</label>
-            <select id="displacement" class="form-control" name="displacement">
+            <select id="displacement" class="form-control" name="displacement"  [class.btn-outline-danger]="jobInformationForm.controls.displacement.invalid && changedJI[1]" (change)="changedJI[1]=true" formControlName="displacement">
+              <option disabled>Chose...</option>
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
           </div>
           <div class="form-group">
             <label for="experienceYears"> how many years of experience do you have on this job</label>
-            <input class="form-control" id="experienceYears" type="number" name="experienceYears" min="0" max="60" value="0" >
+            <input class="form-control" id="experienceYears" type="number" name="experienceYears" min="0" max="60" value="0" [class.btn-outline-danger]="jobInformationForm.controls.experienceYears.invalid && changedJI[2]" (change)="changedJI[2]=true" formControlName="experienceYears" >
           </div>
           <div class="form-group">
             <label>Certificates:</label>
             <div class="checkbox">
-              <label><input type="checkbox" value="CPR"> CPR</label>
+              <label><input type="checkbox" value="CPR" name="certif" formControlName="certif"> CPR</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="firstAid"> First Aid</label>
+              <label><input type="checkbox" value="firstAid" name="certif" formControlName="certif"> First Aid</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="waterSafety"> Water Safety</label>
+              <label><input type="checkbox" value="waterSafety" name="certif" formControlName="certif"> Water Safety</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="driverLicence"> Driver's license</label>
+              <label><input type="checkbox" value="driverLicence" name="certif" formControlName="certif"> Driver's license</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="cooking"> Nutrition and cooking courses</label>
+              <label><input type="checkbox" value="cooking" name="certif" formControlName="certif"> Nutrition and cooking courses</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="fitnessEducation"> Fitness Education </label>
+              <label><input type="checkbox" value="fitnessEducation" name="certif" formControlName="certif"> Fitness Education </label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="specialNeedCare"> Special Needs Care </label>
+              <label><input type="checkbox" value="specialNeedCare" name="certif" formControlName="certif"> Special Needs Care </label>
             </div>
 
           </div>
+          <button type="submit" name="saveJobInformation" id="saveJobInformation" class="btn btn-info btn-md form-control" >Save</button>
+
         </form>
         <div class="border mt-5 mb-5 w-75" style="margin-left: 12.5%"></div>
-        <form>
+        <form [formGroup]="aboutMeForm" (ngSubmit)="onSaveAM(aboutMeForm.value)">
           <h3 class="text-info">About Me</h3>
           <div class="form-group">
-            <textarea class="form-control" id="aboutMeText" name="aboutMeText" placeholder="Describe Your Self Here ...">
+            <textarea class="form-control" id="aboutMeText" name="aboutMeText" placeholder="Describe Your Self Here ..." [class.btn-outline-danger]="aboutMeForm.controls.aboutMeText.invalid && changedAM" (change)="changedAM=true" formControlName="aboutMeText">
             </textarea>
             <small class="text-muted">Maximum 150 words</small>
             <button type="submit" name="saveAboutMe" id="saveAboutMe" class="btn btn-info btn-md form-control" >Save</button>
           </div>
         </form>
         <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
-        <form class="mt-4">
+        <form class="mt-4" [formGroup]="notificationForm">
           <h3 class="text-info">Notifications</h3>
           <div class="form-group col">
-            <div class="form-group">
+            <div class="form-group" >
               <label class="ml-n2" for="subscribeEmail">Subscribe  To NewsLetter:</label>
               <div class="row">
-                <input  type="email" class="form-control" id="subscribeEmail" aria-describedby="subEmail" placeholder="Exp: example@gmail.com" style="width: 90%">
-                <ui-switch class="col-sm-1" color="#17a2b8" [checked]="newsLetterChecked" (change)="subscribeChange()" ></ui-switch>
+                <input  type="email" class="form-control" id="subscribeEmail" aria-describedby="subEmail" placeholder="Exp: Example@gmail.com" style="width: 90%" [class.btn-outline-danger]="notificationForm.controls.emailSub.invalid && changedNotif" (change)="changedNotif=true" formControlName="emailSub">
+                <ui-switch class="col-sm-1" color="#17a2b8" id="emailSubCheck" [disabled]="notificationForm.controls.emailSub.invalid" [checked]="newsLetterChecked" (change)="subscribeChange(notificationForm.value)" formControlName="emailSubCheck" ></ui-switch>
               </div>
             </div>
             <label class="ml-n2">Your email notifications</label>
             <ul class="list-group ml-n3">
-              <li class="list-group-item font-weight-bold" style="height: 50px">Jobs Request <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" checked [disabled]="!newsLetterChecked"></ui-switch></li>
-              <li class="list-group-item font-weight-bold" style="height: 50px">Favourites Availability <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" checked [disabled]="!newsLetterChecked"></ui-switch></li>
+              <li class="list-group-item font-weight-bold" style="height: 50px">Jobs Request <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" checked [disabled]="!newsLetterChecked" (change)="onUpdateNotifications(notificationForm.value)"  formControlName="jobReqNotif"></ui-switch></li>
+              <li class="list-group-item font-weight-bold" style="height: 50px">Favourites Availability <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" checked [disabled]="!newsLetterChecked" (change)="onUpdateNotifications(notificationForm.value)" formControlName="favsAvailability"></ui-switch></li>
             </ul>
 
           </div>
@@ -194,14 +198,15 @@
     <!-- ===================================== Availability CASE ======================================-->
 
     <div id="Availability" class="container tab-pane fade"><br>
-      <form>
+      <form [formGroup]="availabilityForm" (ngSubmit)="onSaveAV(availabilityForm.value)">
         <div class="form-group card-header">
           <label for="available" style="font-size: 28px;font-weight: 500"> Are You Available</label><ui-switch class="col-sm-1 mt-2" color="#17a2b8" style="float: right" id="available" (change)="changeAvailability()" ></ui-switch>
         </div>
         <div class="form-group mt-2" *ngIf="available">
           <div class="form-group">
             <label for="availabilityDate">when are you available</label>
-            <select id="availabilityDate" class="form-control" name="availabilityDate">
+            <select id="availabilityDate" class="form-control" name="availabilityDate" [class.btn-outline-danger]="availabilityForm.controls.availabilityDate.invalid && changedAV[0]" (change)="changedAV[0]=true" formControlName="availabilityDate">
+              <option disabled>Chose...</option>
               <option value="0">Today</option>
               <option value="1">Tomorrow</option>
               <option value="2">In Two Days</option>
@@ -213,8 +218,9 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="interval" > For How Many Days Do you Intend To BabySit</label>
-            <select id="interval" class="form-control" name="interval">
+            <label for="duration" > For How Many Days Do you Intend To BabySit</label>
+            <select id="duration" class="form-control" name="duration" [class.btn-outline-danger]="availabilityForm.controls.duration.invalid && changedAV[1]" (change)="changedAV[1]=true" formControlName="duration">
+              <option disabled>Chose...</option>
               <option value="1">One Day</option>
               <option value="2">Two Days</option>
               <option value="3">Three Days</option>
@@ -226,15 +232,16 @@
           </div>
           <div class="form-group">
             <label for="openJob">Are you Open For a Regular job:</label>
-            <select id="openJob" name="openJob" class="form-control">
+            <select id="openJob" name="openJob" class="form-control" [class.btn-outline-danger]="availabilityForm.controls.openJob.invalid && changedAV[2]" (change)="changedAV[2]=true" formControlName="openJob">
+              <option disabled>Chose...</option>
               <option value="false">No</option>
               <option value="true">Yes</option>
             </select>
           </div>
           <div class="form-group">
             <label for="availabilityAdditionalInfo">Additional Info:</label>
-            <textarea id="availabilityAdditionalInfo" class="form-control" placeholder=""></textarea>
-            <small class="form-text text-muted">Maximum 300 Caracters.</small>
+            <textarea id="availabilityAdditionalInfo" class="form-control" [class.btn-outline-danger]="availabilityForm.controls.availabilityAdditionalInfo.invalid && changedAV[3]" (change)="changedAV[3]=true" formControlName="availabilityAdditionalInfo"></textarea>
+            <small class="form-text text-muted">Maximum 300 Characters.</small>
           </div>
           <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px">Save</button>
         </div>
@@ -320,7 +327,7 @@
           <div class="row mt-2 ">
             <p class=" mt-n1 mr-2">2</p>
             <div class="progress " style="width: 82%">
-              <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-warning" role="progressbar" style="width: 0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
           <div class="row mt-2">

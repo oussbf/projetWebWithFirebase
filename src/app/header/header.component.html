@@ -46,6 +46,19 @@
     </form>
     <!--================================ END SEARCH BAR ================================ -->
 
+    <!--================================ MENU DROPDOWN ================================ -->
+    <div class="btn-group ml-4">
+      <button type="button" class="btn" style="background-color: black" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-bars text-white "></i>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <button class="dropdown-item" type="button" routerLink="profile/parentId">My Account</button>
+        <button class="dropdown-item" type="button" id="logOutButton" (click)="logout()">Log Out</button>
+      </div>
+    </div>
+
+    <!--================================ END MENU DROPDOWN ================================ -->
+
   </div>
 </nav>
 

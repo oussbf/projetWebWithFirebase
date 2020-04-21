@@ -2,25 +2,47 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42e50037-016e-4c55-98d8-0fa021400a0a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/img/sadEmoji.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/services/contact.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/services/contact.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/services/parent-account.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/services/parent-acoount.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/services/search.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/services/search.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/services/sitter-account.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/services/sitter-account.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/services/sitter-rating.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/services/sitter-rating.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/img/step1-blue.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/img/step1-grey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/img/step2-blue.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/img/step2-grey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/img/step3-blue.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/img/step3-grey.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/auth/parent/sign-up-a/sign-up-a.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/parent/sign-up-a/sign-up-a.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/auth/parent/sign-up-a/sign-up-a.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/parent/sign-up-a/sign-up-a.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/auth/signin/signin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/signin/signin.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/auth/signin/signin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/signin/signin.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/auth/sitter/sign-up-b/sign-up-b.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/sitter/sign-up-b/sign-up-b.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/auth/sitter/sign-up-b/sign-up-b.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/sitter/sign-up-b/sign-up-b.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/contact/contact.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/contact/contact.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/contact/contact.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/contact/contact.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/contact/contact.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/contact/contact.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/header/header.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/header/header.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/header/header.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/header/header.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/home/home.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page-not-found/page-not-found.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page-not-found/page-not-found.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page-not-found/page-not-found.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page-not-found/page-not-found.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/search/search.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/search/search.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/search/search.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/search/search.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/img/step1.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +136,12 @@
       <workItem from="1586388333233" duration="27896000" />
       <workItem from="1586698296933" duration="4979000" />
       <workItem from="1586713915019" duration="12431000" />
-      <workItem from="1586794512704" duration="18313000" />
+      <workItem from="1586794512704" duration="19828000" />
+      <workItem from="1586958797518" duration="4677000" />
+      <workItem from="1587048325201" duration="704000" />
+      <workItem from="1587132615435" duration="32985000" />
+      <workItem from="1587301122410" duration="46182000" />
+      <workItem from="1587479048850" duration="16122000" />
     </task>
     <servers />
   </component>
@@ -133,6 +160,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="275" y="27" key="#Inspections/0.0.1366.738@0.0.1366.738" timestamp="1586638695077" />
+    <state x="275" y="27" key="#TSLint" timestamp="1587305891434">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="275" y="27" key="#TSLint/0.0.1366.738@0.0.1366.738" timestamp="1587305891434" />
     <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586120886266">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -157,14 +188,18 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="184" y="11" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1585709483147" />
-    <state x="492" y="286" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586458039740">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1587485208832">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="492" y="286" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.738@0.0.1366.738" timestamp="1586458039740" />
-    <state x="339" y="165" key="run.anything.popup" timestamp="1586834220592">
+    <state width="498" height="446" key="SwitcherDM/0.0.1366.738@0.0.1366.738" timestamp="1587485208832" />
+    <state x="492" y="286" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587241883018">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="339" y="165" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1586834220592" />
+    <state x="492" y="286" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.738@0.0.1366.738" timestamp="1587241883018" />
+    <state x="339" y="165" key="run.anything.popup" timestamp="1587487864856">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="339" y="165" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1587487864856" />
     <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1586798197134">
       <screen x="0" y="0" width="1366" height="738" />
     </state>

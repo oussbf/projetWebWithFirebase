@@ -1,17 +1,17 @@
 
 <div class="row w-100">
   <div class="col w-50 hovereffect">
-    <img src="assets/img/parent1.jpg" width="683" height="482">
+    <img src="assets/img/parent1.jpg" width="683" height="482" alt="parentsPic">
     <div class="overlay">
       <h2 class="text-info">I need a caregiver</h2>
-      <a class="info" href="auth/parent/signUp">Register as a parent</a>
+      <a class="info" routerLink="/auth/parent/signUp">Register as a parent</a>
     </div>
   </div>
   <div class=" hovereffect" style="width: 683px ;margin-right: -15px">
-    <img src="assets/img/sitter1.jpg" width="683" height="482">
+    <img src="assets/img/sitter1.jpg" width="683" height="482" alt="sitterPic">
     <div class="overlay">
       <h2 class="text-info">i am a caregiver</h2>
-      <a class="info" href="auth/sitter/signUp">register as a babysitter</a>
+      <a class="info" routerLink="/auth/sitter/signUp">register as a babysitter</a>
     </div>
   </div>
 </div>
@@ -20,18 +20,18 @@
   <h1 class="text-center how-it-works-font"> HOW IT WORKS?</h1>
   <div class="row">
     <div class="col">
-      <img src="assets/img/1.svg"  height="280px" width="280" alt="img" class="rounded-circle mx-auto">
+      <img [src]="step1Image" (mouseover)="step1Image ='assets/img/step1-blue.png';" (mouseout)="step1Image = 'assets/img/step1-grey.png'"  height="280px" width="280" alt="img" class="rounded-circle mx-auto">
       <h2 class="text-center how-it-works-font"> REGISTRATION  </h2>
       <p class="font-weight-bold text-center how-it-works-font">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas </p>
     </div>
     <div class="col">
-      <img src="assets/img/2.svg"  height="280px" width="280" alt="img" class="rounded-circle mx-auto">
+      <img [src]="step2Image" (mouseover)="step2Image ='assets/img/step2-blue.png';" (mouseout)="step2Image = 'assets/img/step2-grey.png'"  height="280px" width="280" alt="img" class="rounded-circle mx-auto">
       <h2 class="text-center how-it-works-font"> INPUT YOUR DATA</h2>
       <p class="font-weight-bold text-center how-it-works-font">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas </p>
 
     </div>
     <div class="col">
-      <img src="assets/img/3.svg" height="280px" width="280" alt="img" class="rounded-circle mx-auto">
+      <img [src]="step3Image" (mouseover)="step3Image ='assets/img/step3-blue.png';" (mouseout)="step3Image = 'assets/img/step3-grey.png'" height="280px" width="280" alt="img" class="rounded-circle mx-auto">
       <h2 class="text-center how-it-works-font"> LET'S EXPLORE</h2>
       <p class="font-weight-bold text-center how-it-works-font">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas </p>
 

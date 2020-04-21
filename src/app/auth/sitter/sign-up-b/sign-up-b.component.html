@@ -1,23 +1,24 @@
 <div class="container py-5" >
   <div>
     <div class="card" style="width: 600px; margin: 15px auto auto;">
-      <div class="card-header" style="background-color: white; box-shadow: rgba(0, 0, 0, 0.75) 10px 11px 5px 0px" >
+      <div class="card-header" style="background-color: white; box-shadow: rgba(0, 0, 0, 0.75) 10px 11px 5px 0" >
         <h1 class="text-uppercase text-center text-info font-weight-bold">Registration</h1>
       </div>
-      <div class="card-body" style="background-color: white; box-shadow: rgba(0, 0, 0, 0.75) 10px 10px 5px 0px">
+      <div class="card-body" style="background-color: white; box-shadow: rgba(0, 0, 0, 0.75) 10px 10px 5px 0">
+        <form [formGroup]="sitterForm" (ngSubmit)="onRegister(sitterForm.value)">
         <div class="row">
           <!-- ===================================== FIRST NAME INPUT ===================================== -->
 
           <div class="col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-              <label class="text-info">First Name:</label>
+              <label class="text-info" for="firstName">First Name:</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                 <span class="input-group-text">
                   <i class="fa fa-user"></i>
                 </span>
                 </div>
-                <input id="name" type="text" class="form-control">
+                <input id="firstName" type="text" class="form-control" [class.btn-outline-danger]="sitterForm.controls.firstName.invalid && changed[0]" (change)="changed[0]=true" formControlName="firstName">
               </div>
             </div>
           </div>
@@ -28,14 +29,14 @@
 
           <div class="col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-              <label class="text-info">Last Name:</label>
+              <label class="text-info" for="lastName">Last Name:</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                 <span class="input-group-text">
                   <i class="fa fa-user"></i>
                 </span>
                 </div>
-                <input id="lastName" type="text" class="form-control">
+                <input id="lastName" type="text" class="form-control" [class.btn-outline-danger]="sitterForm.controls.lastName.invalid && changed[1]" (change)="changed[1]=true" formControlName="lastName">
               </div>
             </div>
           </div>
@@ -48,14 +49,14 @@
 
           <div class="col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-              <label class="text-info">Phone Number:</label>
+              <label class="text-info" for="phoneNumber">Phone Number:</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
                     <i class="fa fa-phone"></i>
                   </span>
                 </div>
-                <input id="phoneNumber" type="text" class="form-control">
+                <input id="phoneNumber" type="text" class="form-control" [class.btn-outline-danger]="sitterForm.controls.phoneNumber.invalid && changed[2]" (change)="changed[2]=true" formControlName="phoneNumber">
               </div>
             </div>
           </div>
@@ -65,14 +66,14 @@
 
           <div class="col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-              <label class="text-info">Email:</label>
+              <label class="text-info" for="email">Email:</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
                     <i class="fa fa-envelope"></i>
                   </span>
                 </div>
-                <input id="email" type="email" class="form-control">
+                <input id="email" type="email" class="form-control" [class.btn-outline-danger]="sitterForm.controls.email.invalid && changed[3]" (change)="changed[3]=true" formControlName="email">
               </div>
             </div>
           </div>
@@ -84,14 +85,14 @@
 
           <div class="col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-              <label class="text-info">Password:</label>
+              <label class="text-info" for="password">Password:</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="fa fa-lock"></i>
                     </span>
                 </div>
-                <input id="password" type="password" class="form-control">
+                <input id="password" type="password" class="form-control" [class.btn-outline-danger]="sitterForm.controls.password.invalid && changed[4]" (change)="changed[4]=true" formControlName="password">
               </div>
             </div>
           </div>
@@ -101,14 +102,14 @@
 
           <div class="col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-              <label class="text-info">Confirm Password:</label>
+              <label class="text-info" for="confirmedPassword">Confirm Password:</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="fa fa-lock"></i>
                     </span>
                 </div>
-                <input id="confirmedPassword" type="password" class="form-control">
+                <input id="confirmedPassword" type="password" class="form-control" [class.btn-outline-danger]="sitterForm.controls.confirmedPassword.invalid && changed[5]" (change)="changed[5]=true" formControlName="confirmedPassword">
               </div>
             </div>
           </div>
@@ -121,16 +122,15 @@
 
           <div class="col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-              <label class="text-info">Birthday:</label>
+              <label class="text-info" for="birthday">Birthday:</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                 <span class="input-group-text" style="height: 38px">
                   <i class="fas fa-calendar-alt"></i>
                 </span>
                 </div>
-                <input id="birthday" class="form-control" [matDatepicker]="myDatepicker" placeholder="DD/MM/YYYY">
-                <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
-                <mat-datepicker #myDatepicker [startAt]="startDate"></mat-datepicker>
+                <input id="birthday" class="form-control" type="date" placeholder="DD/MM/YYYY" [class.btn-outline-danger]="sitterForm.controls.birthday.invalid && changed[6]" (change)="changed[6]=true" formControlName="birthday">
+
               </div>
             </div>
           </div>
@@ -141,14 +141,15 @@
 
           <div class="col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-              <label class="text-info">Gender:</label>
+              <label class="text-info" for="gender">Gender:</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                 <span class="input-group-text">
                   <i class="fas fa-venus-mars"></i>
                 </span>
                 </div>
-                <select id="gender" class="form-control" name="gender">
+                <select id="gender" class="form-control" name="gender" [class.btn-outline-danger]="sitterForm.controls.gender.invalid && changed[7]" (change)="changed[7] = true" formControlName="gender">
+                  <option disabled>Chose...</option>
                   <option value="female">Female</option>
                   <option value="male">Male</option>
                 </select>
@@ -163,15 +164,16 @@
           <!-- ===================================== CITY INPUT ===================================== -->
           <div class="col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-              <label class="text-info">City/Town:</label>
+              <label class="text-info" for="city">City/Town:</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="fas fa-city"></i>
                     </span>
                 </div>
-                <select id="city" class="form-control" name="city">
-                  <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+                <select id="city" class="form-control" name="city" [class.btn-outline-danger]="sitterForm.controls.city.invalid && changed[8]" (change)="changed[8] = true" formControlName="city">
+                  <option  disabled>chose...</option>
+                  <option *ngFor="let city of cities" [ngValue]="city">{{city}}</option>
                 </select>
               </div>
             </div>
@@ -182,24 +184,25 @@
 
           <div class="col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
-              <label class="text-info">Zip / Postal Code:</label>
+              <label class="text-info" for="ZIP">Zip / Postal Code:</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="fas fa-mail-bulk"></i>
                     </span>
                 </div>
-                <input id="ZIP" type="text" name="ZIP" placeholder="Zip or Postal Code" class="form-control">
+                <input id="ZIP" type="text" name="ZIP" placeholder="Zip or Postal Code" class="form-control" [class.btn-outline-danger]="sitterForm.controls.ZIP.invalid && changed[9]" (change)="changed[9]=true" formControlName="ZIP">
               </div>
             </div>
           </div>
 
           <!-- ===================================== END ZIP INPUT ===================================== -->
         </div>
-        <button type="submit" class="btn btn-info btn-md float-left form-control">
+        <button type="submit" class="btn btn-info btn-md float-left form-control" >
           <i class="fas fa-user-plus"></i>
           Register
         </button>
+        </form>
       </div>
     </div>
   </div>
