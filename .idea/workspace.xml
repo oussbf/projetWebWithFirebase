@@ -2,56 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42e50037-016e-4c55-98d8-0fa021400a0a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/guards/auth-guard.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/auth-guard.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/home-guard.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/home-guard.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/parent-profile-guard.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/parent-profile-guard.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/reverse-auth-guard.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/reverse-auth-guard.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/search-guard.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/search-guard.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/sitter-profile-guard.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/guards/sitter-profile-guard.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/auth.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/parentModal.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/sitterModal.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/radio/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/radio/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/radio/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/radio/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/radio/radio-module.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/radio/radio-module.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/radio/radio.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/radio/radio.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/slide-toggle-module.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/slide-toggle-module.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/slide-toggle-required-validator.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/slide-toggle-required-validator.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/slide-toggle.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/slide-toggle.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/parent/sign-up-a/sign-up-a.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/parent/sign-up-a/sign-up-a.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/signin/signin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/signin/signin.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/sitter/sign-up-b/sign-up-b.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/sitter/sign-up-b/sign-up-b.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/header/header.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/header/header.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/search/search.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/search/search.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/parent-account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/parent-account.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/sitter-account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/sitter-account.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/sitter-rating.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/sitter-rating.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/viewprofile/parent/parent.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/viewprofile/parent/parent.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/viewprofile/parent/parent.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/viewprofile/parent/parent.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
