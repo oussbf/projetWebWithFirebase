@@ -10,7 +10,6 @@ import {Router} from '@angular/router';
 })
 export class SignUpBComponent implements OnInit {
   sitterForm: FormGroup;
-  errorMessage: '';
   changed = [false, false, false, false, false, false, false, false, false, false];
 
 
@@ -35,7 +34,7 @@ export class SignUpBComponent implements OnInit {
       password: ['', [Validators.required, Validators.pattern('(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$')]],
       confirmedPassword: ['', Validators.required],
       city: ['', Validators.required],
-      ZIP: ['', [Validators.required, Validators.pattern('^\\d{5}(-\\d{4})?$')]],
+      ZIP: ['', [Validators.required, Validators.pattern('^\\d{4}$')]],
       gender: ['', Validators.required ],
       birthday: ['', Validators.required]
     });
@@ -43,13 +42,7 @@ export class SignUpBComponent implements OnInit {
 
   onRegister(formValue) {
     if (this.sitterForm.valid) {
-      this.authService.doRegisterAsSitter(formValue).then(res => {
-        this.router.navigate(['viewprofile/sitter']);
-      }, err => {
-        console.log(err);
-        this.errorMessage = err.message;
-      });
-
+      this.authService.doRegisterAsSitter(formValue);
     } else {
       for (let i = 0 ; i < this.changed.length; i++) { this.changed[i] = true; }
     }

@@ -80,10 +80,10 @@
         <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
 
         <form class="mt-4" [formGroup]="jobInformationForm" (ngSubmit)="onSaveJI(jobInformationForm.value)">
-          <h3 class="text-info">Job Informations</h3>
+          <h3 class="text-info">Job Information</h3>
           <div class="form-group">
             <label for ="numberOfChildrenHandling">how many children can you take care of :</label>
-            <select id="numberOfChildrenHandling" class="custom-select" name="numberOfChildrenHandling" [class.btn-outline-danger]="jobInformationForm.controls.numberOfChildrenHandling.invalid && changedJI[0]" (change)="changedJI[0]=true" formControlName="numberOfChildrenHandling">
+            <select id="numberOfChildrenHandling"  class="custom-select" name="numberOfChildrenHandling" [class.btn-outline-danger]="jobInformationForm.controls.numberOfChildrenHandling.invalid && changedJI[0]" (change)="changedJI[0]=true" formControlName="numberOfChildrenHandling">
               <option disabled>Chose...</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -98,25 +98,25 @@
               <div class="col-sm">
                 <div class="col">
                   <div><img src="assets/img/infant.svg" width="150px" height="150px" alt="infantPicture"></div>
-                  <div><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="infant" value="infant" formControlName="childAge" ></div>
+                  <div><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="infant" value="infant" (click)="sitterProfile.toggleElementInArray(sitterProfile.childAge , 'infant')" [checked]="sitterProfile.childAge.includes('infant')"></div>
                 </div>
               </div>
               <div class="col-sm">
                 <div class="col">
                   <div><img src="assets/img/toddler.svg" width="150px" height="150px" alt="toddlerPicture"></div>
-                  <div ><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="toddler" value="toddler" formControlName="childAge"></div>
+                  <div ><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="toddler" value="toddler" (click)="sitterProfile.toggleElementInArray(sitterProfile.childAge , 'toddler')" [checked]="sitterProfile.childAge.includes('toddler')"></div>
                 </div>
               </div>
               <div class="col-sm">
                 <div class="col">
                   <div><img src="assets/img/preschool.svg" width="150px" height="150px" alt="preschoolerPicture"></div>
-                  <div><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="preschool" value="preschool" formControlName="childAge" ></div>
+                  <div><input class="form-check-input" style="margin-left:70px;" type="checkbox" name="childAge" id="preschooler" value="preschooler" (click)="sitterProfile.toggleElementInArray(sitterProfile.childAge , 'preschooler')" [checked]="sitterProfile.childAge.includes('preschooler')"></div>
                 </div>
               </div>
               <div class="col-sm ">
                 <div class="col">
                   <div><img src="assets/img/school.svg" width="150px" height="150px" alt="schoolerPicture"></div>
-                  <div><input class="form-check-input " style="margin-left:70px;" type="checkbox" name="childAge" id="school" value="school" formControlName="childAge"></div>
+                  <div><input class="form-check-input " style="margin-left:70px;" type="checkbox" name="childAge" id="schooler" value="schooler" (click)="sitterProfile.toggleElementInArray(sitterProfile.childAge , 'schooler')" [checked]="sitterProfile.childAge.includes('schooler')"></div>
                 </div>
               </div>
             </div>
@@ -136,25 +136,25 @@
           <div class="form-group">
             <label>Certificates:</label>
             <div class="checkbox">
-              <label><input type="checkbox" value="CPR" name="certif" formControlName="certif"> CPR</label>
+              <label><input type="checkbox" value="CPR" name="certif" (click)="sitterProfile.toggleElementInArray(sitterProfile.certificates , 'CPR')" [checked]="sitterProfile.certificates.includes('CPR')"> CPR</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="firstAid" name="certif" formControlName="certif"> First Aid</label>
+              <label><input type="checkbox" value="firstAid" name="certif" (click)="sitterProfile.toggleElementInArray(sitterProfile.certificates , 'firstAid')" [checked]="sitterProfile.certificates.includes('firstAid')"> First Aid</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="waterSafety" name="certif" formControlName="certif"> Water Safety</label>
+              <label><input type="checkbox" value="waterSafety" name="certif" (click)="sitterProfile.toggleElementInArray(sitterProfile.certificates , 'waterSafety')" [checked]="sitterProfile.certificates.includes('waterSafety')"> Water Safety</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="driverLicence" name="certif" formControlName="certif"> Driver's license</label>
+              <label><input type="checkbox" value="driverLicence" name="certif" (click)="sitterProfile.toggleElementInArray(sitterProfile.certificates , 'drivingLicence')" [checked]="sitterProfile.certificates.includes('drivingLicence')"> Driver's license</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="cooking" name="certif" formControlName="certif"> Nutrition and cooking courses</label>
+              <label><input type="checkbox" value="cooking" name="certif" (click)="sitterProfile.toggleElementInArray(sitterProfile.certificates , 'nutrition')" [checked]="sitterProfile.certificates.includes('nutrition')"> Nutrition and cooking courses</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="fitnessEducation" name="certif" formControlName="certif"> Fitness Education </label>
+              <label><input type="checkbox" value="fitnessEducation" name="certif" (click)="sitterProfile.toggleElementInArray(sitterProfile.certificates , 'fitnessEducation')" [checked]="sitterProfile.certificates.includes('fitnessEducation')"> Fitness Education </label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="specialNeedCare" name="certif" formControlName="certif"> Special Needs Care </label>
+              <label><input type="checkbox" value="specialNeedCare" name="certif" (click)="sitterProfile.toggleElementInArray(sitterProfile.certificates , 'specialNeedCare')" [checked]="sitterProfile.certificates.includes('specialNeedCare')"> Special Needs Care </label>
             </div>
 
           </div>
@@ -178,14 +178,14 @@
             <div class="form-group" >
               <label class="ml-n2" for="subscribeEmail">Subscribe  To NewsLetter:</label>
               <div class="row">
-                <input  type="email" class="form-control" id="subscribeEmail" aria-describedby="subEmail" placeholder="Exp: Example@gmail.com" style="width: 90%" [class.btn-outline-danger]="notificationForm.controls.emailSub.invalid && changedNotif" (change)="changedNotif=true" formControlName="emailSub">
-                <ui-switch class="col-sm-1" color="#17a2b8" id="emailSubCheck" [disabled]="notificationForm.controls.emailSub.invalid" [checked]="newsLetterChecked" (change)="subscribeChange(notificationForm.value)" formControlName="emailSubCheck" ></ui-switch>
+                <input  type="email" class="form-control" id="subscribeEmail" aria-describedby="subEmail"  placeholder="Exp: Example@gmail.com" style="width: 90%" [class.btn-outline-danger]="notificationForm.controls.emailSub.invalid && changedNotif" (change)="changedNotif=true" formControlName="emailSub">
+                <ui-switch class="col-sm-1" color="#17a2b8" id="emailSubCheck" [disabled]="notificationForm.controls.emailSub.invalid" (change)="subscribeChange(notificationForm.value)" formControlName="emailSubCheck" ></ui-switch>
               </div>
             </div>
             <label class="ml-n2">Your email notifications</label>
             <ul class="list-group ml-n3">
-              <li class="list-group-item font-weight-bold" style="height: 50px">Jobs Request <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" checked [disabled]="!newsLetterChecked" (change)="onUpdateNotifications(notificationForm.value)"  formControlName="jobReqNotif"></ui-switch></li>
-              <li class="list-group-item font-weight-bold" style="height: 50px">Favourites Availability <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" checked [disabled]="!newsLetterChecked" (change)="onUpdateNotifications(notificationForm.value)" formControlName="favsAvailability"></ui-switch></li>
+              <li class="list-group-item font-weight-bold" style="height: 50px">Jobs Request <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" [disabled]="!newsLetterChecked" (change)="onUpdateNotifications(notificationForm.value)"  formControlName="jobRequest"></ui-switch></li>
+              <li class="list-group-item font-weight-bold" style="height: 50px">Received Reviews <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" [disabled]="!newsLetterChecked" (change)="onUpdateNotifications(notificationForm.value)" formControlName="reviewsReceived"></ui-switch></li>
             </ul>
 
           </div>
@@ -200,7 +200,7 @@
     <div id="Availability" class="container tab-pane fade"><br>
       <form [formGroup]="availabilityForm" (ngSubmit)="onSaveAV(availabilityForm.value)">
         <div class="form-group card-header">
-          <label for="available" style="font-size: 28px;font-weight: 500"> Are You Available</label><ui-switch class="col-sm-1 mt-2" color="#17a2b8" style="float: right" id="available" (change)="changeAvailability()" ></ui-switch>
+          <label for="available" style="font-size: 28px;font-weight: 500"> Are You Available</label><ui-switch class="col-sm-1 mt-2" color="#17a2b8" style="float: right" id="available" (change)="changeAvailability()" formControlName="available" ></ui-switch>
         </div>
         <div class="form-group mt-2" *ngIf="available">
           <div class="form-group">
@@ -243,8 +243,8 @@
             <textarea id="availabilityAdditionalInfo" class="form-control" [class.btn-outline-danger]="availabilityForm.controls.availabilityAdditionalInfo.invalid && changedAV[3]" (change)="changedAV[3]=true" formControlName="availabilityAdditionalInfo"></textarea>
             <small class="form-text text-muted">Maximum 300 Characters.</small>
           </div>
-          <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px">Save</button>
         </div>
+        <button type="submit" class="btn btn-info btn-md form-control mt-2" style="width: 150px">Save</button>
       </form>
     </div>
 
@@ -255,29 +255,31 @@
 
 
     <div id="Jobs" class="container tab-pane fade"><br>
-      <h3 class="text-center" *ngIf="!jobs.length">No Jobs Have Been Found.</h3>
-      <div class="container mb-2 " *ngFor="let job of jobs; let  i = index">
-        <div class="card-header">
-          <button type="button" class="close" aria-label="Close" (click)="deleteJob(i)">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h5><span class="text-info">{{job.nameSender}}</span> requested you for a job:</h5>
-        </div>
-        <div class="border border-top-0 p-2">
-          <p style="position:relative;">Phone Number :<span style="position: absolute;left: 200px">{{job.phoneNumber}}</span></p>
-          <p style="position:relative;">Job Date :<span style="position: absolute;left: 200px">{{job.jobDate}}</span></p>
-          <p style="position:relative;">Job Length :<span style="position: absolute;left: 200px">{{job.jobLength}}</span></p>
-          <p style="position:relative;">Location :<span style="position: absolute;left: 200px">{{job.jobLocation}}</span></p>
-          <p style="position:relative;">Number Of Children :<span style="position: absolute;left: 200px">{{job.numChildren}}</span></p>
-          <p style="position:relative;">Needs A Regular Job :<span style="position: absolute;left: 200px">{{job.openForRegularJob}}</span></p>
-        </div>
-        <div class="card-header col border-right border-left">
-          <button type="button" class="btn btn-success" *ngIf="!(job.accepted || job.rejected)" (click)="acceptClick(i)" >Accept</button>
-          <button type="button" class="btn btn-danger ml-2" *ngIf="!(job.accepted || job.rejected)" (click)="rejectClick(i)" >Reject</button>
-          <button type="button" class="btn" [ngClass]="{'btn-success':job.accepted , 'btn-danger':job.rejected}" disabled *ngIf="job.accepted || job.rejected" ><span *ngIf="job.accepted">Accepted</span><span *ngIf="job.rejected">Rejected</span></button>
-          <!--ADD AN IGNORED BUTTON (black) WHICH APPEARS IF THE DEADLANE OF ACCEPTING OR REJECTING IS PASSED-->
+      <h3 class="text-center" *ngIf="!sitterProfile.jobs.length">No Jobs Have Been Found.</h3>
+      <div *ngIf="sitterProfile.jobs.length">
+        <div class="container mb-2 " *ngFor="let job of sitterProfile.jobs; let  i = index">
+          <div class="card-header">
+            <button type="button" class="close" aria-label="Close" (click)="deleteJob(i)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h5><span class="text-info">{{job.nameSender}}</span> requested you for a job:</h5>
+          </div>
+          <div class="border border-top-0 p-2">
+            <p style="position:relative;">Phone Number :<span style="position: absolute;left: 200px">{{job.phoneNumber}}</span></p>
+            <p style="position:relative;">Job Date :<span style="position: absolute;left: 200px">{{job.jobDate}}</span></p>
+            <p style="position:relative;">Job Length :<span style="position: absolute;left: 200px">{{job.jobLength}} {{(job.jobLength > 1)? 'Days' : 'Day'}} </span></p>
+            <p style="position:relative;">Location :<span style="position: absolute;left: 200px">{{job.jobLocation}}</span></p>
+            <p style="position:relative;">Number Of Children :<span style="position: absolute;left: 200px">{{job.numChildren}}</span></p>
+            <p style="position:relative;">Needs A Regular Job :<span style="position: absolute;left: 200px">{{job.openFRJ}}</span></p>
+          </div>
+          <div class="card-header col border-right border-left">
+            <button type="button" class="btn btn-success" *ngIf="job.jobStatus === undefined" (click)="acceptClick(i)" >Accept</button>
+            <button type="button" class="btn btn-danger ml-2" *ngIf="job.jobStatus === undefined" (click)="rejectClick(i)" >Reject</button>
+            <button type="button" class="btn" [ngClass]="{'btn-success':job.jobStatus , 'btn-danger':job.jobStatus === false}" disabled *ngIf="!(job.jobStatus === undefined)" ><span *ngIf="job.jobStatus">Accepted</span><span *ngIf="job.jobStatus === false">Rejected</span></button>
+            <!--ADD AN IGNORED BUTTON (black) WHICH APPEARS IF THE DEADLANE OF ACCEPTING OR REJECTING IS PASSED-->
 
-          <a href="#" class="float-right mt-2">details</a>
+            <a [routerLink]="'/viewprofile/parents/'+job.id" class="float-right mt-2">view Profile</a>
+          </div>
         </div>
       </div>
 
@@ -290,73 +292,72 @@
 
 
     <div id="Reviews" class="container tab-pane fade"><br>
-      <h3 class="text-center" *ngIf="!ratings.length">No reviews Have Been Found.</h3>
-      <div class="row">
+      <h3 class="text-center" *ngIf="!sitterProfile.reviews.length">No reviews Have Been Found.</h3>
+      <div class="row" *ngIf="sitterProfile.reviews.length">
         <div class="text-center col-4 ">
-          <h1 style="font-size: 70px">4.0</h1>
+          <h1 style="font-size: 70px">{{sitterProfile.avgRate}}</h1>
           <p>out of 5</p>
-          <p><i class="fas fa-user pr-1"></i>100 total</p>
+          <p><i class="fas fa-user pr-1"></i>{{sitterProfile.reviews.length}} total</p>
           <div class="text-center mb-2">
             <span class="fa fa-star mx-1 text-info"> </span>
-            <span class="fa fa-star mx-1 text-info"></span>
-            <span class="fa fa-star mx-1 text-info"></span>
-            <span class="fa fa-star mx-1 text-info"></span>
-            <span class="far fa-star mx-1 text-info "></span>
+            <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitterProfile.avgRate > 1, 'far': sitterProfile.avgRate === 1}"></span>
+            <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitterProfile.avgRate > 2, 'far': sitterProfile.avgRate <= 2}"></span>
+            <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitterProfile.avgRate > 3, 'far': sitterProfile.avgRate <= 3}"></span>
+            <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitterProfile.avgRate > 4, 'far': sitterProfile.avgRate <= 4}"></span>
           </div>
         </div>
 
         <div class="col-8">
           <div class="row mt-2 ">
             <p class=" mt-n1 mr-2">5</p>
-            <div class="progress " style="width: 82%">
-              <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress " style="width: 82%" >
+              <div class="progress-bar" role="progressbar" [style.width]="(sitterProfile.starCounts[4] / sitterProfile.reviews.length)* 100 + '%'" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
           <div class="row mt-2 ">
             <p class=" mt-n1 mr-2">4</p>
             <div class="progress " style="width: 82%">
-              <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-info" role="progressbar" [style.width]="(sitterProfile.starCounts[3] / sitterProfile.reviews.length)* 100 + '%'" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
           <div class="row mt-2 ">
             <p class=" mt-n1 mr-2">3</p>
             <div class="progress " style="width: 82%">
-              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-success" role="progressbar" [style.width]="(sitterProfile.starCounts[2] / sitterProfile.reviews.length)* 100 +'%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
           <div class="row mt-2 ">
             <p class=" mt-n1 mr-2">2</p>
             <div class="progress " style="width: 82%">
-              <div class="progress-bar bg-warning" role="progressbar" style="width: 0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-warning" role="progressbar" [style.width]="(sitterProfile.starCounts[1] / sitterProfile.reviews.length)* 100 + '%'" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
           <div class="row mt-2">
             <p class=" mt-n1 mr-2">1</p>
             <div class="progress " style="width: 82%">
-              <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-danger" role="progressbar" [style.width]="(sitterProfile.starCounts[0] / sitterProfile.reviews.length)* 100 + '%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
         </div>
 
 
       </div>
-      <div class="mx-auto row mt-3 p-2 bg-light mb-2" style="width: 870px; position:relative ;border: 1px solid #EAEAEA; border-radius: 2px" *ngFor="let rating of ratings ; let i= index">
+      <div class="mx-auto row mt-3 p-2 bg-light mb-2" style="width: 870px; position:relative ;border: 1px solid #EAEAEA; border-radius: 2px" *ngFor="let rating of sitterProfile.reviews ; let i= index">
         <div class="col-2 position-relative ">
           <img class="rounded-circle position-relative top" src="assets/img/oussama.jpg" width="70px" height="70px" alt="reviewerPicture">
-          <a href="#" style="text-underline: none; color: black" class="text-center">Oussama</a>
+          <a [routerLink]="'/viewProfile/parent/'+rating.idRev" style="text-underline: none; color: black" class="text-center">{{rating.firstNameRev}}</a>
           <div class="mb-2 ml-n2" style="width: 90px ;font-size: 9px">
-            <i class="fa fa-star mx-1 text-info" > </i>
-            <i class="fa fa-star mx-1 text-info" ></i>
-            <i class="fa fa-star mx-1 text-info" ></i>
-            <i class="fa fa-star mx-1 text-info" ></i>
-            <i class="far fa-star mx-1 text-info"></i>
+            <i class="fa fa-star mx-1 text-info"> </i>
+            <i class="fa-star mx-1 text-info" [ngClass]="{'fa': +rating.review > 1, 'far': +rating.review === 1}"></i>
+            <i class="fa-star mx-1 text-info" [ngClass]="{'fa': +rating.review > 2, 'far': +rating.review <= 2}"></i>
+            <i class="fa-star mx-1 text-info" [ngClass]="{'fa': +rating.review > 3, 'far': +rating.review <= 3}"></i>
+            <i class="fa-star mx-1 text-info" [ngClass]="{'fa': +rating.review > 4, 'far': +rating.review <= 4}"></i>
+
           </div>
-          <p>24/7/2020</p>
+          <p>{{rating.reviewDate}}</p>
         </div>
         <div class="col-10 text-left pl-4 pt-2">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          {{rating.reviewText}}
         </div>
 
       </div>

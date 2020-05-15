@@ -23,19 +23,31 @@ import { SitterComponent } from './viewprofile/sitter/sitter.component';
 import { ParentComponent } from './viewprofile/parent/parent.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {ParentAccountService} from './services/parent-account.service';
+import {SitterAccountService} from './services/sitter-account.service';
+import {AuthGuardService} from './guards/auth-guard.service';
+import {HomeGuardService} from './guards/home-guard.service';
+import {SearchGuardService} from './guards/search-guard.service';
+import {ParentProfileGuardService} from './guards/parent-profile-guard.service';
+import {SitterProfileGuardService} from './guards/sitter-profile-guard.service';
+import {ReverseAuthGuardService} from './guards/reverse-auth-guard.service';
 
 
 const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'home' , canActivate: [HomeGuardService] , component: HomeComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'search', component: SearchComponent },
-  { path: 'profile/sitterId', component: SitteridComponent },
-  { path: 'profile/parentId', component: ParentIdComponent },
-  { path: 'auth/signIn', component: SigninComponent },
-  { path: 'viewprofile/sitter', component: SitterComponent },
-  { path: 'viewprofile/parent', component: ParentComponent },
-  { path: 'auth/parent/signUp', component: SignUpAComponent  },
-  { path: 'auth/sitter/signUp', component: SignUpBComponent  },
+  { path: 'search', canActivate: [AuthGuardService, SearchGuardService], component: SearchComponent },
+  { path: 'profile/sitter/:id', canActivate: [AuthGuardService, SitterProfileGuardService], component: SitteridComponent },
+  { path: 'profile/parent/:id', canActivate: [AuthGuardService, ParentProfileGuardService], component: ParentIdComponent },
+  { path: 'auth/signIn', canActivate: [ReverseAuthGuardService], component: SigninComponent },
+  { path: 'viewprofile/sitter/:id', component: SitterComponent },
+  { path: 'viewprofile/parent/:id', component: ParentComponent },
+  { path: 'auth/parent/signUp', canActivate: [ReverseAuthGuardService], component: SignUpAComponent  },
+  { path: 'auth/sitter/signUp', canActivate: [ReverseAuthGuardService], component: SignUpBComponent  },
   { path: 'pageNotFound', component: PageNotFoundComponent},
   { path: '**', redirectTo: 'home'}
 
@@ -59,18 +71,23 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
   ],
     imports: [
-        BrowserModule,
-        AppRoutingModule,
-        RouterModule.forRoot(appRoutes),
-        UiSwitchModule,
-        BrowserAnimationsModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        ReactiveFormsModule,
+      BrowserModule,
+      AppRoutingModule,
+      RouterModule.forRoot(appRoutes),
+      UiSwitchModule,
+      BrowserAnimationsModule,
+      MatInputModule,
+      MatDatepickerModule,
+      MatNativeDateModule,
+      ReactiveFormsModule,
+      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AngularFireAuthModule,
+      AngularFirestoreModule
     ],
   providers: [
-    AuthService
+    AuthService,
+    ParentAccountService,
+    SitterAccountService
   ],
   bootstrap: [AppComponent]
 })

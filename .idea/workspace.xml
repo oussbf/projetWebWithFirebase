@@ -2,47 +2,56 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42e50037-016e-4c55-98d8-0fa021400a0a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/services/contact.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/contact.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/parent-account.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/parent-acoount.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/search.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/search.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/sitter-account.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/sitter-account.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/sitter-rating.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/services/sitter-rating.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/step1-blue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/step1-grey.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/step2-blue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/step2-grey.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/step3-blue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/img/step3-grey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/auth-guard.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/auth-guard.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/home-guard.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/home-guard.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/parent-profile-guard.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/parent-profile-guard.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/reverse-auth-guard.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/reverse-auth-guard.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/search-guard.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/search-guard.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/sitter-profile-guard.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/guards/sitter-profile-guard.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/services/auth.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/services/parentModal.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/services/sitterModal.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/radio/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/radio/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/radio/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/radio/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/radio/radio-module.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/radio/radio-module.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/radio/radio.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/radio/radio.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/slide-toggle-module.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/slide-toggle-module.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/slide-toggle-required-validator.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/slide-toggle-required-validator.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/slide-toggle.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/slide-toggle/slide-toggle.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/parent/sign-up-a/sign-up-a.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/parent/sign-up-a/sign-up-a.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/auth/parent/sign-up-a/sign-up-a.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/parent/sign-up-a/sign-up-a.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/signin/signin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/signin/signin.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/auth/signin/signin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/signin/signin.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/sitter/sign-up-b/sign-up-b.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/sitter/sign-up-b/sign-up-b.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/auth/sitter/sign-up-b/sign-up-b.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/sitter/sign-up-b/sign-up-b.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/contact/contact.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/contact/contact.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/contact/contact.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/contact/contact.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/header/header.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/header/header.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/search/search.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/search/search.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/search/search.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/search/search.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/parent-account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/parent-account.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/sitter-account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/sitter-account.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/sitter-rating.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/sitter-rating.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/viewprofile/parent/parent.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/viewprofile/parent/parent.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/viewprofile/parent/parent.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/viewprofile/parent/parent.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/img/step1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +78,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
     <property name="ts.external.directory.path" value="C:\Users\oussama\Downloads\InsatDocs\node_modules\typescript\lib" />
@@ -82,6 +92,7 @@
   <component name="RunManager" selected="npm.Angular CLI Server">
     <configuration name="Tests (InsatDocs)" type="JavaScriptTestRunnerKarma">
       <config-file value="$PROJECT_DIR$/karma.conf.js" />
+      <karma-package-dir value="$PROJECT_DIR$/node_modules/@angular/cli" />
       <working-directory value="$PROJECT_DIR$" />
       <node-interpreter value="project" />
       <envs />
@@ -90,6 +101,7 @@
     <configuration name="E2E Tests (InsatDocs)" type="JavaScriptTestRunnerProtractor">
       <config-file value="$PROJECT_DIR$/e2e/protractor.conf.js" />
       <node-interpreter value="project" />
+      <protractor-package value="$PROJECT_DIR$/node_modules/protractor" />
       <protractor-options value="" />
       <envs />
       <scope-kind value="ALL" />
@@ -142,6 +154,35 @@
       <workItem from="1587132615435" duration="32985000" />
       <workItem from="1587301122410" duration="46182000" />
       <workItem from="1587479048850" duration="16122000" />
+      <workItem from="1587761947761" duration="1755000" />
+      <workItem from="1587773039810" duration="26000" />
+      <workItem from="1587947550903" duration="1829000" />
+      <workItem from="1588004819383" duration="1128000" />
+      <workItem from="1588168709894" duration="24167000" />
+      <workItem from="1588211758568" duration="8481000" />
+      <workItem from="1588261357368" duration="16190000" />
+      <workItem from="1588352403288" duration="583000" />
+      <workItem from="1588373756399" duration="25765000" />
+      <workItem from="1588522056493" duration="4024000" />
+      <workItem from="1588550409482" duration="568000" />
+      <workItem from="1588552481829" duration="14846000" />
+      <workItem from="1588610645712" duration="10094000" />
+      <workItem from="1588637633527" duration="3962000" />
+      <workItem from="1588691931464" duration="5351000" />
+      <workItem from="1588782181387" duration="573000" />
+      <workItem from="1588786361018" duration="618000" />
+      <workItem from="1588867041045" duration="20926000" />
+      <workItem from="1588957662647" duration="3074000" />
+      <workItem from="1588992626915" duration="13000" />
+      <workItem from="1589036140878" duration="23092000" />
+      <workItem from="1589087209808" duration="10925000" />
+      <workItem from="1589138917563" duration="4344000" />
+      <workItem from="1589258989010" duration="90000" />
+      <workItem from="1589259317020" duration="4295000" />
+      <workItem from="1589297647387" duration="14412000" />
+      <workItem from="1589357810855" duration="27613000" />
+      <workItem from="1589455426753" duration="10511000" />
+      <workItem from="1589487557123" duration="5449000" />
     </task>
     <servers />
   </component>
@@ -160,14 +201,22 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="275" y="27" key="#Inspections/0.0.1366.738@0.0.1366.738" timestamp="1586638695077" />
-    <state x="275" y="27" key="#TSLint" timestamp="1587305891434">
+    <state x="275" y="27" key="#TSLint" timestamp="1588261458958">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="275" y="27" key="#TSLint/0.0.1366.738@0.0.1366.738" timestamp="1587305891434" />
-    <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586120886266">
+    <state x="275" y="27" key="#TSLint/0.0.1366.738@0.0.1366.738" timestamp="1588261458958" />
+    <state x="433" y="172" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1588201340280">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.738@0.0.1366.738" timestamp="1586120886266" />
+    <state x="433" y="172" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.738@0.0.1366.738" timestamp="1588201340280" />
+    <state x="488" y="85" key="#com.intellij.ide.util.MemberChooser" timestamp="1589075738190">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="488" y="85" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1589075738190" />
+    <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589077052324">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.738@0.0.1366.738" timestamp="1589077052324" />
     <state width="1345" height="182" key="GridCell.Tab.0.bottom" timestamp="1586658868773">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -196,13 +245,17 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="492" y="286" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.738@0.0.1366.738" timestamp="1587241883018" />
-    <state x="339" y="165" key="run.anything.popup" timestamp="1587487864856">
+    <state x="0" y="0" width="606" height="738" key="find.popup" timestamp="1589076930469">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="339" y="165" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1587487864856" />
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1586798197134">
+    <state x="0" y="0" width="606" height="738" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1589076930469" />
+    <state x="339" y="165" key="run.anything.popup" timestamp="1589039034979">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1586798197134" />
+    <state x="339" y="165" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1589039034979" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1588447573429">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1588447573429" />
   </component>
 </project>

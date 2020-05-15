@@ -11,30 +11,24 @@ import {Router} from '@angular/router';
 
 export class SigninComponent implements OnInit {
   signInForm: FormGroup;
-  errorMessage = '';
   changed = [false, false];
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.initForm();
-
   }
+
   initForm() {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required , Validators.email]],
       password: ['', [Validators.required, Validators.pattern('(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$')]]
     });
   }
+
   onSubmitSignIn(formValue) {
     if (this.signInForm.valid) {
-      this.authService.doLogin(formValue).then(res => {
-         this.router.navigate(['viewprofile/parent']);
-        }, err => {
-          console.log(err);
-          this.errorMessage = err.message;
-        });
-
+      this.authService.doLogin(formValue.email , formValue.password);
     } else {
       for (let i = 0 ; i < this.changed.length; i++) { this.changed[i] = true; }
     }

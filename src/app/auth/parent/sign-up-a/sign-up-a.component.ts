@@ -10,7 +10,6 @@ import {Router} from '@angular/router';
 })
 export class SignUpAComponent implements OnInit {
   parentForm: FormGroup;
-  errorMessage: '';
   changed = [false, false, false, false, false, false, false, false];
 
   cities = [
@@ -34,19 +33,13 @@ export class SignUpAComponent implements OnInit {
       confirmedPassword: ['',
         [Validators.required, Validators.pattern('(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$')]],
       city: ['', Validators.required],
-      ZIP: ['', [Validators.required, Validators.pattern('^\\d{5}(-\\d{4})?$')]]
+      ZIP: ['', [Validators.required, Validators.pattern('^\\d{4}$')]]
     });
   }
 
   onRegister(formValue) {
     if (this.parentForm.valid) {
-      this.authService.doRegisterAsParent(formValue).then(res => {
-        this.router.navigate(['viewprofile/parent']);
-      }, err => {
-        console.log(err);
-        this.errorMessage = err.message;
-      });
-
+      this.authService.doRegisterAsParent(formValue);
       } else {
           for (let i = 0 ; i < this.changed.length; i++) { this.changed[i] = true; }
         }

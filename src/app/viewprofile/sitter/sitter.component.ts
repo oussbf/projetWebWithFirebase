@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SitterRatingService} from '../../services/sitter-rating.service';
+import {ActivatedRoute} from '@angular/router';
+import {SitterModalService} from '../../services/sitterModal.service';
+import * as firebase from 'firebase';
+import {AuthService} from '../../services/auth.service';
+import {ParentAccountService} from '../../services/parent-account.service';
+import {now} from 'moment';
+
 
 @Component({
   selector: 'app-sitter',
@@ -9,19 +16,21 @@ import {SitterRatingService} from '../../services/sitter-rating.service';
 })
 export class SitterComponent implements OnInit {
   reviewForm: FormGroup;
+  requestForm: FormGroup;
   changedReview = false;
   addedToFavourites = false;
-  ratings = [
-    {},
-    {}
-  ];
+  sitterProfile: SitterModalService;
+  sitterId: string;
   star1 = true;
   star2 = false;
   star3 = false;
   star4 = false;
   star5 = false;
   starRating = 1;
-  constructor(private formBuilder: FormBuilder, private sitterRatingService: SitterRatingService) { }
+  changedRequest = [false, false, false, false];
+  visibilityRatingForm = false;
+  constructor(private formBuilder: FormBuilder, private sitterRatingService: SitterRatingService, private route: ActivatedRoute,
+              public authService: AuthService, private parentAccountService: ParentAccountService) { }
 
   star1Click() {
     this.starRating = 1;
@@ -64,26 +73,92 @@ export class SitterComponent implements OnInit {
     this.star5 = true;
   }
 
-  addToFavourites() {
-    this.addedToFavourites = !this.addedToFavourites;
-  }
 
   ngOnInit(): void {
     this.initForm();
+    this.sitterId = this.route.snapshot.params.id;
+    this.sitterProfile = new SitterModalService('', '', '', '', '',
+      '', '', '', '' , [],
+      '', '', [], '', '', '', '',
+      '', '' , '' , [],
+      '', [0, 0, 0, 0, 0], '', []);
+    firebase.database().ref().child(`sitters/${this.sitterId}`).on('value' , (res) => {
+      this.sitterProfile.firstName = res.exportVal().firstName;
+      this.sitterProfile.lastName = res.exportVal().lastName;
+      this.sitterProfile.gender = res.exportVal().gender;
+      this.sitterProfile.city = res.exportVal().city;
+      this.sitterProfile.experienceYears = res.exportVal().experienceYears;
+      this.sitterProfile.displacement = res.exportVal().displacement;
+      this.sitterProfile.age = res.exportVal().age;
+      this.sitterProfile.jobEducation = res.exportVal().jobEducation;
+      this.sitterProfile.aboutMe = res.exportVal().aboutMe;
+      res.child('certificates').forEach(x => {if (x.exportVal()) {this.sitterProfile.certificates.push(x.key.toString()); } });
+      res.child('childAge').forEach(x => {if (x.exportVal()) {this.sitterProfile.childAge.push(x.key.toString()); } });
+      this.sitterProfile.availability = res.exportVal().availability;
+      this.sitterProfile.availabilityDate = res.exportVal().availabilityDate;
+      this.sitterProfile.availabilityDuration = res.exportVal().availabilityDuration;
+      this.sitterProfile.availabilityAdditionalInfo = res.exportVal().availabilityAdditionalInfo;
+      res.child('reviews').forEach(x => {
+        const reviewerInfo = {
+          idRev: x.exportVal().idRev,
+          firstNameRev: x.exportVal().firstNameRev,
+          reviewDate: x.exportVal().reviewDate,
+          review: x.exportVal().review,
+          reviewText: x.exportVal().reviewText
+        };
+        this.sitterProfile.starCounts[+x.exportVal().review - 1]++;
+        this.sitterProfile.reviews.push(reviewerInfo);
+      });
+      this.sitterProfile.avgRate = res.exportVal().avgRating;
+    } );
 
+    firebase.database().ref(`parents/${this.authService.userId}/favourites`).orderByChild('idFavourite').equalTo(this.sitterId)
+      .on('value', child => {
+        this.addedToFavourites = child.hasChildren();
+      });
+
+    firebase.database().ref(`sitters/${this.sitterId}/reviews`).orderByChild('idRev').equalTo(this.authService.userId)
+      .on('value', child => {
+        this.visibilityRatingForm = (this.authService.isParent && !child.hasChildren());
+      });
   }
+
+
   initForm() {
     this.reviewForm = this.formBuilder.group({
-      reviewText: ['', [Validators.required, Validators.maxLength(300)]]
+      reviewText: ['', [Validators.required, Validators.maxLength(500)]]
+    });
+
+    this.requestForm = this.formBuilder.group({
+      requestedDate: ['', [Validators.required]],
+      requestedDuration: ['', [Validators.required, Validators.min(1), Validators.max(7)]],
+      requestedLocation: ['', Validators.required],
+      requestedChildrenNbr: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
+      requestedNeedRegularJob: ['', Validators.required]
     });
   }
   onSubmitReview(formValue) {
     if (this.reviewForm.valid) {
-      this.sitterRatingService.SubmitReview(formValue, this.starRating).then(res => {
-        window.location.reload();
-      }, err => console.log(err));
+      this.sitterRatingService.SubmitReview(formValue, this.starRating, this.sitterId);
     } else {
       this.changedReview = true;
+    }
+  }
+
+  onSubmitRequest(formValue) {
+    if (this.requestForm.valid) {
+      this.parentAccountService.requestJob(formValue, this.sitterId);
+    } else {
+      for (let i = 0 ; i < this.changedRequest.length; i++) { this.changedRequest[i] = true; }
+    }
+  }
+
+  addToFavourites() {
+    this.addedToFavourites = !this.addedToFavourites;
+    if (this.addedToFavourites) {
+      this.parentAccountService.addToFavourites(this.sitterId);
+    } else {
+      this.parentAccountService.deleteFavourite(this.sitterId);
     }
   }
 

@@ -41,7 +41,7 @@
           <h3 class="text-info">Personal Information</h3>
           <div class="form-group">
             <label for="firstName">First Name:</label>
-            <input type="text" class="form-control" id="firstName" placeholder="Exp: Ouss.." [class.btn-outline-danger]="personalInfoForm.controls.firstName.invalid && changedPI[0]" (change)="changedPI[0]=true" formControlName="firstName">
+            <input type="text" class="form-control" placeholder="Exp: Oussama ..." id="firstName" [class.btn-outline-danger]="personalInfoForm.controls.firstName.invalid && changedPI[0]" (change)="changedPI[0]=true" formControlName="firstName">
           </div>
           <div class="form-group">
             <label for="lastName">Last Name:</label>
@@ -86,24 +86,27 @@
             <div class="form-group" >
               <label class="ml-n2" for="subscribeEmail">Subscribe  To NewsLetter:</label>
               <div class="row">
-                <input  type="email" class="form-control" id="subscribeEmail" aria-describedby="subEmail" placeholder="Exp: Example@gmail.com" style="width: 90%" [class.btn-outline-danger]="notificationForm.controls.emailSub.invalid && changedNotif" (change)="changedNotif=true" formControlName="emailSub">
-                <ui-switch class="col-sm-1" color="#17a2b8" id="emailSubCheck" [disabled]="notificationForm.controls.emailSub.invalid" [checked]="newsLetterChecked" (change)="subscribeChange(notificationForm.value)" formControlName="emailSubCheck" ></ui-switch>
+                <input  type="email" class="form-control" id="subscribeEmail" [disabled]="newsLetterChecked && parentProfile.notifications.emailSub.length > 0" aria-describedby="subEmail" placeholder="Exp: Example@gmail.com" style="width: 90%" [class.btn-outline-danger]="notificationForm.controls.emailSub.invalid && changedNotif" (change)="changedNotif=true" formControlName="emailSub">
+                <ui-switch  class="col-sm-1" color="#17a2b8" id="emailSubCheck" [disabled]="notificationForm.controls.emailSub.invalid" (change)="subscribeChange(notificationForm.value)" formControlName="emailSubCheck"></ui-switch>
               </div>
             </div>
             <label class="ml-n2">Your email notifications</label>
             <ul class="list-group ml-n3">
-              <li class="list-group-item font-weight-bold" style="height: 50px">Jobs Request <ui-switch class="col-sm-1" color="#17a2b8" style="float: right"   [checked]="true" [disabled]="!newsLetterChecked" (change)="onUpdateNotifications(notificationForm.value)"  formControlName="jobReqNotif"></ui-switch></li>
-              <li class="list-group-item font-weight-bold" style="height: 50px">Favourites Availability <ui-switch class="col-sm-1" color="#17a2b8" style="float: right"  [disabled]="!newsLetterChecked" (change)="onUpdateNotifications(notificationForm.value)" formControlName="favsAvailability"></ui-switch></li>
+              <li class="list-group-item font-weight-bold" style="height: 50px">messages received <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" [disabled]="!newsLetterChecked" (change)="onUpdateNotifications(notificationForm.value)" formControlName="messagesReceived"></ui-switch></li>
+              <li class="list-group-item font-weight-bold" style="height: 50px">Favourites Availability <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" [disabled]="!newsLetterChecked" (change)="onUpdateNotifications(notificationForm.value)" formControlName="favsAvailability"></ui-switch></li>
             </ul>
 
           </div>
         </form>
       </div>
     </div>
+    <!-- ================================= END ACCOUNT SETTINGS CASE ==================================-->
+
+    <!-- ================================= MESSAGES CASE ==================================-->
 
     <div id="Messages" class="container tab-pane fade"><br>
-      <h2 *ngIf="!messages.length" class="font-weight-bold text-center"> No Messages Have Been Found.</h2>
-      <div class="container card-header  mb-4 shadow" style="position:relative; border-radius: 10px" *ngFor="let message of messages; let i =index">
+      <h2 *ngIf="!parentProfile.messages.length" class="font-weight-bold text-center"> No Messages Have Been Found.</h2>
+      <div class="container card-header  mb-4 shadow" style="position:relative; border-radius: 10px" *ngFor="let message of parentProfile.messages; let i =index">
         <button type="button" class="close" aria-label="Close" (click)="deleteMessage(i)">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -113,31 +116,35 @@
           </div>
 
           <div class="ml-2 mt-1 col-10">
-            <h5>Name : {{message.sender}}</h5>
-            <h5>Status : <span [ngStyle]="{'color':message.status === 'Accepted' ? 'green' : 'red' }">{{message.status}}</span></h5>
-            <h5 *ngIf="message.status === 'Accepted'">Phone Number : {{message.phoneNumber}}</h5>
+            <h5>Name : {{message.firstNameSender}} {{message.lastNameSender}}</h5>
+            <h5>Status : <span [ngClass]="{'text-danger': message.status === 'declined', 'text-success': message.status === 'accepted',
+            'text-dark': message.status === 'pending'}">
+              {{message.status}}</span></h5>
+            <h5 *ngIf="message.status === 'accepted'">Phone Number : {{message.phoneNumber}}</h5>
           </div>
         </div>
-        <a href="#" style="position: absolute ; bottom: 10px ;right: 20px">view Profile</a> <!--to be modified to get the real Url-->
+        <a [routerLink]="'/viewprofile/sitter/'+message.idSender" style="position: absolute ; bottom: 10px ;right: 20px">view Profile</a> <!--to be modified to get the real Url-->
       </div>
     </div>
+    <!-- ================================= END MESSAGES CASE ==================================-->
+
 
     <!-- ============================================== KIDS TABLE ===========================================-->
     <div id="Kids" class="container tab-pane fade"><br>
       <form [formGroup]="kidsForm" (ngSubmit)="onSaveKid(kidsForm.value)">
-        <div class="container card-header border mb-2" *ngFor="let child of ArrayofkidsId; let i = index; ">
-          <button type="button" class="close" aria-label="Close" *ngIf="!(ArrayofkidsId.length === 1)" (click)="deleteChild(i)">
+        <div class="container card-header border mb-2" *ngFor="let child of parentProfile.kids; let i = index">
+          <button type="button" class="close" aria-label="Close" *ngIf="!(parentProfile.kids.length === 1)" (click)="parentProfile.deleteChild(i)">
             <span aria-hidden="true">&times;</span>
           </button>
           <div class="form-group">
             <label for="kidName">Input Your Kid's Name:</label>
-            <input type="text" id="kidName" class="form-control" placeholder="EXP: achoik" [class.btn-outline-danger]="kidsForm.controls.kidName.invalid && changedKid[0]" (change)="changedKid[0]=true" formControlName="kidName">
+            <input type="text" id="kidName" [ngModel]="child.kidName" class="form-control" placeholder="EXP: achoik" [class.btn-outline-danger]="kidsForm.controls.kidName.invalid && changedKid[0]" (change)="changedKid[0]=true" formControlName="kidName">
           </div>
           <div class="form-group">
             <label for="kidAge">Input Your Kid's Age:</label>
-            <select id="kidAge" class="form-control" [class.btn-outline-danger]="kidsForm.controls.kidAge.invalid && changedKid[1]" (change)="changedKid[1]=true" formControlName="kidAge">
+            <select id="kidAge" class="form-control" [ngModel]="child.kidAge" [class.btn-outline-danger]="kidsForm.controls.kidAge.invalid && changedKid[1]" (change)="changedKid[1]=true" formControlName="kidAge">
               <option disabled>Chose...</option>
-              <option value="l1">less than 1 year</option>
+              <option value="0">less than 1 year</option>
               <option value="1">1 year</option>
               <option value="2">2 years</option>
               <option value="3">3 years</option>
@@ -161,25 +168,25 @@
               <div class="col-sm">
                 <div class="col">
                   <div><img src="assets/img/infant.svg" width="150px" height="150px" alt="infantImage"></div>
-                  <div><input class="form-check-input " style="margin-left:70px;" type="radio" name="childAge" id="infant" value="infant" formControlName="childAge" ></div>
+                  <div><input class="form-check-input " style="margin-left:70px;" type="radio" name="childAge" id="infant" value="infant" (click)="child.childAge = 'infant'" [checked]="child.childAge === 'infant'" required></div>
                 </div>
               </div>
               <div class="col-sm">
                 <div class="col">
                   <div><img src="assets/img/toddler.svg" width="150px" height="150px" alt="toddlerImage"></div>
-                  <div ><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="toddler" value="toddler" formControlName="childAge"></div>
+                  <div ><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="toddler" value="toddler" (click)="child.childAge = 'toddler'" [checked]="child.childAge === 'toddler'" required></div>
                 </div>
               </div>
               <div class="col-sm">
                 <div class="col">
                   <div><img src="assets/img/preschool.svg" width="150px" height="150px" alt="preschoolerImage"></div>
-                  <div><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="preschool" value="preschool" formControlName="childAge" ></div>
+                  <div><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="preschooler" value="preschooler" (click)="child.childAge = 'preschooler'" [checked]="child.childAge === 'preschooler'" required></div>
                 </div>
               </div>
               <div class="col-sm ">
                 <div class="col">
                   <div><img src="assets/img/school.svg" width="150px" height="150px" alt="schoolerImage"></div>
-                  <div><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="school" value="school" formControlName="childAge"></div>
+                  <div><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="schooler" value="schooler" (click)="child.childAge = 'schooler'" [checked]="child.childAge === 'schooler'" required></div>
                 </div>
               </div>
             </div>
@@ -187,37 +194,37 @@
           <div class="form-group">
             <label>Special Needs:</label>
             <div class="checkbox">
-              <label><input type="checkbox" value="deaf" formControlName="specialNeeds"> deaf</label>
+              <label><input type="checkbox" name="specialNeed" value="deaf" (click)="parentProfile.toggleSpecialNeed(child.specialNeeds , 'deaf')"  [checked]="child.specialNeeds.includes('deaf')"> deaf</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="blind" formControlName="specialNeeds"> blind</label>
+              <label><input type="checkbox" name="specialNeed" value="blind" (click)="parentProfile.toggleSpecialNeed(child.specialNeeds , 'blind')" [checked]="child.specialNeeds.includes('blind')"> blind</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="handicapped" formControlName="specialNeeds"> handicapped</label>
+              <label><input type="checkbox" name="specialNeed" value="handicapped" (click)="parentProfile.toggleSpecialNeed(child.specialNeeds , 'handicapped')"  [checked]="child.specialNeeds.includes('handicapped')"> handicapped</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="mute" formControlName="specialNeeds"> mute</label>
+              <label><input type="checkbox" name="specialNeed" value="mute" (click)="parentProfile.toggleSpecialNeed(child.specialNeeds , 'mute')" [checked]="child.specialNeeds.includes('mute')"> mute</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="autistic" formControlName="specialNeeds"> autistic</label>
+              <label><input type="checkbox" name="specialNeed" value="autistic" (click)="parentProfile.toggleSpecialNeed(child.specialNeeds , 'autistic')" [checked]="child.specialNeeds.includes('autistic')"> autistic</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox"  (change)="othersSelectedChange()"> others...</label>
+              <label><input type="checkbox" name="specialNeed" (change)="othersSelectedChange()" [checked]="child.otherSpecialNeed.length > 0"> others...</label>
             </div>
-            <div class="form-group">
-              <textarea class="form-control" id="otherHandicaps" placeholder="Please Describe Here..." *ngIf="otherSelectedChecked" [class.btn-outline-danger]="kidsForm.controls.otherHandicaps.invalid && changedKid[2]" (change)="changedKid[2]=true" formControlName="otherHandicaps"></textarea>
+            <div class="form-group" *ngIf="otherSelectedChecked || child.otherSpecialNeed.length > 0">
+              <textarea class="form-control" id="otherHandicaps" [ngModel]="child.otherSpecialNeed" placeholder="Please Describe Here..."  [class.btn-outline-danger]="kidsForm.controls.otherHandicaps.invalid && changedKid[2]" (change)="changedKid[2]=true" formControlName="otherHandicaps"></textarea>
             </div>
 
           </div>
 
           <div class="form-group">
             <label for="comments">Tel Us Something About Your Kid:</label>
-            <textarea id="comments" class="form-control" placeholder="EXP: Hobbies , favourite food , etc ..." [class.btn-outline-danger]="kidsForm.controls.comments.invalid && changedKid[3]" (change)="changedKid[3]=true" formControlName="comments"></textarea>
+            <textarea id="comments" class="form-control" [ngModel]="child.additionalInfo" placeholder="EXP: Hobbies , favourite food , etc ..." [class.btn-outline-danger]="kidsForm.controls.comments.invalid && changedKid[3]" (change)="changedKid[3]=true" formControlName="comments"></textarea>
             <small class="form-text text-muted">Maximum 300 Caracters.</small>
           </div>
 
         </div>
-        <button class="btn btn-info btn-md form-control mb-2 mt-2" (click)="addKid()" *ngIf="ArrayofkidsId.length <5"> Add Another Kid</button>
+        <button class="btn btn-info btn-md form-control mb-2 mt-2" (click)="addKid()" *ngIf="parentProfile.kids.length <5">{{(!parentProfile.kids.length)? 'Add A Kid': ' Add Another Kid'}}</button>
         <button type="submit" id="submitKids" class="btn btn-info btn-md form-control" >save</button>
       </form>
 
@@ -226,18 +233,18 @@
 
 
     <div id="Favourite" class="container tab-pane fade"><br>
-      <h2 class="font-weight-bold text-center" *ngIf="!favSitters.length">No Favourites Have Been Found.</h2>
+      <h2 class="font-weight-bold text-center" *ngIf="!parentProfile.favourites.length">No Favourites Have Been Found.</h2>
       <div class=" bg-white mx-auto" >
-        <div class="card-header shadow mb-4" style="background-color: rgb(247, 247, 247); border-radius: 10px" *ngFor="let sitter of favSitters  let i = index">
+        <div class="card-header shadow mb-4" style="background-color: rgb(247, 247, 247); border-radius: 10px" *ngFor="let sitter of parentProfile.favourites  let i = index">
           <div class="row">
             <div class="col-2" >
               <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="rounded-circle" width="100%" alt="sitterPicture">
             </div>
             <div class="col-7">
               <h1 class="text-left">{{sitter.firstName}} {{sitter.lastName}}</h1>
-              <small class="text-left">{{sitter.experience}} Years Of Experience / Location: {{sitter.location}} / {{sitter.distance}} KM</small>
-              <p>{{sitter.describtion}}</p>
-              <h5>Certificates: <span class="text-info" *ngFor="let certif of sitter.certificates , let j = index">{{certif}} . </span></h5>
+              <small class="text-left">{{sitter.experience}} Years Of Experience / Location: {{sitter.location}}</small>
+              <p>{{sitter.description}}</p>
+              <h5 *ngIf="sitter.certificates.length">Certificates: <span class="text-info" *ngFor="let certif of sitter.certificates , let j = index">{{certif}} . </span></h5>
             </div>
             <div class="col-3 border-left position-relative">
               <button type="button" class="close position-absolute" style="top: 5px;right: 5px" aria-label="Close" (click)="deleteFavourite(i)">
@@ -246,11 +253,59 @@
               <div class="row h-100">
                 <div class="col-12 my-auto" style="margin-left: 20%">
                   <span class="fa fa-star mx-1 text-info"> </span>
-                  <span class="fa fa-star mx-1 text-info"></span>
-                  <span class="fa fa-star mx-1 text-info"></span>
-                  <span class="fa fa-star mx-1 text-info"></span>
-                  <span class="far fa-star mx-1 text-info "></span>
-                  <button class="mt-3 btn btn-danger mx-auto">Request Job</button>
+                  <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRating > 1, 'far': sitter.avgRating === 1}"></span>
+                  <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRating > 2, 'far': sitter.avgRating <= 2}"></span>
+                  <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRating > 3, 'far': sitter.avgRating <= 3}"></span>
+                  <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRating > 4, 'far': sitter.avgRating <= 4}"></span>
+                  <button class="mt-3 btn btn-danger mx-auto" data-toggle="modal" data-target="#requestModal">Request Job</button>
+                  <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModal" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form [formGroup]="requestForm" (ngSubmit)="onSubmitRequest(requestForm.value, i)">
+                            <div class="form-group">
+                              <label for="requestedDate">Chose A Date</label>
+                              <input type="date" id="requestedDate" class="form-control" formControlName="requestedDate">
+                            </div>
+                            <div class="form-group">
+                              <label for="requestedDuration">Job Duration</label>
+                              <input type="number" id="requestedDuration" class="form-control" min="1" max="7" [class.btn-outline-danger]="requestForm.controls.requestedDuration.invalid && changedRequest[0]" (change)="changedRequest[0]=true" formControlName="requestedDuration">
+                            </div>
+                            <div class="form-group">
+                              <label for="requestedLocation">Job Location</label>
+                              <select id="requestedLocation" class="form-control" [class.btn-outline-danger]="requestForm.controls.requestedLocation.invalid && changedRequest[1]" (change)="changedRequest[1]=true" formControlName="requestedLocation">
+                                <option value="sitterHouse" selected>Sitter's House</option>
+                                <option value="yourHouse">Your House</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="requestedChildrenNbr">Number Of Children</label>
+                              <input type="number" id="requestedChildrenNbr" class="form-control" min="1" max="5" [class.btn-outline-danger]="requestForm.controls.requestedChildrenNbr.invalid && changedRequest[2]" (change)="changedRequest[2]=true" formControlName="requestedChildrenNbr">
+                            </div>
+                            <div class="form-group">
+                              <label for="requestedNeedRegularJob">Are you Open For a Regular Job</label>
+                              <select id="requestedNeedRegularJob" class="form-control" [class.btn-outline-danger]="requestForm.controls.requestedNeedRegularJob.invalid && changedRequest[3]" (change)="changedRequest[3]=true" formControlName="requestedNeedRegularJob">
+                                <option value="false" selected>false</option>
+                                <option value="true">true</option>
+                              </select>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary" >Submit</button>
+                            </div>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>

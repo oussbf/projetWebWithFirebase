@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SitterAccountService} from '../../services/sitter-account.service';
+import {SitterModalService} from '../../services/sitterModal.service';
+import * as firebase from 'firebase';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-sitterid',
@@ -14,10 +17,9 @@ export class SitteridComponent implements OnInit {
   jobInformationForm: FormGroup;
   aboutMeForm: FormGroup;
   notificationForm: FormGroup;
+  sitterProfile: SitterModalService;
 
   url: string | ArrayBuffer = 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png';
-  accepted = false;
-  rejected = false;
   available = false;
   newsLetterChecked = false;
   checkBoxChecked = false;
@@ -28,50 +30,104 @@ export class SitteridComponent implements OnInit {
   changedAV = [false, false, false, false];
   changedNotif = false;
 
-  jobs = [
-    {
-      idSender: '1',
-      nameSender: 'Oussama',
-      phoneNumber: '24772681',
-      jobDate: '06/04/2020', /*Date*/
-      jobLength: '2 days', /*format: n days / one day / one week*/
-      jobLocation: 'Your House', /*format: your house / address */
-      numChildren: '2',
-      openForRegularJob: 'yes'
-    },
-    {
-      idSender: '2',
-      nameSender: 'achoik',
-      phoneNumber: '24772681',
-      jobDate: '06/04/2020', /*Date*/
-      jobLength: ' 1 day', /*format: n days / one day / one week*/
-      jobLocation: 'Your House', /*format: your house / address */
-      numChildren: '3',
-      openForRegularJob: 'no',
-      accepted: false,
-      rejected: false
-    }
 
-  ];
+  constructor(private formBuilder: FormBuilder , private sitterAccountService: SitterAccountService, private authService: AuthService) {
+    this.initForms();
+    this.sitterProfile = new SitterModalService('', '', '', '', '',
+      '', '', '', '' , [],
+      '', '', [], '', {}, '', '',
+      '', '' , '' , [],
+      '', [0, 0, 0, 0, 0], '', []);
+    firebase.database().ref().child(`sitters/${this.authService.userId}`).on('value', (sitter) => {
+      this.sitterProfile.firstName = sitter.exportVal().firstName;
+      this.sitterProfile.lastName = sitter.exportVal().lastName;
+      this.sitterProfile.email = sitter.exportVal().email;
+      this.sitterProfile.phoneNumber = sitter.exportVal().phoneNumber;
+      this.sitterProfile.jobEducation = sitter.exportVal().jobEducation;
+      this.sitterProfile.gender = sitter.exportVal().gender;
+      this.sitterProfile.city = sitter.exportVal().city;
+      this.sitterProfile.experienceYears = sitter.exportVal().experienceYears;
+      this.sitterProfile.displacement = sitter.exportVal().displacement;
+      this.sitterProfile.numberOfChildrenHandling = sitter.exportVal().numberOfChildrenHandling;
+      this.sitterProfile.age = sitter.exportVal().age;
+      this.sitterProfile.aboutMe = sitter.exportVal().aboutMe;
+      sitter.child('certificates').forEach(x => {if (x.exportVal()) {this.sitterProfile.certificates.push(x.key.toString()); } });
+      sitter.child('childAge').forEach(x => {if (x.exportVal()) {this.sitterProfile.childAge.push(x.key.toString()); } });
+      this.sitterProfile.availability = sitter.exportVal().availability;
+      this.available = sitter.exportVal().availability;
+      this.sitterProfile.availabilityDate = sitter.exportVal().availabilityDate;
+      this.sitterProfile.availabilityDuration = sitter.exportVal().availabilityDuration;
+      this.sitterProfile.availabilityAdditionalInfo = sitter.exportVal().availabilityAdditionalInfo;
+      this.sitterProfile.availablityOpenForRegularJob = sitter.exportVal().availablityOpenForRegularJob;
+      sitter.child('reviews').forEach(x => {
+        const reviewerInfo = {
+          idRev: x.exportVal().idRev,
+          firstNameRev: x.exportVal().firstNameRev,
+          reviewDate: x.exportVal().reviewDate,
+          review: x.exportVal().review,
+          reviewText: x.exportVal().reviewText
+        };
+        this.sitterProfile.starCounts[+x.exportVal().review - 1]++;
+        this.sitterProfile.reviews.push(reviewerInfo);
+      });
+      this.sitterProfile.avgRate = sitter.exportVal().avgRating;
+      this.sitterProfile.notifications.emailSub = sitter.exportVal().notifications.emailSub;
+      this.sitterProfile.notifications.jobRequest = sitter.exportVal().notifications.jobRequest;
+      this.sitterProfile.notifications.reviewsReceived = sitter.exportVal().notifications.reviewsReceived;
+      if (this.sitterProfile.notifications.emailSub.length > 0) {
+        this.newsLetterChecked = true;
+        document.querySelector('#subscribeEmail').setAttribute('disabled', String('true') );
+      }
+      sitter.child('jobs').forEach(job => {
+        this.sitterProfile.jobs.push({
+          idJob: job.exportVal().idJob,
+          id: job.exportVal().id,
+          jobDate: job.exportVal().jobDate,
+          jobLength: +job.exportVal().jobLength,
+          jobLocation: job.exportVal().jobLocation,
+          nameSender: job.exportVal().nameSender,
+          numChildren: +job.exportVal().numChildren,
+          openFRJ: job.exportVal().openFRJ,
+          phoneNumber: job.exportVal().phoneNumber,
+          jobStatus: job.exportVal().jobStatus
+        });
+      });
 
-  ratings = [
-    {},
-    {}
-  ];
+      this.personalInfoForm.patchValue({
+        firstName: this.sitterProfile.firstName,
+        lastName: this.sitterProfile.lastName,
+        email: this.sitterProfile.email,
+        phoneNumber: this.sitterProfile.phoneNumber,
+        jobStatus: this.sitterProfile.jobEducation
+      });
+      this.jobInformationForm.patchValue({
+        numberOfChildrenHandling: this.sitterProfile.numberOfChildrenHandling.toString(),
+        displacement: this.sitterProfile.displacement,
+        experienceYears: this.sitterProfile.experienceYears
+      });
 
-  constructor(private formBuilder: FormBuilder , private sitterAccountService: SitterAccountService) { }
+      this.aboutMeForm.patchValue({
+        aboutMeText: this.sitterProfile.aboutMe
+      });
 
-  deleteJob(i) {
-    this.jobs.splice(i, 1);
+      this.notificationForm.patchValue({
+        emailSub: this.sitterProfile.notifications.emailSub,
+        jobRequest: this.sitterProfile.notifications.jobRequest,
+        reviewsReceived: this.sitterProfile.notifications.reviewsReceived,
+        emailSubCheck: this.newsLetterChecked
+      });
+
+      this.availabilityForm.patchValue({
+        available: this.available,
+        availabilityDate: this.sitterProfile.availabilityDate,
+        duration: this.sitterProfile.availabilityDuration,
+        openJob: this.sitterProfile.availablityOpenForRegularJob,
+        availabilityAdditionalInfo: this.sitterProfile.availabilityAdditionalInfo
+      });
+    } );
+
   }
 
-  acceptClick(i) {
-    this.jobs[i].accepted = true;
-  }
-
-  rejectClick(i) {
-    this.jobs[i].rejected = true;
-  }
 
   changeAvailability() {
     this.available = !this.available;
@@ -99,7 +155,8 @@ export class SitteridComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initForms();
+
+
   }
 
   initForms() {
@@ -122,8 +179,6 @@ export class SitteridComponent implements OnInit {
       numberOfChildrenHandling: ['', Validators.required],
       displacement: ['', Validators.required],
       experienceYears: ['', [Validators.required, Validators.min(0), Validators.maxLength(60)]],
-      childAge: [''],
-      certif: ['']
     });
 
     this.aboutMeForm = this.formBuilder.group({
@@ -131,6 +186,7 @@ export class SitteridComponent implements OnInit {
     });
 
     this.availabilityForm = this.formBuilder.group({
+      available: [],
       availabilityDate: ['', Validators.required],
       duration: ['', Validators.required],
       openJob: ['', Validators.required],
@@ -140,54 +196,47 @@ export class SitteridComponent implements OnInit {
     this.notificationForm = this.formBuilder.group({
       emailSub: ['', [Validators.required, Validators.email]],
       emailSubCheck: [''],
-      jobReqNotif: [''],
-      favsAvailability: ['']
+      jobRequest: [''],
+      reviewsReceived: ['']
     });
 
     }
   onSavePI(formValue) {
     if (this.personalInfoForm.valid) {
-      this.sitterAccountService.savePI(formValue).then(res => {
-        window.location.reload();
-      }, err => console.log(err));
+      this.sitterAccountService.savePI(formValue);
     } else {
       for (let i = 0 ; i < this.changedPI.length; i++) { this.changedPI[i] = true; }
     }
   }
   onSaveNP(formValue) {
     if (this.personalInfoForm.valid) {
-      this.sitterAccountService.saveNP(formValue).then(res => {
-        window.location.reload();
-      }, err => console.log(err));
+      this.sitterAccountService.saveNP(formValue);
     } else {
       for (let i = 0 ; i < this.changedNP.length; i++) { this.changedNP[i] = true; }
     }
   }
   onSaveJI(formValue) {
     if (this.personalInfoForm.valid) {
-      this.sitterAccountService.saveJI(formValue).then(res => {
-        window.location.reload();
-      }, err => console.log(err));
+      this.sitterAccountService.saveJI(formValue, this.sitterProfile.childAge, this.sitterProfile.certificates);
     } else {
       for (let i = 0 ; i < this.changedJI.length; i++) { this.changedJI[i] = true; }
     }
   }
   onSaveAM(formValue) {
     if (this.personalInfoForm.valid) {
-      this.sitterAccountService.saveAM(formValue).then(res => {
-        window.location.reload();
-      }, err => console.log(err));
+      this.sitterAccountService.saveAM(formValue);
     } else {this.changedAM = true; }
   }
 
   onSaveAV(formValue) {
+    if (this.available) {
     if (this.availabilityForm.valid) {
-      this.sitterAccountService.saveAV(formValue).then(res => {
-        window.location.reload();
-      }, err => console.log(err));
+      this.sitterAccountService.saveAV(formValue);
     } else {
       for (let i = 0 ; i < this.changedAV.length; i++) { this.changedAV[i] = true; }
 
+    }} else {
+      this.sitterAccountService.saveAV(formValue);
     }
   }
   subscribeChange(formValue) {
@@ -208,8 +257,26 @@ export class SitteridComponent implements OnInit {
   }
 
   onUpdateNotifications(formValue) {
-    this.sitterAccountService.updateNotifications(formValue).then(res => {
-    }, err => console.log(err));
+    this.sitterAccountService.updateNotifications(formValue);
+  }
+
+  acceptClick(i) {
+    this.sitterProfile.acceptClick(i);
+    this.sitterAccountService.acceptClick(this.sitterProfile.jobs[i].idJob, this.sitterProfile.firstName, this.sitterProfile.lastName,
+      this.sitterProfile.phoneNumber, this.sitterProfile.jobs[i].id);
+  }
+
+  rejectClick(i) {
+    this.sitterProfile.rejectClick(i);
+    this.sitterAccountService.rejectClick(this.sitterProfile.jobs[i].idJob, this.sitterProfile.firstName, this.sitterProfile.lastName,
+      this.sitterProfile.jobs[i].id);
+
+  }
+
+  deleteJob(i) {
+    this.sitterProfile.deleteJob(i);
+    this.sitterAccountService.deleteJob(this.sitterProfile.jobs[i].idJob);
+
   }
 
 

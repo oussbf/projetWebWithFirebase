@@ -7,19 +7,25 @@ import {Router} from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
   logout() {
-    this.authService.doLogout()
-      .then((res) => {
-        this.router.navigate(['/home']);
-      }, (error) => {
-        console.log('Logout error: ', error);
-      });
+    this.authService.doLogout();
+  }
+
+  onMyAccount() {
+    if (this.authService.isParent) {
+      this.router.navigate([`profile/parent/${this.authService.userId}`]);
+    } else {
+      this.router.navigate([`profile/sitter/${this.authService.userId}`]);
+
+    }
   }
 }

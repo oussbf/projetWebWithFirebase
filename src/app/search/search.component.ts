@@ -15,7 +15,6 @@ export class SearchComponent implements OnInit {
   showFilter = true;
   changedFilter = [false, false, false, false, false, false, false];
   changedRequest = [false, false, false, false];
-  errorMessage: string;
 
   sitters = [
     {
@@ -116,7 +115,6 @@ export class SearchComponent implements OnInit {
         this.router.navigate(['profile/parentId']);
       }, err => {
         console.log(err);
-        this.errorMessage = err.message;
       });
 
     } else {
@@ -130,7 +128,6 @@ export class SearchComponent implements OnInit {
         window.location.reload();
       }, err => {
         console.log(err);
-        this.errorMessage = err.message;
       });
 
     } else {

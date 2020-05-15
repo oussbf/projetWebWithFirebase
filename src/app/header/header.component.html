@@ -7,14 +7,14 @@
   <div class="navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto ">
       <!--================================ HOME BUTTON ================================ -->
-      <li class="nav-item " routerLinkActive="active">
+      <li class="nav-item " routerLinkActive="active" *ngIf="!authService.isLoggedIn">
         <a class="nav-link" routerLink="home"><span class="stlbutton">Home</span> <span class="sr-only">(current)</span></a>
       </li>
       <!--================================END HOME BUTTON ================================ -->
 
       <!--================================ SEARCH BUTTON ================================ -->
 
-      <li class="nav-item " routerLinkActive="active">
+      <li class="nav-item " routerLinkActive="active" *ngIf="authService.isLoggedIn">
         <a class="nav-link"  routerLink="search"><span class="stlbutton">Search</span></a>
       </li>
       <!--================================ END SEARCH BUTTON ================================ -->
@@ -31,8 +31,8 @@
     </ul>
     <!--================================ SIGNIN BUTTON ================================ -->
 
-    <div class="nav-item my-lg-1 mr-3 " style="margin-right: 10px">
-      <a class="btn btn-sm btn-outline-secondary btn-outline-info " routerLinkActive="active" routerLink="auth/signIn" role="button" >SignIn</a>
+    <div class="nav-item my-lg-1 mr-3 " style="margin-right: 10px" *ngIf="!authService.isLoggedIn">
+      <a class="btn btn-sm btn-outline-secondary btn-outline-info "  routerLinkActive="active" routerLink="auth/signIn" role="button" >SignIn</a>
     </div>
     <!--================================ END SIGNIN BUTTON ================================ -->
 
@@ -47,12 +47,12 @@
     <!--================================ END SEARCH BAR ================================ -->
 
     <!--================================ MENU DROPDOWN ================================ -->
-    <div class="btn-group ml-4">
+    <div class="btn-group ml-4" *ngIf="authService.isLoggedIn">
       <button type="button" class="btn" style="background-color: black" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-bars text-white "></i>
       </button>
       <div class="dropdown-menu dropdown-menu-right">
-        <button class="dropdown-item" type="button" routerLink="profile/parentId">My Account</button>
+        <button class="dropdown-item" type="button" (click)="onMyAccount()">My Account</button>
         <button class="dropdown-item" type="button" id="logOutButton" (click)="logout()">Log Out</button>
       </div>
     </div>
