@@ -70,7 +70,7 @@ export class SitteridComponent implements OnInit {
         this.sitterProfile.starCounts[+x.exportVal().review - 1]++;
         this.sitterProfile.reviews.push(reviewerInfo);
       });
-      this.sitterProfile.avgRate = sitter.exportVal().avgRating;
+      this.sitterProfile.avgRate = sitter.exportVal().avgRate;
       this.sitterProfile.notifications.emailSub = sitter.exportVal().notifications.emailSub;
       this.sitterProfile.notifications.jobRequest = sitter.exportVal().notifications.jobRequest;
       this.sitterProfile.notifications.reviewsReceived = sitter.exportVal().notifications.reviewsReceived;

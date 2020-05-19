@@ -121,7 +121,7 @@ export class ParentIdComponent implements OnInit {
             description: sitter.exportVal().aboutMe,
             rating: 0,
             certificates : y,
-            avgRating: +sitter.exportVal().avgRating
+            avgRate: +sitter.exportVal().avgRate
           };
           this.parentProfile.favourites.push(x);
         });

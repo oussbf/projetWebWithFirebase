@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {Router} from '@angular/router';
@@ -16,8 +15,7 @@ export  class AuthService {
   private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false');
   private isParentStatus = JSON.parse( localStorage.getItem('isParent')) || 'null';
 
-  constructor(   public afs: AngularFirestore,   // Inject Firestore service
-                 public afAuth: AngularFireAuth, // Inject Firebase auth service
+  constructor(   public afAuth: AngularFireAuth, // Inject Firebase auth service
                  public db: AngularFireDatabase,   // Inject Firebase data base
                  public router: Router,
   ) {}

@@ -38,7 +38,7 @@ export class ParentModal {
     description: string,
     rating: number,
     certificates: string[],
-    avgRating: number
+    avgRate: number
   } [];
   constructor(firstName , lastName, email, phoneNumber, notifications, city, ZIP, messages, kids,
               favourites) {

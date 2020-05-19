@@ -1,19 +1,18 @@
 <div class="mx-auto" style="width: 95%; margin-top: 70px  ">
   <div class="d-flex" >
     <div class="d-flex justify-content-start">
-      <button class="btn btn-light" (click)="changeFilter()"><i class="fa fa-times"></i>   Filter & Refine</button><!-- NEDD TO ADD OPEN MENU ANIMATION TO THIS -->
+      <button class="btn btn-light" (click)="changeFilter()"><i class="fa fa-times"></i>   Filter & Refine</button><!-- NEED TO ADD OPEN MENU ANIMATION TO THIS -->
     </div>
     <div class="d-flex ml-auto">
       <div class="btn-group" role="group" aria-label="Basic example">
-        <button id="ratingSortBtn" type="button" class="btn btn-light" (click)="sortByRating($event)">Best Rated   <i class="fas fa-sort" [ngClass]="{'fa-sort-down': sortedByRating , 'fa-sort-up': !sortedByRating}"></i></button>
-        <button id="newestSortBtn" type="button" class="btn btn-light" (click)="sortByNewest($event)">Newest   <i class="fas fa-sort" [ngClass]="{'fa-sort-down': sortedByNewest , 'fa-sort-up': !sortedByNewest}"></i></button>
+        <button id="ratingSortBtn" type="button" class="btn btn-light" (click)="sortByRating($event)">Rating   <i class="fas fa-sort" [ngClass]="{'fa-sort-down': sortedByRating , 'fa-sort-up': !sortedByRating}"></i></button>
+        <button id="ExperienceSortBtn" type="button" class="btn btn-light" (click)="sortByExperience($event)">Experience   <i class="fas fa-sort" [ngClass]="{'fa-sort-down': sortedByExperience , 'fa-sort-up': !sortedByExperience}"></i></button>
         <button id="dateSortBtn" type="button" class="btn btn-light" (click)="sortByDate($event)">Date   <i class="fas fa-sort" [ngClass]="{'fa-sort-down': sortedByDate , 'fa-sort-up': !sortedByDate}"></i></button>
       </div>
     </div>
   </div>
   <div class="row mt-2 mb-4">
     <div class="col-3" *ngIf="showFilter">
-      <form [formGroup]="filterForm" (ngSubmit)="onFilter(filterForm.value)">
         <div class="accordion" id="collapseSearch">
           <div class="card">
             <div class="card-header" id="Date">
@@ -27,8 +26,8 @@
             <div id="collapseDate" class="collapse show" aria-labelledby="Date" data-parent="#collapseSearch">
               <div class="card-body">
                 <div class="form-group">
-                  <label for="startDate">Starting From:</label>
-                  <select class="form-control" formControlName="startDate" [class.btn-outline-danger]="filterForm.controls.startDate.invalid && changedFilter[0]" (change)="changedFilter[0]=true" id="startDate" >
+                  <label for="availabilityDate">Starting From:</label>
+                  <select class="form-control" id="availabilityDate" [(ngModel)]="availabilityDate" (change)="filterGreaterThan('availabilityDate', availabilityDate)" >
                     <option disabled>chose ...</option>
                     <option value="1">Today</option>
                     <option value="2">Tomorrow</option>
@@ -38,10 +37,12 @@
                     <option value="6">In 5 Days</option>
                     <option value="7">In A week</option>
                  </select>
+                  <button *ngIf="availabilityDate" class="mt-1 btn btn-danger" (click)="removeFilter('availabilityDate')">Remove Filter</button>
+
                 </div>
                 <div class="form-group">
                   <label for="endDate">Until:</label>
-                  <select class="form-control" id="endDate" [class.btn-outline-danger]="filterForm.controls.endDate.invalid && changedFilter[1]" (change)="changedFilter[2]=true" formControlName="endDate">
+                  <select class="form-control" id="endDate" [(ngModel)]="endDate" (change)="filterMinorThan('availabilityDate', endDate)">
                     <option  disabled>chose ...</option>
                     <option value="1">Today</option>
                     <option value="2">Tomorrow</option>
@@ -51,18 +52,22 @@
                     <option value="6">5 Days</option>
                     <option value="7">One week</option>
                   </select>
+                  <button *ngIf="endDate" class="mt-1 btn btn-danger" (click)="removeFilter('endDate')">Remove Filter</button>
+
                 </div>
                 <div class="form-group">
-                  <label for="duration">Duration Of Service</label>
-                  <input type="number" id="duration" class="form-control" MIN="0" max="7" [class.btn-outline-danger]="filterForm.controls.duration.invalid && changedFilter[2]" (change)="changedFilter[2]=true" formControlName="duration">
+                  <label for="availabilityDuration">Duration Of Service</label>
+                  <input type="number" id="availabilityDuration" [(ngModel)]="availabilityDuration" (change)="filterGreaterThan('availabilityDuration',availabilityDuration)" class="form-control" MIN="0" max="7" >
+                  <button *ngIf="availabilityDuration" class="mt-1 btn btn-danger" (click)="removeFilter('availabilityDuration')">Remove Filter</button>
                 </div>
                 <div class="form-group">
-                  <label for="openForReg">Open For Regular Job</label>
-                  <select id="openForReg" class="form-control" [class.btn-outline-danger]="filterForm.controls.openForReg.invalid && changedFilter[3]" (change)="changedFilter[3]=true" formControlName="openForReg">
+                  <label for="availablityOpenForRegularJob">Open For Regular Job</label>
+                  <select id="availablityOpenForRegularJob" class="form-control" [(ngModel)]="availablityOpenForRegularJob" (change)="filterExact('availablityOpenForRegularJob', availablityOpenForRegularJob)" >
                     <option  disabled>chose ...</option>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                   </select>
+                  <button *ngIf="availablityOpenForRegularJob" class="mt-1 btn btn-danger" (click)="removeFilter('availablityOpenForRegularJob')">Remove Filter</button>
                 </div>
               </div>
             </div>
@@ -80,15 +85,16 @@
               <div class="card-body">
                 <div class="form-group">
                   <label for="distance">Far Within:         <span class="font-weight-bold">{{distance}} KM</span></label>
-                  <input id="distance" type="range" class="custom-range" min="1" max="10" value="1" (change)="distanceChange($event)" formControlName="distance">
+                  <input id="distance" type="range" class="custom-range" min="1" max="10" value="1" >
                 </div>
                 <div class="form-group">
                   <label for="displacement">Displacement</label>
-                  <select id="displacement" class="form-control" [class.btn-outline-danger]="filterForm.controls.displacement.invalid && changedFilter[4]" (change)="changedFilter[4]=true" formControlName="displacement">
+                  <select id="displacement" class="form-control" [(ngModel)]="displacement" (change)="filterExact('displacement', displacement)">
                     <option  disabled>chose ...</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
+                    <option value='true'>Yes</option>
+                    <option value='false'>No</option>
                   </select>
+                  <button *ngIf="displacement" class="btn btn-danger mt-1" (click)="removeFilter('displacement')">Remove Filter</button>
                 </div>
               </div>
             </div>
@@ -105,60 +111,62 @@
             <div id="collapseJob" class="collapse" aria-labelledby="jobReq" data-parent="#collapseSearch">
               <div class="card-body">
                 <div class="form-group">
-                  <label for="expYears">Years Of Babysitting Experience</label>
-                  <input class="form-control" type="number" id="expYears" min="0" max="70" value="" [class.btn-outline-danger]="filterForm.controls.expYears.invalid && changedFilter[5]" (change)="changedFilter[5]=true" formControlName="expYears">
+                  <label for="experienceYears">Years Of Babysitting Experience</label>
+                  <input class="form-control" type="number" id="experienceYears" [(ngModel)]="experienceYears" (click)="filterGreaterThan('experienceYears', experienceYears)" min="0" max="70" >
+                  <button *ngIf="experienceYears" class="btn btn-danger mt-1" (click)="removeFilter('experienceYears')">Remove Filter</button>
                 </div>
                 <div class="form-group">
                   <label>Can Take Care Of:</label>
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="toddler" formControlName="childAge">
+                    <input type="checkbox" class="custom-control-input" id="toddler" [(ngModel)]="toddler" (change)="applyFilterChildAge('certificates','toddler', toddler)">
                     <label class="custom-control-label" for="toddler"> Toddler    <i class="fas fa-baby"></i></label>
                   </div>
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="infant" formControlName="childAge">
+                    <input type="checkbox" class="custom-control-input" id="infant" [(ngModel)]="infant" (change)="applyFilterChildAge('certificates','infant', infant)">
                     <label class="custom-control-label" for="infant">Infant    <i class="fas fa-child"></i></label>
                   </div>
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="preschooler" formControlName="childAge">
+                    <input type="checkbox" class="custom-control-input" id="preschooler" [(ngModel)]="preschooler" (change)="applyFilterChildAge('certificates','preschooler', preschooler)">
                     <label class="custom-control-label" for="preschooler">Preschooler    <i class="fas fa-running"></i></label>
                   </div>
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="schooled" formControlName="childAge">
+                    <input type="checkbox" class="custom-control-input" id="schooled" [(ngModel)]="schooler" (change)="applyFilterChildAge('certificates','schooler', schooler)">
                     <label class="custom-control-label" for="schooled">Schooled Kids    <i class="fas fa-chalkboard-teacher"></i></label>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="nbrOfChildren">can handle:</label>
-                  <input id="nbrOfChildren" type="number" class="form-control" min="1" max="5" value="" [class.btn-outline-danger]="filterForm.controls.nbrOfChildren.invalid && changedFilter[6]" (change)="changedFilter[6]=true" formControlName="nbrOfChildren">
+                  <label for="numberOfChildrenHandling">can handle:</label>
+                  <input id="numberOfChildrenHandling" type="number" class="form-control" min="1" max="5" value="" [(ngModel)]="numberOfChildrenHandling" (change)="filterGreaterThan('numberOfChildrenHandling', numberOfChildrenHandling)">
+                  <button class="btn btn-danger mt-1" *ngIf="numberOfChildrenHandling" (click)="removeFilter('numberOfChildrenHandling')">Remove Filter</button>
                 </div>
                 <div class="form-group">
                   <label>Certificates:</label>
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="cpr" formControlName="certif">
-                    <label class="custom-control-label" for="cpr"> CPR</label>
+                    <input type="checkbox" class="custom-control-input" id="cpr" [(ngModel)]="CPR"  (change)="applyFilterCertificate('certificates','CPR', CPR)">
+                    <label class="custom-control-label" for="cpr">CPR</label>
                   </div>
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="firstAid" formControlName="certif">
+                    <input type="checkbox" class="custom-control-input" id="firstAid" [(ngModel)]="firstAid" (change)="applyFilterCertificate('certificates','firstAid', firstAid)">
                     <label class="custom-control-label" for="firstAid">First Aid</label>
                   </div>
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="waterSafety" formControlName="certif">
+                    <input type="checkbox" class="custom-control-input" id="waterSafety" [(ngModel)]="waterSafety" (change)="applyFilterCertificate('certificates','waterSafety', waterSafety)">
                     <label class="custom-control-label" for="waterSafety">Water Safety</label>
                   </div>
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="driver" formControlName="certif">
+                    <input type="checkbox" class="custom-control-input" id="driver" [(ngModel)]="drivingLicence" (change)="applyFilterCertificate('certificates','drivingLicence', drivingLicence)">
                     <label class="custom-control-label" for="driver">Driver's Licence</label>
                   </div>
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="nutrition" formControlName="certif">
+                    <input type="checkbox" class="custom-control-input" id="nutrition" [(ngModel)]="nutrition" (change)="applyFilterCertificate('certificates','nutrition', nutrition)">
                     <label class="custom-control-label" for="nutrition">Nutrition and cooking courses</label>
                   </div>
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="fitness" formControlName="certif">
+                    <input type="checkbox" class="custom-control-input" id="fitness" [(ngModel)]="fitnessEducation" (change)="applyFilterCertificate('certificates','fitnessEducation', fitnessEducation)">
                     <label class="custom-control-label" for="fitness">Fitness Education</label>
                   </div>
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="specialNeedCare" formControlName="certif">
+                    <input type="checkbox" class="custom-control-input" id="specialNeedCare" [(ngModel)]="specialNeedCare" (change)="applyFilterCertificate('certificates','specialNeedCare', specialNeedCare)">
                     <label class="custom-control-label" for="specialNeedCare">Special Needs Care</label>
                   </div>
                 </div>
@@ -166,31 +174,29 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-info w-100 mt-2" type="submit">Filter</button>
-      </form>
     </div>
     <div class="container" [ngClass]="{'col-8 ml-auto' : showFilter , 'mx-auto w-75' : !showFilter }">
-      <div class="card-header shadow mb-3" style="background-color:  rgb(247, 247, 247); border-radius: 10px" *ngFor="let sitter of sitters  let i = index">
+      <div class="card-header shadow mb-3" style="background-color:  rgb(247, 247, 247); border-radius: 10px" *ngFor="let sitter of filteredSitters | sortBy: sortOrder:sortColumn ;  let i = index">
         <div class="row">
           <div class="col-2" >
             <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="rounded-circle" width="100%" alt="sitterPicture">
           </div>
           <div class="col-7">
-            <h1 class="text-left">{{sitter.firstName}} {{sitter.lastName}}</h1>
-            <small class="text-left">{{sitter.experience}} Years Of Experience / Location: {{sitter.location}} / {{sitter.distance}} KM</small>
-            <p>{{sitter.description}}</p>
-            <h5>Certificates: <span class="text-info" *ngFor="let certif of sitter.certificates , let j = index">{{certif}} . </span></h5>
+            <h1 class="text-left" ><a class="text-dark" [routerLink]="'/viewProfile/sitter/'+idSitters[i]">{{sitter.firstName}} {{sitter.lastName}}</a></h1>
+            <small class="text-left">{{sitter.experienceYears}} Years Of Experience / Location: {{sitter.city}} / <!--{{sitter.payload.exportVal().distance}} KM --></small>
+            <p>{{sitter.aboutMe}}</p>
+            <h5 *ngIf="sitter.certificates.length">Certificates: <span class="text-info" *ngFor="let certif of sitter.certificates , let j = index">{{certif}} . </span></h5>
           </div>
           <div class="col-3 border-left position-relative">
             <h1><i class="fas fa-star text-warning position-absolute" title="Add To Favourites" style="top: 5px;right: 5px"></i></h1>
             <div class="row h-100 w-100">
             <div class="col-12 my-auto ml-4">
-              <span class="fa fa-star mx-1 text-info"> </span>
-              <span class="fa fa-star mx-1 text-info"></span>
-              <span class="fa fa-star mx-1 text-info"></span>
-              <span class="fa fa-star mx-1 text-info"></span>
-              <span class="far fa-star mx-1 text-info "></span>
-              <button class="mt-3 btn btn-danger mx-auto" data-toggle="modal" data-target="#requestModal">Request Job</button>
+              <i class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRate > 0, 'far': sitter.avgRate === 0}"></i>
+              <i class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRate > 1, 'far': sitter.avgRate <= 1}"></i>
+              <i class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRate > 2, 'far': sitter.avgRate <= 2}"></i>
+              <i class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRate > 3, 'far': sitter.avgRate <= 3}"></i>
+              <i class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRate > 4, 'far': sitter.avgRate <= 4}"></i>
+              <button class="mt-3 btn btn-danger mx-auto" data-toggle="modal" data-target="#requestModal" id="RequestJobButton" name="RequestJobButton">Request Job</button>
               <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
@@ -200,44 +206,45 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                      <div class="modal-body">
-                        <form [formGroup]="requestForm" (ngSubmit)="onSubmitRequest(requestForm.value)">
+                    <div class="modal-body">
+                      <form [formGroup]="requestForm" (ngSubmit)="onSubmitRequest(requestForm.value, idSitters[i])">
                         <div class="form-group">
-                            <label for="requestedDate">Chose A Date</label>
-                            <input type="date" id="requestedDate" class="form-control" formControlName="requestedDate">
-                          </div>
-                          <div class="form-group">
-                            <label for="requestedDuration">Job Duration</label>
-                            <input type="number" id="requestedDuration" class="form-control" min="1" max="7" [class.btn-outline-danger]="requestForm.controls.requestedDuration.invalid && changedRequest[0]" (change)="changedRequest[0]=true" formControlName="requestedDuration">
-                          </div>
-                          <div class="form-group">
-                            <label for="requestedLocation">Job Location</label>
-                            <select id="requestedLocation" class="form-control" [class.btn-outline-danger]="requestForm.controls.requestedLocation.invalid && changedRequest[1]" (change)="changedRequest[1]=true" formControlName="requestedLocation">
-                              <option value="sitterHouse" selected>Sitter's House</option>
-                              <option value="yourHouse">Your House</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="requestedChildrenNbr">Number Of Children</label>
-                            <input type="number" id="requestedChildrenNbr" class="form-control" min="1" max="5" [class.btn-outline-danger]="requestForm.controls.requestedChildrenNbr.invalid && changedRequest[2]" (change)="changedRequest[2]=true" formControlName="requestedChildrenNbr">
-                          </div>
-                          <div class="form-group">
-                            <label for="requestedNeedRegularJob">Are you Open For a Regular Job</label>
-                            <select id="requestedNeedRegularJob" class="form-control" [class.btn-outline-danger]="requestForm.controls.requestedNeedRegularJob.invalid && changedRequest[3]" (change)="changedRequest[3]=true" formControlName="requestedNeedRegularJob">
-                              <option value="false" selected>false</option>
-                              <option value="true">true</option>
-                            </select>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" >Submit</button>
-                          </div>
-                        </form>
-                      </div>
+                          <label for="requestedDate">Chose A Date</label>
+                          <input type="date" id="requestedDate" class="form-control" formControlName="requestedDate">
+                        </div>
+                        <div class="form-group">
+                          <label for="requestedDuration">Job Duration</label>
+                          <input type="number" id="requestedDuration" class="form-control" min="1" max="7" [class.btn-outline-danger]="requestForm.controls.requestedDuration.invalid && changedRequest[0]" (change)="changedRequest[0]=true" formControlName="requestedDuration">
+                        </div>
+                        <div class="form-group">
+                          <label for="requestedLocation">Job Location</label>
+                          <select id="requestedLocation" class="form-control" [class.btn-outline-danger]="requestForm.controls.requestedLocation.invalid && changedRequest[1]" (change)="changedRequest[1]=true" formControlName="requestedLocation">
+                            <option value="sitterHouse" selected>Sitter's House</option>
+                            <option value="yourHouse">Your House</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="requestedChildrenNbr">Number Of Children</label>
+                          <input type="number" id="requestedChildrenNbr" class="form-control" min="1" max="5" [class.btn-outline-danger]="requestForm.controls.requestedChildrenNbr.invalid && changedRequest[2]" (change)="changedRequest[2]=true" formControlName="requestedChildrenNbr">
+                        </div>
+                        <div class="form-group">
+                          <label for="requestedNeedRegularJob">Are you Open For a Regular Job</label>
+                          <select id="requestedNeedRegularJob" class="form-control" [class.btn-outline-danger]="requestForm.controls.requestedNeedRegularJob.invalid && changedRequest[3]" (change)="changedRequest[3]=true" formControlName="requestedNeedRegularJob">
+                            <option value="false" selected>false</option>
+                            <option value="true">true</option>
+                          </select>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary" >Submit</button>
+                        </div>
+                      </form>
+                    </div>
 
                   </div>
                 </div>
               </div>
+
             </div>
             </div>
           </div>

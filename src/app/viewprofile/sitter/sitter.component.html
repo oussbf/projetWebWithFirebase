@@ -161,8 +161,8 @@
           <img class="rounded-circle position-relative top" src="assets/img/oussama.jpg" width="70px" height="70px" alt="reviewerPicture">
           <a [routerLink]="'viewProfile/parent/'+rating.idRev" style="text-underline: none; color: black" class="text-center">{{rating.firstNameRev}}</a>
           <div class="mb-2 ml-n2" style="width: 90px ;font-size: 9px">
-            <i class="fa fa-star mx-1 text-info"> </i>
-            <i class="fa-star mx-1 text-info" [ngClass]="{'fa': +rating.review > 1, 'far': +rating.review === 1}"></i>
+            <i class="fa-star mx-1 text-info" [ngClass]="{'fa': +rating.review > 0, 'far': +rating.review <= 0}"></i>
+            <i class="fa-star mx-1 text-info" [ngClass]="{'fa': +rating.review > 1, 'far': +rating.review <= 1}"></i>
             <i class="fa-star mx-1 text-info" [ngClass]="{'fa': +rating.review > 2, 'far': +rating.review <= 2}"></i>
             <i class="fa-star mx-1 text-info" [ngClass]="{'fa': +rating.review > 3, 'far': +rating.review <= 3}"></i>
             <i class="fa-star mx-1 text-info" [ngClass]="{'fa': +rating.review > 4, 'far': +rating.review <= 4}"></i>

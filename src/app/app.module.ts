@@ -35,6 +35,7 @@ import {SearchGuardService} from './guards/search-guard.service';
 import {ParentProfileGuardService} from './guards/parent-profile-guard.service';
 import {SitterProfileGuardService} from './guards/sitter-profile-guard.service';
 import {ReverseAuthGuardService} from './guards/reverse-auth-guard.service';
+import {NgpSortModule} from 'ngp-sort-pipe';
 
 
 const appRoutes: Routes = [
@@ -82,7 +83,8 @@ const appRoutes: Routes = [
       ReactiveFormsModule,
       AngularFireModule.initializeApp(environment.firebaseConfig),
       AngularFireAuthModule,
-      AngularFirestoreModule
+      AngularFirestoreModule,
+      NgpSortModule
     ],
   providers: [
     AuthService,

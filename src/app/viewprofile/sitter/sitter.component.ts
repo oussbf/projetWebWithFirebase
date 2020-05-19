@@ -109,7 +109,7 @@ export class SitterComponent implements OnInit {
         this.sitterProfile.starCounts[+x.exportVal().review - 1]++;
         this.sitterProfile.reviews.push(reviewerInfo);
       });
-      this.sitterProfile.avgRate = res.exportVal().avgRating;
+      this.sitterProfile.avgRate = res.exportVal().avgRate;
     } );
 
     firebase.database().ref(`parents/${this.authService.userId}/favourites`).orderByChild('idFavourite').equalTo(this.sitterId)

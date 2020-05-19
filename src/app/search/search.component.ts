@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SearchService} from '../services/search.service';
 import {Router} from '@angular/router';
+import * as _ from 'lodash';
+import {AngularFireDatabase} from '@angular/fire/database';
+import {SitterModalService} from '../services/sitterModal.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ParentAccountService} from '../services/parent-account.service';
 
 @Component({
   selector: 'app-search',
@@ -9,67 +13,71 @@ import {Router} from '@angular/router';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  requestForm: FormGroup;
-  filterForm: FormGroup;
   distance = 1;
   showFilter = true;
-  changedFilter = [false, false, false, false, false, false, false];
+  requestForm: FormGroup;
+  sitters: any [] = [] ;
+  idSitters: string[] = [];
   changedRequest = [false, false, false, false];
+  filteredSitters: any ;
+  filters = {};
+  sortOrder = 'asc';
+  sortColumn = 'firstName';
+  availabilityDate: number;
+  endDate: number;
+  availabilityDuration: number;
+  availablityOpenForRegularJob: boolean;
+  displacement: boolean;
+  experienceYears: number;
+  toddler: boolean;
+  infant: boolean;
+  preschooler: boolean;
+  schooler: boolean;
+  numberOfChildrenHandling: number;
+  CPR: boolean;
+  firstAid: boolean;
+  waterSafety: boolean;
+  drivingLicence: boolean;
+  nutrition: boolean;
+  fitnessEducation: boolean;
+  specialNeedCare: boolean;
 
-  sitters = [
-    {
-      firstName : 'Oussama',
-      lastName : 'Ben Fredj',
-      experience: '5',
-      distance: '2',
-      location: 'Sousse , Sousse 4004',
-      // tslint:disable-next-line:max-line-length
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
-      rating : '4',
-      certificates: ['CPR' , 'Special Needs Care']
-    },
-    {
-      firstName : 'Anis',
-      lastName : 'Ben Ghanem',
-      experience: '3',
-      distance: '5',
-      location: 'Tunis , Hay Khadra 1003',
-      // tslint:disable-next-line:max-line-length
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      rating : '4',
-      certificates: ['CPR' , 'Special Needs Care']
-    }
-  ];
 
   /* SORTING VAR AND FUNCTIONS */
   sortedByRating = false;
-  sortedByNewest = false;
+  sortedByExperience = false;
   sortedByDate = false;
   sortByRating(e) {
     this.sortedByRating = !this.sortedByRating;
-    this.sortedByNewest = false;
+    this.sortedByExperience = false;
     this.sortedByDate = false;
     e.target.style.backgroundColor = '#EAEAEA';
-    document.getElementById('newestSortBtn').style.backgroundColor = 'white';
+    document.getElementById('ExperienceSortBtn').style.backgroundColor = 'white';
     document.getElementById('dateSortBtn').style.backgroundColor = 'white';
+    this.sortColumn = 'avgRate';
+    this.sortOrder = (!this.sortedByRating) ? 'asc' : 'desc';
   }
-  sortByNewest(e) {
-    this.sortedByNewest = !this.sortedByNewest;
+  sortByExperience(e) {
+    this.sortedByExperience = !this.sortedByExperience;
     this.sortedByRating = false;
     this.sortedByDate = false;
     e.target.style.backgroundColor = '#EAEAEA';
     document.getElementById('ratingSortBtn').style.backgroundColor = 'white';
     document.getElementById('dateSortBtn').style.backgroundColor = 'white';
+    this.sortColumn = 'experienceYears';
+    this.sortOrder = (!this.sortedByExperience) ? 'asc' : 'desc';
   }
   sortByDate(e) {
     this.sortedByDate = !this.sortedByDate;
-    this.sortedByNewest = false;
+    this.sortedByExperience = false;
     this.sortedByRating = false;
     e.target.style.backgroundColor = '#EAEAEA';
-    document.getElementById('newestSortBtn').style.backgroundColor = 'white';
+    document.getElementById('ExperienceSortBtn').style.backgroundColor = 'white';
     document.getElementById('ratingSortBtn').style.backgroundColor = 'white';
+    this.sortColumn = 'availabilityDate';
+    this.sortOrder = (!this.sortedByDate) ? 'asc' : 'desc';
   }
-  /* END SORTING VAR AND FUNCTIONS */
+
   distanceChange(event) {
     this.distance = event.target.value;
   }
@@ -77,27 +85,7 @@ export class SearchComponent implements OnInit {
     this.showFilter = !this.showFilter;
   }
 
-
-  constructor(private formBuilder: FormBuilder, private searchService: SearchService, private router: Router) { }
-
-  ngOnInit(): void {
-    this.initForm();
-
-  }
   initForm() {
-    this.filterForm = this.formBuilder.group({
-      startDate: [''],
-      endDate: [''],
-      duration: ['', [Validators.max(7), Validators.min(0)]],
-      openForReg: [''],
-      distance: ['', [Validators.max(10), Validators.min(1)]],
-      displacement: [''],
-      expYears: ['', [Validators.max(70), Validators.min(0)]],
-      childAge: [''],
-      nbrOfChildren: ['', [Validators.max(5), Validators.min(1)]],
-      certif: ['']
-    });
-
     this.requestForm = this.formBuilder.group({
       requestedDate: ['', [Validators.required]],
       requestedDuration: ['', [Validators.required, Validators.min(1), Validators.max(7)]],
@@ -105,33 +93,86 @@ export class SearchComponent implements OnInit {
       requestedChildrenNbr: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
       requestedNeedRegularJob: ['', Validators.required]
     });
-
   }
 
-  onSubmitRequest(formValue) {
+  onSubmitRequest(formValue, sitterId) {
     if (this.requestForm.valid) {
-      this.searchService.submitRequest(formValue).then(res => {
-        window.location.reload();
-        this.router.navigate(['profile/parentId']);
-      }, err => {
-        console.log(err);
-      });
-
+      this.parentAccountService.requestJob(formValue, sitterId);
     } else {
       for (let i = 0 ; i < this.changedRequest.length; i++) { this.changedRequest[i] = true; }
     }
   }
 
-  onFilter(formValue) {
-    if (this.filterForm.valid) {
-      this.searchService.filter(formValue).then(res => {
-        window.location.reload();
-      }, err => {
-        console.log(err);
-      });
 
-    } else {
-      for (let i = 0 ; i < this.changedFilter.length; i++) { this.changedFilter[i] = true; }
-    }
+  constructor(private searchService: SearchService, private router: Router,
+              private db: AngularFireDatabase, private formBuilder: FormBuilder,
+              private parentAccountService: ParentAccountService) { }
+
+  ngOnInit(): void {
+    this.initForm();
+    this.db.list('/sitters').snapshotChanges().subscribe( sitters => {
+      sitters.forEach(sitter => {
+        const x = sitter.payload.exportVal();
+        const sitt: SitterModalService = new SitterModalService(x.firstName, x.lastName, '', ''
+        , '', x.city, '', x.age, x.numberOfChildrenHandling, [], x.displacement.toString() , x.experienceYears
+        , [], x.aboutMe, {}, x.gender, x.availability.toString(), x.availabilityDate, x.availabilityDuration,
+          '', [], x.avgRate, 0, x.availablityOpenForRegularJob.toString(), []);
+        sitter.payload.child('certificates').forEach(certif => {
+          if (certif.exportVal()) {sitt.certificates.push(certif.key); }
+        });
+        sitter.payload.child('childAge').forEach(childAge => {
+          if (childAge.exportVal()) {sitt.childAge.push(childAge.key); }
+        });
+        this.sitters.push(sitt);
+        this.idSitters.push(sitter.key);
+      });
+      this.applyFilter();
+    });
   }
+
+  applyFilterCertificate(property: string, certifName: string, rule) {
+    if (!rule) {
+      this.removeFilter(property);
+    } else {
+      this.filters[property] = val => val.indexOf(certifName) !== -1;
+    }
+    this.applyFilter();
+  }
+
+  applyFilterChildAge(property: string, childAge: string, rule) {
+    if (!rule) {
+      this.removeFilter(property);
+    } else {
+      this.filters[property] = val => val.indexOf(childAge) !== -1;
+    }
+    this.applyFilter();
+  }
+
+  private applyFilter() {
+    this.filteredSitters = _.filter(this.sitters, _.conforms(this.filters));
+
+  }
+
+  filterExact(property: string, rule: any) {
+    this.filters[property] = val => val === rule;
+    this.applyFilter();
+  }
+
+  filterGreaterThan(property: string, rule: any) {
+    this.filters[property] = val => val >= rule;
+    this.applyFilter();
+  }
+
+  filterMinorThan(property: string, rule: any) {
+    this.filters[property] = val => val <= rule;
+    this.applyFilter();
+  }
+
+  removeFilter(property: string) {
+    delete this.filters[property];
+    this[property] = null;
+    this.applyFilter();
+  }
+
+
 }

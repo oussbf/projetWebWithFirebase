@@ -253,10 +253,10 @@
               <div class="row h-100">
                 <div class="col-12 my-auto" style="margin-left: 20%">
                   <span class="fa fa-star mx-1 text-info"> </span>
-                  <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRating > 1, 'far': sitter.avgRating === 1}"></span>
-                  <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRating > 2, 'far': sitter.avgRating <= 2}"></span>
-                  <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRating > 3, 'far': sitter.avgRating <= 3}"></span>
-                  <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRating > 4, 'far': sitter.avgRating <= 4}"></span>
+                  <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRate > 1, 'far': sitter.avgRate === 1}"></span>
+                  <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRate > 2, 'far': sitter.avgRate <= 2}"></span>
+                  <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRate > 3, 'far': sitter.avgRate <= 3}"></span>
+                  <span class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRate > 4, 'far': sitter.avgRate <= 4}"></span>
                   <button class="mt-3 btn btn-danger mx-auto" data-toggle="modal" data-target="#requestModal">Request Job</button>
                   <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModal" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">

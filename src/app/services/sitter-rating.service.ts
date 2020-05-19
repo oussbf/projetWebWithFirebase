@@ -22,18 +22,18 @@ export class SitterRatingService {
         reviewText: formValue.reviewText
       }).then(r  => {
         firebase.database().ref(`sitters/${sitterId}`).once('value', sitter => {
-          if (sitter.exportVal().avgRating) {
-            const y = ((+sitter.exportVal().avgRating * (sitter.child('reviews').numChildren() - 1)) + starRating)
+          if (sitter.exportVal().avgRate) {
+            const y = ((+sitter.exportVal().avgRate * (sitter.child('reviews').numChildren() - 1)) + starRating)
               / (sitter.child('reviews').numChildren());
-            console.log(sitter.exportVal().avgRating);
+            console.log(sitter.exportVal().avgRate);
             console.log(sitter.child('reviews').numChildren());
             console.log(y);
             firebase.database().ref((`sitters/${sitterId}`)).update({
-              avgRating: y
+              avgRate: y
             });
           } else {
             firebase.database().ref((`sitters/${sitterId}`)).update({
-              avgRating: starRating
+              avgRate: starRating
             });
           }
 
