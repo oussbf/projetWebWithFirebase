@@ -1,4 +1,5 @@
 export class SitterModalService {
+  id = '';
   firstName: string;
   lastName: string;
   age: string;

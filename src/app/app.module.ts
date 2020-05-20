@@ -50,7 +50,7 @@ const appRoutes: Routes = [
   { path: 'auth/parent/signUp', canActivate: [ReverseAuthGuardService], component: SignUpAComponent  },
   { path: 'auth/sitter/signUp', canActivate: [ReverseAuthGuardService], component: SignUpBComponent  },
   { path: 'pageNotFound', component: PageNotFoundComponent},
-  { path: '**', redirectTo: 'home'}
+  { path: '**', redirectTo: 'pageNotFound'}
 
 ];
 

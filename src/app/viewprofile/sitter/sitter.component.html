@@ -79,13 +79,13 @@
           <div id="aboutMe">
             <h2>About Me</h2>
             <span id="aboutMeText">{{sitterProfile.aboutMe}}</span>
-            <h4 class="mt-3">skills:</h4>
+            <h4 class="mt-3" *ngIf="sitterProfile.certificates.length">skills:</h4>
             <h5 class="text-info" *ngFor="let certificate of sitterProfile.certificates"><i class="fas fa-check-circle "></i><span class="ml-2">{{certificate}}</span></h5>
           </div>
           <div class="border mb-3 mt-4"></div>
           <div id="jobInfo" class="mb-5">
             <h2 class="mt-2 mb-3">Job Info</h2>
-            <h4>I Am Capable Of Taking Care Of:</h4>
+            <h4 *ngIf="sitterProfile.childAge.length">I Am Capable Of Taking Care Of:</h4>
             <h5 class="text-info" *ngFor="let childAgeType of sitterProfile.childAge"><i *ngIf="childAgeType === 'infant'" class="fas fa-child"></i><i *ngIf="childAgeType === 'preschooler'" class="fas fa-running"></i><i *ngIf="childAgeType === 'toddler'" class="fas fa-baby"></i><i *ngIf="childAgeType === 'schooler'" class="fas fa-chalkboard-teacher"></i><span class="ml-2">{{childAgeType}}</span></h5>
             <h4 class="text-danger" *ngIf="!sitterProfile.availability">Not Available.</h4>
             <div *ngIf="sitterProfile.availability">

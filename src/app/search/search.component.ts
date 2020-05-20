@@ -17,7 +17,6 @@ export class SearchComponent implements OnInit {
   showFilter = true;
   requestForm: FormGroup;
   sitters: any [] = [] ;
-  idSitters: string[] = [];
   changedRequest = [false, false, false, false];
   filteredSitters: any ;
   filters = {};
@@ -123,8 +122,8 @@ export class SearchComponent implements OnInit {
         sitter.payload.child('childAge').forEach(childAge => {
           if (childAge.exportVal()) {sitt.childAge.push(childAge.key); }
         });
+        sitt.id = sitter.key;
         this.sitters.push(sitt);
-        this.idSitters.push(sitter.key);
       });
       this.applyFilter();
     });

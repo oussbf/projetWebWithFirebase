@@ -182,7 +182,7 @@
             <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="rounded-circle" width="100%" alt="sitterPicture">
           </div>
           <div class="col-7">
-            <h1 class="text-left" ><a class="text-dark" [routerLink]="'/viewProfile/sitter/'+idSitters[i]">{{sitter.firstName}} {{sitter.lastName}}</a></h1>
+            <h1 class="text-left" ><a class="text-dark" [routerLink]="'/viewprofile/sitter/'+sitter.id">{{sitter.firstName}} {{sitter.lastName}}</a></h1>
             <small class="text-left">{{sitter.experienceYears}} Years Of Experience / Location: {{sitter.city}} / <!--{{sitter.payload.exportVal().distance}} KM --></small>
             <p>{{sitter.aboutMe}}</p>
             <h5 *ngIf="sitter.certificates.length">Certificates: <span class="text-info" *ngFor="let certif of sitter.certificates , let j = index">{{certif}} . </span></h5>
@@ -207,7 +207,7 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      <form [formGroup]="requestForm" (ngSubmit)="onSubmitRequest(requestForm.value, idSitters[i])">
+                      <form [formGroup]="requestForm" (ngSubmit)="onSubmitRequest(requestForm.value, sitter.id)">
                         <div class="form-group">
                           <label for="requestedDate">Chose A Date</label>
                           <input type="date" id="requestedDate" class="form-control" formControlName="requestedDate">
