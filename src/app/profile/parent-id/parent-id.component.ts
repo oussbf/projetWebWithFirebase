@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ParentAccountService} from '../../services/parent-account.service';
 import {AuthService} from '../../services/auth.service';
 import {ParentModal} from '../../services/parentModal.service';
@@ -88,28 +88,32 @@ export class ParentIdComponent implements OnInit {
 
 
       /* ********************************************** FILLING KIDS INFO *************************************************/
-      res.child('kids').forEach(kid => {
-        const y = [];
-        kid.child('specialNeeds').forEach(specialNeed => {
-          if ((specialNeed.key.toString() !== 'others')) {y.push(specialNeed.key); }
-        });
-        const x = {
-          idKid: kid.exportVal().idKid,
-          kidName: kid.exportVal().kidName,
-          kidAge: kid.exportVal().kidAge,
-          childAge: kid.exportVal().childAge,
-          specialNeeds: y,
-          otherSpecialNeed: kid.child('specialNeeds').exportVal().others,
-          additionalInfo: kid.exportVal().additionalInfo
-        };
-        this.parentProfile.kids.push(x);
-      });
+      if (res.child('kids').hasChildren()) {
+       res.child('kids').forEach(kid => {
+         const y = [];
+         kid.child('specialNeeds').forEach(specialNeed => {
+           if ((specialNeed.key.toString() !== 'others')) {
+             y.push(specialNeed.key);
+           }
+         });
+         const x = {
+           idKid: kid.exportVal().idKid,
+           kidName: kid.exportVal().kidName,
+           kidAge: kid.exportVal().kidAge,
+           childAge: kid.exportVal().childAge,
+           specialNeeds: y,
+           otherSpecialNeed: kid.child('specialNeeds').exportVal().others,
+           additionalInfo: kid.exportVal().additionalInfo
+         };
+         this.parentProfile.kids.push(x);
+       });
+     }
       /* ********************************************** END FILLING KIDS INFO *************************************************/
 
       /* ********************************************** FILLING FAVOURITES INFO *************************************************/
 
       res.child('favourites').forEach(sitterId => {
-        firebase.database().ref().child(`sitters/${sitterId.child('idFavourite').exportVal()}`).on('value', (sitter) => {
+        firebase.database().ref().child(`sitters/${sitterId.child('idFavourite').exportVal()}`).on('value', sitter => {
           const y: string[] = [];
           sitter.child('certificates').forEach(n => {if (n.exportVal()) {y.push(n.key.toString()); } });
           const x = {

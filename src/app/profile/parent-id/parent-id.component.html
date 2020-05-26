@@ -123,7 +123,7 @@
             <h5 *ngIf="message.status === 'accepted'">Phone Number : {{message.phoneNumber}}</h5>
           </div>
         </div>
-        <a [routerLink]="'/viewprofile/sitter/'+message.idSender" style="position: absolute ; bottom: 10px ;right: 20px">view Profile</a> <!--to be modified to get the real Url-->
+        <a [routerLink]="'/viewprofile/sitter/'+message.idSender" style="position: absolute ; bottom: 10px ;right: 20px">view Profile</a>
       </div>
     </div>
     <!-- ================================= END MESSAGES CASE ==================================-->
@@ -235,13 +235,13 @@
     <div id="Favourite" class="container tab-pane fade"><br>
       <h2 class="font-weight-bold text-center" *ngIf="!parentProfile.favourites.length">No Favourites Have Been Found.</h2>
       <div class=" bg-white mx-auto" >
-        <div class="card-header shadow mb-4" style="background-color: rgb(247, 247, 247); border-radius: 10px" *ngFor="let sitter of parentProfile.favourites  let i = index">
+        <div class="card-header shadow mb-4" style="background-color: rgb(247, 247, 247); border-radius: 10px" *ngFor="let sitter of parentProfile.favourites;  let i = index">
           <div class="row">
             <div class="col-2" >
               <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="rounded-circle" width="100%" alt="sitterPicture">
             </div>
             <div class="col-7">
-              <h1 class="text-left">{{sitter.firstName}} {{sitter.lastName}}</h1>
+              <h1 class="text-left"><a class="text-dark" [routerLink]="'/viewprofile/sitter/'+sitter.id">{{sitter.firstName}}</a>   <a class="text-dark ml-2" [routerLink]="'/viewprofile/sitter/'+sitter.id">{{sitter.lastName}}</a></h1>
               <small class="text-left">{{sitter.experience}} Years Of Experience / Location: {{sitter.location}}</small>
               <p>{{sitter.description}}</p>
               <h5 *ngIf="sitter.certificates.length">Certificates: <span class="text-info" *ngFor="let certif of sitter.certificates , let j = index">{{certif}} . </span></h5>

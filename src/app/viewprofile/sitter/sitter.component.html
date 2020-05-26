@@ -30,7 +30,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form [formGroup]="requestForm" (ngSubmit)="onSubmitRequest(requestForm.value)">
+                  <form [formGroup]="requestForm" >
                     <div class="form-group">
                       <label for="requestedDate">Chose A Date</label>
                       <input type="date" id="requestedDate" class="form-control" formControlName="requestedDate">
@@ -59,7 +59,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary" >Submit</button>
+                      <button type="submit" class="btn btn-primary" (click)="onSubmitRequest(requestForm.value)" data-dismiss="modal">Submit</button>
                     </div>
                   </form>
                 </div>
@@ -72,7 +72,7 @@
         <div class="col-9" >
           <a class="text-danger float-right" style="font-size: 25px"> <i class="fas fa-flag"> Report Profile</i></a>
           <div id="profileDetails" style="height: 230px">
-            <h1 class="mb-n2">{{sitterProfile.firstName}} {{sitterProfile.lastName}}                         <i *ngIf="authService.isParent" class=" fa-star text-info" [ngClass]="{far: !addedToFavourites, fa : addedToFavourites }" (click)="addToFavourites()"><a class="text-info" [href]="'profile/parent/'+authService.userId" style="font-size: 20px" *ngIf="addedToFavourites">See In Favourites</a></i> </h1>
+            <h1 class="mb-n2">{{sitterProfile.firstName}} {{sitterProfile.lastName}}                         <i *ngIf="authService.isParent" class=" fa-star text-info" [ngClass]="{far: !addedToFavourites, fa : addedToFavourites }" (click)="addToFavourites()"></i><a class="text-info" [href]="'profile/parent/'+authService.userId" style="font-size: 20px" *ngIf="addedToFavourites">See In Favourites</a> </h1>
             <h5><br>lives In: {{sitterProfile.city}}<br>{{(sitterProfile.displacement)? 'Able': 'Not Able'}} to make displacements.<br>Has {{sitterProfile.experienceYears}} Years Of Experience<br>Gender: {{sitterProfile.gender}}<br>Age: {{sitterProfile.age}}<br>Job: {{sitterProfile.jobEducation}}</h5>
           </div>
           <div class="border mb-3"></div>

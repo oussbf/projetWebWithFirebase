@@ -183,12 +183,11 @@
           </div>
           <div class="col-7">
             <h1 class="text-left" ><a class="text-dark" [routerLink]="'/viewprofile/sitter/'+sitter.id">{{sitter.firstName}} {{sitter.lastName}}</a></h1>
-            <small class="text-left">{{sitter.experienceYears}} Years Of Experience / Location: {{sitter.city}} / <!--{{sitter.payload.exportVal().distance}} KM --></small>
+            <small class="text-left">{{sitter.experienceYears}} Years Of Experience / Location: {{sitter.city}}<!-- / {{sitter.payload.exportVal().distance}} KM --></small>
             <p>{{sitter.aboutMe}}</p>
             <h5 *ngIf="sitter.certificates.length">Certificates: <span class="text-info" *ngFor="let certif of sitter.certificates , let j = index">{{certif}} . </span></h5>
           </div>
-          <div class="col-3 border-left position-relative">
-            <h1><i class="fas fa-star text-warning position-absolute" title="Add To Favourites" style="top: 5px;right: 5px"></i></h1>
+          <div class="col-3 border-left ">
             <div class="row h-100 w-100">
             <div class="col-12 my-auto ml-4">
               <i class="fa-star mx-1 text-info" [ngClass]="{'fa': sitter.avgRate > 0, 'far': sitter.avgRate === 0}"></i>
@@ -207,7 +206,7 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      <form [formGroup]="requestForm" (ngSubmit)="onSubmitRequest(requestForm.value, sitter.id)">
+                      <form [formGroup]="requestForm" >
                         <div class="form-group">
                           <label for="requestedDate">Chose A Date</label>
                           <input type="date" id="requestedDate" class="form-control" formControlName="requestedDate">
@@ -236,7 +235,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-primary" >Submit</button>
+                          <button type="submit" class="btn btn-primary" (click)="onSubmitRequest(requestForm.value, sitter.id)" data-dismiss="modal">Submit</button>
                         </div>
                       </form>
                     </div>

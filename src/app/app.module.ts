@@ -39,6 +39,7 @@ import {NgpSortModule} from 'ngp-sort-pipe';
 
 
 const appRoutes: Routes = [
+  { path: '', canActivate: [HomeGuardService] , component: HomeComponent },
   { path: 'home' , canActivate: [HomeGuardService] , component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'search', canActivate: [AuthGuardService, SearchGuardService], component: SearchComponent },
