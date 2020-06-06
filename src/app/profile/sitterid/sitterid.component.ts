@@ -18,7 +18,11 @@ export class SitteridComponent implements OnInit {
   aboutMeForm: FormGroup;
   notificationForm: FormGroup;
   sitterProfile: SitterModalService;
-
+  savingPI = false;
+  savingNP = false;
+  savingJI = false;
+  savingAM = false;
+  savingAvailability = false;
   url: string | ArrayBuffer = 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png';
   available = false;
   newsLetterChecked = false;
@@ -202,33 +206,44 @@ export class SitteridComponent implements OnInit {
 
     }
   onSavePI(formValue) {
+    this.savingPI = true;
     if (this.personalInfoForm.valid) {
       this.sitterAccountService.savePI(formValue);
     } else {
+      this.savingPI = false;
       for (let i = 0 ; i < this.changedPI.length; i++) { this.changedPI[i] = true; }
     }
   }
   onSaveNP(formValue) {
+    this.savingNP = true;
     if (this.personalInfoForm.valid) {
       this.sitterAccountService.saveNP(formValue);
     } else {
+      this.savingNP = false;
       for (let i = 0 ; i < this.changedNP.length; i++) { this.changedNP[i] = true; }
     }
   }
   onSaveJI(formValue) {
+    this.savingJI = true;
     if (this.personalInfoForm.valid) {
       this.sitterAccountService.saveJI(formValue, this.sitterProfile.childAge, this.sitterProfile.certificates);
     } else {
+      this.savingJI = false;
       for (let i = 0 ; i < this.changedJI.length; i++) { this.changedJI[i] = true; }
     }
   }
   onSaveAM(formValue) {
+    this.savingAM = true;
     if (this.personalInfoForm.valid) {
       this.sitterAccountService.saveAM(formValue);
-    } else {this.changedAM = true; }
+    } else {
+      this.savingAM = false;
+      this.changedAM = true;
+    }
   }
 
   onSaveAV(formValue) {
+    this.savingAvailability = true;
     if (this.available) {
     if (this.availabilityForm.valid) {
       this.sitterAccountService.saveAV(formValue);
@@ -238,6 +253,7 @@ export class SitteridComponent implements OnInit {
     }} else {
       this.sitterAccountService.saveAV(formValue);
     }
+    this.savingAvailability = false;
   }
   subscribeChange(formValue) {
     if (this.newsLetterChecked) {

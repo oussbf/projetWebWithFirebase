@@ -42,6 +42,9 @@
           <div class="form-group">
             <label for="firstName">First Name:</label>
             <input type="text" class="form-control" placeholder="Exp: Oussama ..." id="firstName" [class.btn-outline-danger]="personalInfoForm.controls.firstName.invalid && changedPI[0]" (change)="changedPI[0]=true" formControlName="firstName">
+            <div class="invalid-tooltip">
+              Please choose a unique and valid username.
+            </div>
           </div>
           <div class="form-group">
             <label for="lastName">Last Name:</label>
@@ -60,7 +63,12 @@
             <input type="checkbox" class="form-check-input" id="exampleCheck1" (change)="checkBoxChange()">
             <label class="form-check-label" for="exampleCheck1">Check me out </label>
           </div>
-          <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px" [disabled]="!checkBoxChecked">Save</button>
+          <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px" [disabled]="!checkBoxChecked">
+            <span [hidden]="savingPI">Save</span>
+            <span [hidden]="!savingPI" class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </span>
+          </button>
         </form>
         <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
         <form class="mt-4" [formGroup]="newPasswordForm" (ngSubmit)="onSaveNP(newPasswordForm.value)">
@@ -77,7 +85,12 @@
             <label for="confirmNewPassword">Confirm Your New Password</label>
             <input type="password" class="form-control" id="confirmNewPassword" [class.btn-outline-danger]="newPasswordForm.controls.confirmNewPassword.invalid && changedNP[2]" (change)="changedNP[2]=true" formControlName="confirmNewPassword">
           </div>
-          <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px">Save</button>
+          <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px">
+            <span [hidden]="savingNP">Save</span>
+            <span [hidden]="!savingNP" class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </span>
+          </button>
         </form>
         <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
         <form class="mt-4" [formGroup]="notificationForm">
@@ -209,9 +222,9 @@
               <label><input type="checkbox" name="specialNeed" value="autistic" (click)="parentProfile.toggleSpecialNeed(child.specialNeeds , 'autistic')" [checked]="child.specialNeeds.includes('autistic')"> autistic</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" name="specialNeed" (change)="othersSelectedChange()" [checked]="child.otherSpecialNeed.length > 0"> others...</label>
+              <label><input type="checkbox" name="specialNeed" (change)="othersSelectedChange(i)" [checked]="otherSelectedChecked"> others...</label>
             </div>
-            <div class="form-group" *ngIf="otherSelectedChecked || child.otherSpecialNeed.length > 0">
+            <div class="form-group" *ngIf="otherSelectedChecked || child.otherSpecialNeed.length">
               <textarea class="form-control" id="otherHandicaps" [ngModel]="child.otherSpecialNeed" placeholder="Please Describe Here..."  [class.btn-outline-danger]="kidsForm.controls.otherHandicaps.invalid && changedKid[2]" (change)="changedKid[2]=true" formControlName="otherHandicaps"></textarea>
             </div>
 

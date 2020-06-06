@@ -58,7 +58,12 @@
             <input type="checkbox" class="form-check-input" id="exampleCheck1" (change)="checkBoxChange()">
             <label class="form-check-label" for="exampleCheck1">Check me out </label>
           </div>
-          <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px" [disabled]="!checkBoxChecked">Save</button>
+          <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px" [disabled]="!checkBoxChecked">
+            <span [hidden]="savingPI">Save</span>
+            <span [hidden]="!savingPI" class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </span>
+          </button>
         </form>
         <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
         <form class="mt-4" [formGroup]="newPasswordForm" (ngSubmit)="onSaveNP(newPasswordForm.value)">
@@ -75,7 +80,12 @@
             <label for="confirmNewPassword">Confirm Your New Password</label>
             <input type="password" class="form-control" id="confirmNewPassword" [class.btn-outline-danger]="newPasswordForm.controls.confirmNewPassword.invalid && changedNP[2]" (change)="changedNP[2]=true" formControlName="confirmNewPassword">
           </div>
-          <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px">Save</button>
+          <button type="submit" class="btn btn-info btn-md form-control " style="width: 150px">
+            <span [hidden]="savingNP">Save</span>
+            <span [hidden]="!savingNP" class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </span>
+          </button>
         </form>
         <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
 
@@ -158,7 +168,12 @@
             </div>
 
           </div>
-          <button type="submit" name="saveJobInformation" id="saveJobInformation" class="btn btn-info btn-md form-control" >Save</button>
+          <button type="submit" class="btn btn-info btn-md form-control" >
+            <span [hidden]="savingJI">Save</span>
+            <span [hidden]="!savingJI" class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </span>
+          </button>
 
         </form>
         <div class="border mt-5 mb-5 w-75" style="margin-left: 12.5%"></div>
@@ -168,7 +183,12 @@
             <textarea class="form-control" id="aboutMeText" name="aboutMeText" placeholder="Describe Your Self Here ..." [class.btn-outline-danger]="aboutMeForm.controls.aboutMeText.invalid && changedAM" (change)="changedAM=true" formControlName="aboutMeText">
             </textarea>
             <small class="text-muted">Maximum 150 words</small>
-            <button type="submit" name="saveAboutMe" id="saveAboutMe" class="btn btn-info btn-md form-control" >Save</button>
+            <button type="submit" name="saveAboutMe" class="btn btn-info btn-md form-control" >
+              <span [hidden]="savingAM">Save</span>
+              <span [hidden]="!savingAM" class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </span>
+            </button>
           </div>
         </form>
         <div class="border mt-5 w-75" style="margin-left: 12.5%"></div>
@@ -244,7 +264,12 @@
             <small class="form-text text-muted">Maximum 300 Characters.</small>
           </div>
         </div>
-        <button type="submit" class="btn btn-info btn-md form-control mt-2" style="width: 150px">Save</button>
+        <button type="submit" class="btn btn-info btn-md form-control mt-2" style="width: 150px">
+          <span [hidden]="savingAvailability">Save</span>
+          <span [hidden]="!savingAvailability" class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </span>
+        </button>
       </form>
     </div>
 

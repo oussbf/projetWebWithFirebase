@@ -12,6 +12,8 @@ import * as firebase from 'firebase';
 })
 
 export class ParentIdComponent implements OnInit {
+  savingPI = false;
+  savingNP = false;
   personalInfoForm: FormGroup;
   newPasswordForm: FormGroup;
   kidsForm: FormGroup;
@@ -19,8 +21,8 @@ export class ParentIdComponent implements OnInit {
   url: string | ArrayBuffer = 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png';
   ArrayofkidsId = ['Achoik'];
   newsLetterChecked = false;
-  checkBoxChecked = false;
-  otherSelectedChecked = false;
+  checkBoxChecked =  false;
+  otherSelectedChecked: boolean;
   changedPI  = [false, false, false , false];
   changedNP = [false, false, false];
   changedKid = [false, false, false , false];
@@ -34,8 +36,11 @@ export class ParentIdComponent implements OnInit {
   checkBoxChange() {
     this.checkBoxChecked = !this.checkBoxChecked;
   }
-  othersSelectedChange() {
+  othersSelectedChange(i) {
     this.otherSelectedChecked = !this.otherSelectedChecked;
+    if (!this.otherSelectedChecked) {
+      this.parentProfile.kids[i].otherSpecialNeed = '';
+    }
   }
   clickPic() {
     document.getElementById('imageUpload').click();
@@ -63,7 +68,7 @@ export class ParentIdComponent implements OnInit {
     this.initForms();
     /* **************************************** FILLING ACCOUNT SETTINGS ********************************* */
     this.parentProfile = new ParentModal('' , '' , '' , '' , {}, '', '' , [] , [], []);
-    firebase.database().ref().child(`parents/${this.authService.userId}`).on('value' , (res) => {
+    firebase.database().ref().child(`parents/${this.authService.userId}`).once('value' , (res) => {
       this.parentProfile.firstName = res.exportVal().firstName;
       this.parentProfile.lastName = res.exportVal().lastName;
       this.parentProfile.email = res.exportVal().email;
@@ -96,6 +101,7 @@ export class ParentIdComponent implements OnInit {
              y.push(specialNeed.key);
            }
          });
+         this.otherSelectedChecked = kid.child('specialNeeds').exportVal().others.length > 0;
          const x = {
            idKid: kid.exportVal().idKid,
            kidName: kid.exportVal().kidName,
@@ -113,9 +119,9 @@ export class ParentIdComponent implements OnInit {
       /* ********************************************** FILLING FAVOURITES INFO *************************************************/
 
       res.child('favourites').forEach(sitterId => {
-        firebase.database().ref().child(`sitters/${sitterId.child('idFavourite').exportVal()}`).on('value', sitter => {
+        firebase.database().ref().child(`sitters/${sitterId.child('idFavourite').exportVal()}`).once('value', sitter => {
           const y: string[] = [];
-          sitter.child('certificates').forEach(n => {if (n.exportVal()) {y.push(n.key.toString()); } });
+          sitter.child('certificates').forEach(certif => {if (certif.exportVal()) {y.push(certif.key.toString()); } });
           const x = {
             id: sitterId.child('idFavourite').exportVal(),
             firstName: sitter.exportVal().firstName,
@@ -135,7 +141,7 @@ export class ParentIdComponent implements OnInit {
 
     } );
     /* **************************************** END FILLING ACCOUNT SETTINGS********************************* */
-    firebase.database().ref().child(`parents/${this.authService.userId}/messages`).on('value' , (res) => {
+    firebase.database().ref().child(`parents/${this.authService.userId}/messages`).once('value' , (res) => {
     res.forEach(msg => {
       const x = {
         idMessage: msg.exportVal().idMessage,
@@ -209,20 +215,24 @@ export class ParentIdComponent implements OnInit {
   addKid() {
     // this.addNext();
     this.parentProfile.addKid();
-    this.parentAccountService.addKid(this.parentProfile.kids);
+    // this.parentAccountService.addKid(this.parentProfile.kids);
   }
 
   onSavePI(formValue) {
+    this.savingPI = true;
     if (this.personalInfoForm.valid) {
       this.parentAccountService.savePI(formValue);
     } else {
+      this.savingPI = false;
       for (let i = 0 ; i < this.changedPI.length; i++) { this.changedPI[i] = true; }
     }
   }
   onSaveNP(formValue) {
+    this.savingNP = true;
     if (this.newPasswordForm.valid) {
       this.parentAccountService.saveNP(formValue);
     } else {
+      this.savingNP = false;
       for (let i = 0 ; i < this.changedNP.length; i++) { this.changedNP[i] = true; }
     }
   }

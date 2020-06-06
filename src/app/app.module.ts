@@ -85,7 +85,7 @@ const appRoutes: Routes = [
       AngularFireModule.initializeApp(environment.firebaseConfig),
       AngularFireAuthModule,
       AngularFirestoreModule,
-      NgpSortModule
+      NgpSortModule,
     ],
   providers: [
     AuthService,

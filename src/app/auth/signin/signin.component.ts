@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 export class SigninComponent implements OnInit {
   signInForm: FormGroup;
   changed = [false, false];
+  submitting = false
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
@@ -27,10 +28,12 @@ export class SigninComponent implements OnInit {
   }
 
   onSubmitSignIn(formValue) {
+    this.submitting = true;
     if (this.signInForm.valid) {
       this.authService.doLogin(formValue.email , formValue.password);
     } else {
       for (let i = 0 ; i < this.changed.length; i++) { this.changed[i] = true; }
+      this.submitting = false;
     }
   }
 

@@ -20,8 +20,8 @@ export  class AuthService {
                  public router: Router,
   ) {}
 
-  async doRegisterAsSitter(value) {
-    await this.afAuth.createUserWithEmailAndPassword(value.email, value.password).then(res => {
+   doRegisterAsSitter(value) {
+     this.afAuth.createUserWithEmailAndPassword(value.email, value.password).then(res => {
       console.log('success!');
       const x = new SitterModalService(value.firstName, value.lastName, value.email, value.phoneNumber, '',
         value.city, value.ZIP, value.birthday, '' , [],
@@ -30,24 +30,20 @@ export  class AuthService {
         '', '' , '' , [],
         0, [], false, []);
       firebase.database().ref('sitters').child(res.user.uid).set(x);
-
-      this.router.navigate(['auth/signIn']); } ).catch((error) => {
-      console.log(error.message);
-    });
+    }).then(() => {this.router.navigate(['auth/signIn']); } ).catch((error) =>
+       console.log(error.message));
   }
 
-  async doRegisterAsParent(value) {
-    await this.afAuth.createUserWithEmailAndPassword(value.email, value.password).then(res => {
+   doRegisterAsParent(value) {
+     this.afAuth.createUserWithEmailAndPassword(value.email, value.password).then(res => {
       console.log('success!');
       const x = new ParentModal(value.firstName, value.lastName, value.email, value.phoneNumber, {
         emailSub: '',
         favsAvailability: false,
         messagesReceived: false}, value.city, value.ZIP, {}, {}, {});
       firebase.database().ref('parents').child(res.user.uid).set(x);
-
-      this.router.navigate(['auth/signIn']); } ).catch((error) => {
-      console.log(error.message);
-    });
+    }).then(() => {this.router.navigate(['auth/signIn']); } )
+       .catch((error) => console.log(error));
   }
 
   doLogin(email, password) {
@@ -60,7 +56,7 @@ export  class AuthService {
     });
   }
 
-  async setLoggedIn(value: boolean) {
+   setLoggedIn(value: boolean): Promise<any> {
     return new Promise(((resolve, reject) => {
       this.loggedInStatus = value;
       localStorage.setItem('loggedIn', 'true');
@@ -68,8 +64,7 @@ export  class AuthService {
         if (user) {
           localStorage.setItem('userId', user.uid);
           this.userIdstatus = user.uid;
-          const ref = firebase.database().ref('parents');
-          ref.child(`${user.uid}`).once('value', snapshot => {
+          firebase.database().ref('parents').child(`${user.uid}`).once('value', snapshot => {
             if (snapshot.exists()) {
               this.isParentStatus = true;
               localStorage.setItem('isParent', 'true');
@@ -78,21 +73,23 @@ export  class AuthService {
               localStorage.setItem('isParent', 'false');
             }
             }
-          );
-          resolve(this.isParentStatus);
+          ).then(() => resolve( this.isParentStatus));
         }
       });
     }));
   }
 
-  async setLoggedOut(value: boolean) {
-    await firebase.auth().signOut().then( res => {
-      this.loggedInStatus = value;
-      localStorage.removeItem('loggedIn');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('isParent');
-      this.isParentStatus = null;
-      this.userIdstatus = null;
+   setLoggedOut(value: boolean): Promise<any>  {
+    return new Promise<any>((resolve) => {
+      firebase.auth().signOut().then(() => {
+        this.loggedInStatus = value;
+        localStorage.removeItem('loggedIn');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('isParent');
+        this.isParentStatus = null;
+        this.userIdstatus = null;
+        localStorage.removeItem('user');
+      }).then(() => resolve(true));
     });
   }
 
@@ -109,9 +106,7 @@ export  class AuthService {
   }
 
   doLogout() {
-    this.setLoggedOut(false);
-    this.afAuth.signOut().then((res) => {
-     localStorage.removeItem('user');
+    this.setLoggedOut(false).then(() => {
      this.router.navigate(['/home']).then(window.location.reload);
    }, (error) => {
      console.log('Logout error: ', error);

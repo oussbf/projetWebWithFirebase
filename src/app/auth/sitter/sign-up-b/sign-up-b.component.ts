@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class SignUpBComponent implements OnInit {
   sitterForm: FormGroup;
   changed = [false, false, false, false, false, false, false, false, false, false];
-
+  submitting = false;
 
   cities = [
     'Ariana', 'Beja', 'Ben Arous', 'Bizerte', 'Gabes' , 'Gafsa' , 'Jendouba' , 'Kasserine' , 'Kairouan' , 'Kebili' , 'Kef' ,
@@ -41,9 +41,11 @@ export class SignUpBComponent implements OnInit {
   }
 
   onRegister(formValue) {
+    this.submitting = true;
     if (this.sitterForm.valid) {
       this.authService.doRegisterAsSitter(formValue);
     } else {
+      this.submitting = false;
       for (let i = 0 ; i < this.changed.length; i++) { this.changed[i] = true; }
     }
 

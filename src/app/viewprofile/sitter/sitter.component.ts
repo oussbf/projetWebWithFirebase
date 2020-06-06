@@ -29,6 +29,7 @@ export class SitterComponent implements OnInit {
   starRating = 1;
   changedRequest = [false, false, false, false];
   visibilityRatingForm = false;
+  pageReady = false;
   constructor(private formBuilder: FormBuilder, private sitterRatingService: SitterRatingService, private route: ActivatedRoute,
               public authService: AuthService, private parentAccountService: ParentAccountService) { }
 
@@ -82,7 +83,7 @@ export class SitterComponent implements OnInit {
       '', '', [], '', '', '', '',
       '', '' , '' , [],
       '', [0, 0, 0, 0, 0], '', []);
-    firebase.database().ref().child(`sitters/${this.sitterId}`).on('value' , (res) => {
+    firebase.database().ref().child(`sitters/${this.sitterId}`).once('value' , (res) => {
       this.sitterProfile.firstName = res.exportVal().firstName;
       this.sitterProfile.lastName = res.exportVal().lastName;
       this.sitterProfile.gender = res.exportVal().gender;
@@ -110,15 +111,15 @@ export class SitterComponent implements OnInit {
         this.sitterProfile.reviews.push(reviewerInfo);
       });
       this.sitterProfile.avgRate = res.exportVal().avgRate;
-    } );
+    } ).then(() => this.pageReady = true);
 
     firebase.database().ref(`parents/${this.authService.userId}/favourites`).orderByChild('idFavourite').equalTo(this.sitterId)
-      .on('value', child => {
+      .once('value', child => {
         this.addedToFavourites = child.hasChildren();
       });
 
     firebase.database().ref(`sitters/${this.sitterId}/reviews`).orderByChild('idRev').equalTo(this.authService.userId)
-      .on('value', child => {
+      .once('value', child => {
         this.visibilityRatingForm = (this.authService.isParent && !child.hasChildren());
       });
   }

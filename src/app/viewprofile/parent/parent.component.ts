@@ -11,13 +11,14 @@ import * as firebase from 'firebase';
 export class ParentComponent implements OnInit {
   parentProfile: ParentModal;
   parentId: string;
+  pageReady = false;
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.parentId = this.route.snapshot.params.id;
-    this.parentProfile = new ParentModal('' , '' , '' , '' , '', '', '' , '' , '', []);
-    firebase.database().ref().child(`parents/${this.parentId}`).on('value' , (res) => {
+    this.parentProfile = new ParentModal('' , '' , '' , '' , '', '', '' , '' , [], []);
+    firebase.database().ref().child(`parents/${this.parentId}`).once('value' , (res) => {
       this.parentProfile.firstName = res.exportVal().firstName;
       this.parentProfile.lastName = res.exportVal().lastName;
       this.parentProfile.city = res.exportVal().city;
@@ -38,7 +39,7 @@ export class ParentComponent implements OnInit {
         };
         this.parentProfile.kids.push(x);
       });
-    });
+    }).then(() => this.pageReady = true);
 
 
     }
