@@ -20,28 +20,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42e50037-016e-4c55-98d8-0fa021400a0a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/InsatDocs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/InsatDocs.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/progress-spinner/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/progress-spinner/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/progress-spinner/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/progress-spinner/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/progress-spinner/progress-spinner-module.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/progress-spinner/progress-spinner-module.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@angular/material/progress-spinner/progress-spinner.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@angular/material/progress-spinner/progress-spinner.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jquery/JQuery.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/jquery/JQuery.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jquery/JQueryStatic.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/jquery/JQueryStatic.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jquery/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/jquery/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jquery/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/jquery/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jquery/dist/jquery.slim.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/jquery/dist/jquery.slim.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jquery/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/jquery/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jquery/legacy.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/jquery/legacy.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jquery/misc.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/jquery/misc.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jquery/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/jquery/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/auth/parent/sign-up-a/sign-up-a.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/parent/sign-up-a/sign-up-a.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/auth/parent/sign-up-a/sign-up-a.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/parent/sign-up-a/sign-up-a.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/signin/signin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/signin/signin.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/signin/signin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/signin/signin.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/auth/sitter/sign-up-b/sign-up-b.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/sitter/sign-up-b/sign-up-b.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/sitter/sign-up-b/sign-up-b.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/sitter/sign-up-b/sign-up-b.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/parent-id/parent-id.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/profile/sitterid/sitterid.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/viewprofile/parent/parent.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/viewprofile/parent/parent.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/parent-account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/parent-account.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/sitter-account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/sitter-account.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/viewprofile/parent/parent.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/viewprofile/parent/parent.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/viewprofile/sitter/sitter.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/polyfills.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/polyfills.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +69,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -183,7 +190,9 @@
       <workItem from="1590446613616" duration="4477000" />
       <workItem from="1590484715554" duration="12000" />
       <workItem from="1591427209276" duration="12944000" />
-      <workItem from="1591480711160" duration="3465000" />
+      <workItem from="1591480711160" duration="4196000" />
+      <workItem from="1591520954362" duration="17829000" />
+      <workItem from="1591688751469" duration="22830000" />
     </task>
     <servers />
   </component>
@@ -250,9 +259,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="184" y="11" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1585709483147" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1587485208832">
-      <screen x="0" y="0" width="1366" height="738" />
+    <state width="498" height="417" key="SwitcherDM" timestamp="1591708163022">
+      <screen x="0" y="0" width="1280" height="690" />
     </state>
+    <state width="498" height="417" key="SwitcherDM/0.0.1280.690@0.0.1280.690" timestamp="1591708163022" />
     <state width="498" height="446" key="SwitcherDM/0.0.1366.738@0.0.1366.738" timestamp="1587485208832" />
     <state x="492" y="286" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587241883018">
       <screen x="0" y="0" width="1366" height="738" />
@@ -267,9 +277,10 @@
     </state>
     <state x="339" y="163" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1589770147311" />
     <state x="339" y="165" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1589039034979" />
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1588447573429">
-      <screen x="0" y="0" width="1366" height="738" />
+    <state x="324" y="55" width="672" height="634" key="search.everywhere.popup" timestamp="1591708418623">
+      <screen x="0" y="0" width="1280" height="690" />
     </state>
+    <state x="324" y="55" width="672" height="634" key="search.everywhere.popup/0.0.1280.690@0.0.1280.690" timestamp="1591708418623" />
     <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1588447573429" />
   </component>
 </project>

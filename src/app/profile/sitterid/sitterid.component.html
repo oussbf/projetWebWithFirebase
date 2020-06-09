@@ -199,13 +199,13 @@
               <label class="ml-n2" for="subscribeEmail">Subscribe  To NewsLetter:</label>
               <div class="row">
                 <input  type="email" class="form-control" id="subscribeEmail" aria-describedby="subEmail"  placeholder="Exp: Example@gmail.com" style="width: 90%" [class.btn-outline-danger]="notificationForm.controls.emailSub.invalid && changedNotif" (change)="changedNotif=true" formControlName="emailSub">
-                <ui-switch class="col-sm-1" color="#17a2b8" id="emailSubCheck" [disabled]="notificationForm.controls.emailSub.invalid" (change)="subscribeChange(notificationForm.value)" formControlName="emailSubCheck" ></ui-switch>
+                <ui-switch class="col-sm-1" color="#17a2b8" id="emailSubCheck" [disabled]="notificationForm.controls.emailSub.invalid" (click)="subscribeChange(notificationForm.value)" formControlName="emailSubCheck" ></ui-switch>
               </div>
             </div>
             <label class="ml-n2">Your email notifications</label>
             <ul class="list-group ml-n3">
-              <li class="list-group-item font-weight-bold" style="height: 50px">Jobs Request <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" [disabled]="!newsLetterChecked" (change)="onUpdateNotifications(notificationForm.value)"  formControlName="jobRequest"></ui-switch></li>
-              <li class="list-group-item font-weight-bold" style="height: 50px">Received Reviews <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" [disabled]="!newsLetterChecked" (change)="onUpdateNotifications(notificationForm.value)" formControlName="reviewsReceived"></ui-switch></li>
+              <li class="list-group-item font-weight-bold" style="height: 50px">Jobs Request <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" [disabled]="!newsLetterChecked" (click)="onUpdateNotifications(notificationForm.value)"  formControlName="jobRequest"></ui-switch></li>
+              <li class="list-group-item font-weight-bold" style="height: 50px">Received Reviews <ui-switch class="col-sm-1" color="#17a2b8" style="float: right" [disabled]="!newsLetterChecked" (click)="onUpdateNotifications(notificationForm.value)" formControlName="reviewsReceived"></ui-switch></li>
             </ul>
 
           </div>
@@ -303,7 +303,7 @@
             <button type="button" class="btn" [ngClass]="{'btn-success':job.jobStatus , 'btn-danger':job.jobStatus === false}" disabled *ngIf="!(job.jobStatus === undefined)" ><span *ngIf="job.jobStatus">Accepted</span><span *ngIf="job.jobStatus === false">Rejected</span></button>
             <!--ADD AN IGNORED BUTTON (black) WHICH APPEARS IF THE DEADLANE OF ACCEPTING OR REJECTING IS PASSED-->
 
-            <a [routerLink]="'/viewprofile/parents/'+job.id" class="float-right mt-2">view Profile</a>
+            <a [routerLink]="'/viewprofile/parent/'+job.id" class="float-right mt-2">View Profile</a>
           </div>
         </div>
       </div>

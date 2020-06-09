@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ParentAccountService} from '../../services/parent-account.service';
 import {AuthService} from '../../services/auth.service';
 import {ParentModal} from '../../services/parentModal.service';
@@ -12,6 +12,7 @@ import * as firebase from 'firebase';
 })
 
 export class ParentIdComponent implements OnInit {
+  @ViewChild('favouriteSubmit') favouriteSubmit: HTMLButtonElement;
   savingPI = false;
   savingNP = false;
   personalInfoForm: FormGroup;
@@ -19,10 +20,8 @@ export class ParentIdComponent implements OnInit {
   kidsForm: FormGroup;
   notificationForm: FormGroup;
   url: string | ArrayBuffer = 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png';
-  ArrayofkidsId = ['Achoik'];
   newsLetterChecked = false;
   checkBoxChecked =  false;
-  otherSelectedChecked: boolean;
   changedPI  = [false, false, false , false];
   changedNP = [false, false, false];
   changedKid = [false, false, false , false];
@@ -36,12 +35,15 @@ export class ParentIdComponent implements OnInit {
   checkBoxChange() {
     this.checkBoxChecked = !this.checkBoxChecked;
   }
+
   othersSelectedChange(i) {
-    this.otherSelectedChecked = !this.otherSelectedChecked;
-    if (!this.otherSelectedChecked) {
-      this.parentProfile.kids[i].otherSpecialNeed = '';
+    this.kids.controls[i].get('othersCheckBox').setValue(!this.kids.controls[i].get('othersCheckBox').value);
+    console.log('othersCheckBox value: ' + this.kids.controls[i].get('othersCheckBox').value);
+    if (!this.kids.controls[i].get('othersCheckBox').value) {
+      this.kids.controls[i].get('otherHandicaps').setValue('');
     }
   }
+
   clickPic() {
     document.getElementById('imageUpload').click();
   }
@@ -55,7 +57,7 @@ export class ParentIdComponent implements OnInit {
       // tslint:disable-next-line:no-shadowed-variable
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.url = event.target.result;
-        this.parentAccountService.uploadPicture(this.url).then(res => {
+        this.parentAccountService.uploadPicture(this.url).then(() => {
           window.location.reload();
         }, err => console.log(err));
       };
@@ -97,11 +99,11 @@ export class ParentIdComponent implements OnInit {
        res.child('kids').forEach(kid => {
          const y = [];
          kid.child('specialNeeds').forEach(specialNeed => {
-           if ((specialNeed.key.toString() !== 'others')) {
+           if (specialNeed.exportVal() === true) {
+             console.log(specialNeed.key);
              y.push(specialNeed.key);
            }
          });
-         this.otherSelectedChecked = kid.child('specialNeeds').exportVal().others.length > 0;
          const x = {
            idKid: kid.exportVal().idKid,
            kidName: kid.exportVal().kidName,
@@ -112,6 +114,8 @@ export class ParentIdComponent implements OnInit {
            additionalInfo: kid.exportVal().additionalInfo
          };
          this.parentProfile.kids.push(x);
+         this.addKid(x.kidName, x.otherSpecialNeed, x.additionalInfo, x.kidAge, kid.child('specialNeeds').exportVal().others.length > 0 );
+
        });
      }
       /* ********************************************** END FILLING KIDS INFO *************************************************/
@@ -172,22 +176,16 @@ export class ParentIdComponent implements OnInit {
         [Validators.required, Validators.pattern('(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$')]],
 
     });
-   /* this.kidsForm = this.formBuilder.group({
-      item: this.formBuilder.array([this.createItem()])
-    });*/
 
     this.kidsForm = this.formBuilder.group({
-      kidName: ['', [Validators.required, Validators.maxLength(18)]],
-      otherHandicaps: ['',  Validators.maxLength(20)],
-      comments: ['', Validators.maxLength(300)],
-      kidAge: ['', Validators.required]
+      kids: this.formBuilder.array([])
     });
 
     this.notificationForm = this.formBuilder.group({
       emailSub: ['', [Validators.required, Validators.email]],
       emailSubCheck: [''],
-      messagesReceived: [''],
-      favsAvailability: ['']
+      messagesReceived: [],
+      favsAvailability: []
     });
 
     this.requestForm = this.formBuilder.group({
@@ -200,22 +198,22 @@ export class ParentIdComponent implements OnInit {
 
   }
 
-  /*createItem() {
+  newKid(kidName, otherHandicaps, comments, kidAge, othersCheckBox): FormGroup {
     return this.formBuilder.group({
-      kidName: ['', [Validators.required, Validators.maxLength(18)]],
-      otherHandicaps: ['',  Validators.maxLength(20)],
-      comments: ['', Validators.maxLength(300)],
-      kidAge: ['', Validators.required]});
+      kidName: [kidName, [Validators.required, Validators.maxLength(18)]],
+      otherHandicaps: [otherHandicaps,  Validators.maxLength(20)],
+      comments: [comments, Validators.maxLength(300)],
+      kidAge: [kidAge, Validators.required],
+      othersCheckBox: [othersCheckBox]
+    });
   }
 
-  addNext() {
-    (this.kidsForm.controls.items as FormArray).push(this.createItem());
-  }*/
-
-  addKid() {
-    // this.addNext();
+  addKid(kidName, otherHandicaps, comments, kidAge, othersCheckBox) {
+    this.kids.push(this.newKid(kidName, otherHandicaps, comments, kidAge, othersCheckBox));
     this.parentProfile.addKid();
-    // this.parentAccountService.addKid(this.parentProfile.kids);
+  }
+  get kids(): FormArray {
+    return this.kidsForm.get('kids') as FormArray;
   }
 
   onSavePI(formValue) {
@@ -227,6 +225,7 @@ export class ParentIdComponent implements OnInit {
       for (let i = 0 ; i < this.changedPI.length; i++) { this.changedPI[i] = true; }
     }
   }
+
   onSaveNP(formValue) {
     this.savingNP = true;
     if (this.newPasswordForm.valid) {
@@ -236,15 +235,15 @@ export class ParentIdComponent implements OnInit {
       for (let i = 0 ; i < this.changedNP.length; i++) { this.changedNP[i] = true; }
     }
   }
-  onSaveKid(formValue) {
+
+  onSaveKid(kids) {
     if (this.kidsForm.valid) {
-      this.parentAccountService.saveKid(formValue).then(res => {
-        window.location.reload();
-        }, err => console.log(err));
+      this.parentAccountService.addKid(this.parentProfile.kids, kids);
     } else {
       for (let i = 0 ; i < this.changedKid.length; i++) { this.changedKid[i] = true; }
     }
   }
+
   subscribeChange(formValue) {
     if (this.newsLetterChecked) {
       this.newsLetterChecked = !this.newsLetterChecked;
@@ -262,11 +261,18 @@ export class ParentIdComponent implements OnInit {
 
   onUpdateNotifications(formValue) {
     this.parentAccountService.updateNotifications(formValue);
+    console.log('messages received ' + this.notificationForm.value.messagesReceived);
+    console.log('favsAvailability ' + this.notificationForm.value.favsAvailability);
   }
 
   deleteMessage(i) {
     this.parentAccountService.deleteMessage(this.parentProfile.messages[i].idMessage);
     this.parentProfile.deleteMessage(i);
+  }
+
+  deleteKid(i) {
+    this.parentProfile.deleteChild(i);
+    this.kids.removeAt(i);
   }
 
   onSubmitRequest(formValue, i) {

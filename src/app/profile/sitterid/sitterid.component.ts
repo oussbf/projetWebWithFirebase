@@ -42,7 +42,7 @@ export class SitteridComponent implements OnInit {
       '', '', [], '', {}, '', '',
       '', '' , '' , [],
       '', [0, 0, 0, 0, 0], '', []);
-    firebase.database().ref().child(`sitters/${this.authService.userId}`).on('value', (sitter) => {
+    firebase.database().ref().child(`sitters/${this.authService.userId}`).once('value', (sitter) => {
       this.sitterProfile.firstName = sitter.exportVal().firstName;
       this.sitterProfile.lastName = sitter.exportVal().lastName;
       this.sitterProfile.email = sitter.exportVal().email;

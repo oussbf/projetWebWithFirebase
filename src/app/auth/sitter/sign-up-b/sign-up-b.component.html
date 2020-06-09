@@ -92,7 +92,7 @@
                       <i class="fa fa-lock"></i>
                     </span>
                 </div>
-                <input id="password" type="password" class="form-control" [class.btn-outline-danger]="sitterForm.controls.password.invalid && changed[4]" (change)="changed[4]=true" formControlName="password">
+                <input id="password" type="password" class="form-control" [class.btn-outline-danger]="sitterForm.controls.password.invalid && changed[4]" (change)="changed[4]=true" formControlName="password" ngbPopover="Your password must be between 8 and 30 characters, it must contain at least one uppercase, or capital, letter (ex: A, B, etc...), one number digit (ex: 0, 1, 2, 3, etc.) and at least one special character (ex: $,#,@, etc ...)" triggers="focus" popoverTitle="password Description">
               </div>
             </div>
           </div>

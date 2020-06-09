@@ -36,6 +36,7 @@ import {ParentProfileGuardService} from './guards/parent-profile-guard.service';
 import {SitterProfileGuardService} from './guards/sitter-profile-guard.service';
 import {ReverseAuthGuardService} from './guards/reverse-auth-guard.service';
 import {NgpSortModule} from 'ngp-sort-pipe';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 const appRoutes: Routes = [
@@ -86,6 +87,7 @@ const appRoutes: Routes = [
       AngularFireAuthModule,
       AngularFirestoreModule,
       NgpSortModule,
+      NgbModule
     ],
   providers: [
     AuthService,

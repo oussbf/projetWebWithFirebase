@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {ParentModal} from './parentModal.service';
 import {AuthService} from './auth.service';
 import * as firebase from 'firebase';
+import {FormArray} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -28,20 +29,6 @@ export class ParentAccountService {
     });
   }
 
-  saveKid(formValue) {
-
-    /*backed Script to update user's kids Info*/
-
-    return new Promise(
-      (resolve, reject) => {
-        setTimeout(
-          () => {
-            resolve(true);
-          }, 2000
-        );
-      }
-    );
-  }
   uploadPicture(url) {
     /*backed Script to update user's picture*/
     return new Promise(
@@ -59,10 +46,10 @@ export class ParentAccountService {
     if (formValue.emailSub.length) {
       firebase.database().ref(`parents/${this.authService.userId}/notifications`).update({
         emailSub: formValue.emailSub,
-        favsAvailability: !formValue.favsAvailability,
-        messagesReceived: !formValue.messagesReceived
+        favsAvailability: (formValue.favsAvailability),
+        messagesReceived: (formValue.messagesReceived)
       })
-        .then(success => {window.location.reload(); });
+        .then(success => {/*window.location.reload(); */});
     } else {
       firebase.database().ref(`parents/${this.authService.userId}/notifications`).update({emailSub: ''})
         .then(success => {window.location.reload(); });
@@ -105,26 +92,29 @@ export class ParentAccountService {
       .then(success => {console.log('added To Favourites'); });
   }
 
-  addKid(kidsArray: any[]) {
-    kidsArray.forEach(kid => {
-      if (kid.idKid.length) {
-        firebase.database().ref(`parents/${this.authService.userId}/kids/${kid.idKid}`).update({
-          kidName: kid.kidName,
-          kidAge: kid.kidAge,
-          childAge: kid.childAge,
-          additionalInfo: kid.additionalInfo
-          /*I NEED TO COMPLETE THE SPECIALNEEDS AND OTHERSPECIALNEED*/
-        });
-      } else {
-        const x = firebase.database().ref(`parents/${this.authService.userId}/kids`).push();
-        x.set({
-          idKid : x.key,
-          kidName: kid.kidName,
-          kidAge: kid.kidAge,
-          childAge: kid.childAge,
-          additionalInfo: kid.additionalInfo
-          /*I NEED TO COMPLETE THE SPECIALNEEDS AND OTHERSPECIALNEED*/
-        });
+  addKid(kidsArray: any[], kids: FormArray) {
+    const ref = firebase.database().ref(`parents/${this.authService.userId}/kids`);
+    ref.set({}).then(() => {
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0 ; i < kids.controls.length; i++ ) {
+        const id = ref.push();
+        const y = {
+          others: kids.controls[i].get('otherHandicaps').value,
+          deaf : kidsArray[i].specialNeeds.includes('deaf'),
+          blind : kidsArray[i].specialNeeds.includes('blind'),
+          handicapped : kidsArray[i].specialNeeds.includes('handicapped'),
+          mute : kidsArray[i].specialNeeds.includes('mute'),
+          autistic : kidsArray[i].specialNeeds.includes('autistic')
+        };
+        const x = {
+          idKid: id.key,
+          kidName: kids.controls[i].get('kidName').value,
+          kidAge: kids.controls[i].get('kidAge').value,
+          additionalInfo: kids.controls[i].get('comments').value,
+          childAge: kidsArray[i].childAge,
+          specialNeeds: y
+        };
+        ref.child(id.key).set(x);
       }
     });
   }

@@ -13,14 +13,14 @@ export class SitterAccountService {
   savePI(formValue) {
     firebase.database().ref(`sitters/${this.authService.userId}`).update({firstName: formValue.firstName,
       lastName: formValue.lastName, email: formValue.email, phoneNumber: formValue.phoneNumber, jobEducation: formValue.jobStatus})
-      .then(res => {window.location.reload(); });
+      .then(() => {window.location.reload(); });
   }
 
   saveNP(formValue) {
     const currentUser = firebase.auth().currentUser;
     const credentials = firebase.auth.EmailAuthProvider.credential(currentUser.email, formValue.oldPassword);
     currentUser.reauthenticateWithCredential(credentials).then(success => {currentUser.updatePassword(formValue.newPassword)
-      .then( finishedUpdate => {
+      .then( () => {
           window.location.reload();
         }
       );
@@ -61,7 +61,7 @@ export class SitterAccountService {
         specialNeedCare: certificates.includes('specialNeedCare'),
         waterSafety: certificates.includes('waterSafety'),
       }
-    }).then(success => {window.location.reload(); });
+    }).then(() => {window.location.reload(); });
   }
 
   saveAM(formValue) {
@@ -78,7 +78,7 @@ export class SitterAccountService {
         availabilityDuration: formValue.duration,
         availablityOpenForRegularJob: formValue.openJob,
         availabilityAdditionalInfo: formValue.availabilityAdditionalInfo
-      }).then(success => {window.location.reload(); });
+      }).then(() => {window.location.reload(); });
     } else {
       firebase.database().ref(`sitters/${this.authService.userId}`).update({
         availability: formValue.available,
@@ -86,7 +86,7 @@ export class SitterAccountService {
         availabilityDuration: '',
         availablityOpenForRegularJob: false,
         availabilityAdditionalInfo: ''
-      }).then(success => {window.location.reload(); });
+      }).then(() => {window.location.reload(); });
     }
   }
 
@@ -94,13 +94,13 @@ export class SitterAccountService {
     if (formValue.emailSub.length) {
       firebase.database().ref(`sitters/${this.authService.userId}/notifications`).update({
         emailSub: formValue.emailSub,
-        jobRequest: !formValue.jobRequest,
-        reviewsReceived: !formValue.reviewsReceived
+        jobRequest: formValue.jobRequest,
+        reviewsReceived: formValue.reviewsReceived
       })
-        .then(success => {window.location.reload(); });
+        .then(() => {/*window.location.reload(); */});
     } else {
       firebase.database().ref(`sitters/${this.authService.userId}/notifications`).update({emailSub: ''})
-        .then(success => {window.location.reload(); });
+        .then(() => {window.location.reload(); });
     }
   }
 

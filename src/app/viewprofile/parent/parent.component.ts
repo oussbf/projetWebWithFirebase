@@ -26,7 +26,9 @@ export class ParentComponent implements OnInit {
       res.child('kids').forEach(kid => {
         const y = [];
         kid.child('specialNeeds').forEach(specialNeed => {
-          if ((specialNeed.key.toString() !== 'others')) {y.push(specialNeed.key); }
+          if ((specialNeed.key.toString() !== 'others') && specialNeed.exportVal()) {
+            y.push(specialNeed.key);
+          }
         });
         const x = {
           idKid: kid.exportVal().idKid,
