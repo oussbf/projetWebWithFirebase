@@ -184,25 +184,25 @@
                   <div class="col-sm">
                     <div class="col">
                       <div><img src="assets/img/infant.svg" width="150px" height="150px" alt="infantImage"></div>
-                      <div><input class="form-check-input " style="margin-left:70px;" type="radio" name="childAge" id="infant" value="infant" (click)="parentProfile.kids[i].childAge = 'infant'" [checked]="parentProfile.kids[i].childAge === 'infant'" required></div>
+                      <div><input class="form-check-input " style="margin-left:70px;" type="radio" value="infant" (click)="parentProfile.kids[i].childAge = 'infant'" [checked]="parentProfile.kids[i].childAge === 'infant'" required></div>
                     </div>
                   </div>
                   <div class="col-sm">
                     <div class="col">
                       <div><img src="assets/img/toddler.svg" width="150px" height="150px" alt="toddlerImage"></div>
-                      <div ><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="toddler" value="toddler" (click)="parentProfile.kids[i].childAge = 'toddler'" [checked]="parentProfile.kids[i].childAge === 'toddler'" required></div>
+                      <div ><input class="form-check-input" style="margin-left:70px;" type="radio" value="toddler" (click)="parentProfile.kids[i].childAge = 'toddler'" [checked]="parentProfile.kids[i].childAge === 'toddler'" required></div>
                     </div>
                   </div>
                   <div class="col-sm">
                     <div class="col">
                       <div><img src="assets/img/preschool.svg" width="150px" height="150px" alt="preschoolerImage"></div>
-                      <div><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="preschooler" value="preschooler" (click)="parentProfile.kids[i].childAge = 'preschooler'" [checked]="parentProfile.kids[i].childAge === 'preschooler'" required></div>
+                      <div><input class="form-check-input" style="margin-left:70px;" type="radio" value="preschooler" (click)="parentProfile.kids[i].childAge = 'preschooler'" [checked]="parentProfile.kids[i].childAge === 'preschooler'" required></div>
                     </div>
                   </div>
                   <div class="col-sm ">
                     <div class="col">
                       <div><img src="assets/img/school.svg" width="150px" height="150px" alt="schoolerImage"></div>
-                      <div><input class="form-check-input" style="margin-left:70px;" type="radio" name="childAge" id="schooler" value="schooler" (click)="parentProfile.kids[i].childAge = 'schooler'" [checked]="parentProfile.kids[i].childAge === 'schooler'" required></div>
+                      <div><input class="form-check-input" style="margin-left:70px;" type="radio"  value="schooler" (click)="parentProfile.kids[i].childAge = 'schooler'" [checked]="parentProfile.kids[i].childAge === 'schooler'" required></div>
                     </div>
                   </div>
                 </div>
@@ -210,19 +210,19 @@
               <div class="form-group">
                 <label>Special Needs:</label>
                 <div class="checkbox">
-                  <label><input type="checkbox" name="specialNeed" value="deaf" (click)="parentProfile.toggleSpecialNeed(parentProfile.kids[i].specialNeeds , 'deaf')"  [checked]="parentProfile.kids[i].specialNeeds.includes('deaf')"> deaf</label>
+                  <label><input type="checkbox" (click)="parentProfile.toggleSpecialNeed(parentProfile.kids[i].specialNeeds , 'deaf')"  [checked]="parentProfile.kids[i].specialNeeds.includes('deaf')"> deaf</label>
                 </div>
                 <div class="checkbox">
-                  <label><input type="checkbox" name="specialNeed" value="blind" (click)="parentProfile.toggleSpecialNeed(parentProfile.kids[i].specialNeeds , 'blind')" [checked]="parentProfile.kids[i].specialNeeds.includes('blind')"> blind</label>
+                  <label><input type="checkbox" (click)="parentProfile.toggleSpecialNeed(parentProfile.kids[i].specialNeeds , 'blind')" [checked]="parentProfile.kids[i].specialNeeds.includes('blind')"> blind</label>
                 </div>
                 <div class="checkbox">
-                  <label><input type="checkbox" name="specialNeed" value="handicapped" (click)="parentProfile.toggleSpecialNeed(parentProfile.kids[i].specialNeeds , 'handicapped')"  [checked]="parentProfile.kids[i].specialNeeds.includes('handicapped')"> handicapped</label>
+                  <label><input type="checkbox" (click)="parentProfile.toggleSpecialNeed(parentProfile.kids[i].specialNeeds , 'handicapped')"  [checked]="parentProfile.kids[i].specialNeeds.includes('handicapped')"> handicapped</label>
                 </div>
                 <div class="checkbox">
-                  <label><input type="checkbox" name="specialNeed" value="mute" (click)="parentProfile.toggleSpecialNeed(parentProfile.kids[i].specialNeeds , 'mute')" [checked]="parentProfile.kids[i].specialNeeds.includes('mute')"> mute</label>
+                  <label><input type="checkbox" (click)="parentProfile.toggleSpecialNeed(parentProfile.kids[i].specialNeeds , 'mute')" [checked]="parentProfile.kids[i].specialNeeds.includes('mute')"> mute</label>
                 </div>
                 <div class="checkbox">
-                  <label><input type="checkbox" name="specialNeed" value="autistic" (click)="parentProfile.toggleSpecialNeed(parentProfile.kids[i].specialNeeds , 'autistic')" [checked]="parentProfile.kids[i].specialNeeds.includes('autistic')"> autistic</label>
+                  <label><input type="checkbox" (click)="parentProfile.toggleSpecialNeed(parentProfile.kids[i].specialNeeds , 'autistic')" [checked]="parentProfile.kids[i].specialNeeds.includes('autistic')"> autistic</label>
                 </div>
                 <div class="checkbox">
                   <label><input type="checkbox" name="othersCheckBox" (click)="othersSelectedChange(i)" [checked]="parentProfile.kids[i].otherSpecialNeed.length" formControlName="othersCheckBox"> others...</label>
@@ -240,7 +240,7 @@
               </div>
             </div>
           </div>
-          <button class="btn btn-info btn-md form-control mb-2 mt-2"  (click)="addKid('', '','', '', false)" *ngIf="parentProfile.kids.length <5">{{(!parentProfile.kids.length)? 'Add A Kid': ' Add Another Kid'}}</button>
+          <button class="btn btn-info btn-md form-control mb-2 mt-2"  (click)="addKid('', '','', '', false); parentProfile.addKid()" *ngIf="parentProfile.kids.length <5">{{(!parentProfile.kids.length)? 'Add A Kid': ' Add Another Kid'}}</button>
           <button type="submit" id="submitKids" class="btn btn-info btn-md form-control" >save</button>
         </div>
       </form>

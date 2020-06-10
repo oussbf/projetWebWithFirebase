@@ -100,7 +100,6 @@ export class ParentIdComponent implements OnInit {
          const y = [];
          kid.child('specialNeeds').forEach(specialNeed => {
            if (specialNeed.exportVal() === true) {
-             console.log(specialNeed.key);
              y.push(specialNeed.key);
            }
          });
@@ -210,8 +209,8 @@ export class ParentIdComponent implements OnInit {
 
   addKid(kidName, otherHandicaps, comments, kidAge, othersCheckBox) {
     this.kids.push(this.newKid(kidName, otherHandicaps, comments, kidAge, othersCheckBox));
-    this.parentProfile.addKid();
   }
+
   get kids(): FormArray {
     return this.kidsForm.get('kids') as FormArray;
   }
