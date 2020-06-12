@@ -63,13 +63,19 @@ export class SitteridComponent implements OnInit {
       this.sitterProfile.availabilityDuration = sitter.exportVal().availabilityDuration;
       this.sitterProfile.availabilityAdditionalInfo = sitter.exportVal().availabilityAdditionalInfo;
       this.sitterProfile.availablityOpenForRegularJob = sitter.exportVal().availablityOpenForRegularJob;
+      this.sitterProfile.imageUrl = sitter.exportVal().imageURL;
+      if (this.sitterProfile.imageUrl) {
+        this.url = this.sitterProfile.imageUrl;
+      }
+
       sitter.child('reviews').forEach(x => {
         const reviewerInfo = {
           idRev: x.exportVal().idRev,
           firstNameRev: x.exportVal().firstNameRev,
           reviewDate: x.exportVal().reviewDate,
           review: x.exportVal().review,
-          reviewText: x.exportVal().reviewText
+          reviewText: x.exportVal().reviewText,
+          imageURL: x.exportVal().imageURL
         };
         this.sitterProfile.starCounts[+x.exportVal().review - 1]++;
         this.sitterProfile.reviews.push(reviewerInfo);
@@ -145,17 +151,22 @@ export class SitteridComponent implements OnInit {
   clickPic() {
     document.getElementById('imageUpload').click();
   }
-  onSelectFile(event) {
+
+  onUploadPicture(event: any) {
     if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
-
-      // tslint:disable-next-line:no-shadowed-variable
-      reader.onload = (event) => { // called once readAsDataURL is completed
-        this.url = event.target.result;
-      };
-    }
+      const file: File = event.target.files[0];
+      const metaData = {contentType: file.type};
+      const storageRef = firebase.storage().ref(`pictures/${this.authService.userId}`);
+      storageRef.put(file, metaData).then(res =>
+        res.ref.getDownloadURL().then(downloadLink => {
+          this.url = downloadLink;
+          firebase.database().ref(`sitters/${this.authService.userId}`).update({
+            imageURL: 'https://firebasestorage.googleapis.com/v0/b/webprojectbackend.appspot.com/o/pictures%2F'
+              + this.authService.userId + '?alt=media'
+          });
+        })
+      );
+    } else {alert('No Picture Has Been Selected'); }
   }
 
   ngOnInit(): void {
@@ -279,13 +290,13 @@ export class SitteridComponent implements OnInit {
   acceptClick(i) {
     this.sitterProfile.acceptClick(i);
     this.sitterAccountService.acceptClick(this.sitterProfile.jobs[i].idJob, this.sitterProfile.firstName, this.sitterProfile.lastName,
-      this.sitterProfile.phoneNumber, this.sitterProfile.jobs[i].id);
+      this.sitterProfile.phoneNumber, this.sitterProfile.jobs[i].id, this.url);
   }
 
   rejectClick(i) {
     this.sitterProfile.rejectClick(i);
     this.sitterAccountService.rejectClick(this.sitterProfile.jobs[i].idJob, this.sitterProfile.firstName, this.sitterProfile.lastName,
-      this.sitterProfile.jobs[i].id);
+      this.sitterProfile.jobs[i].id, this.url);
 
   }
 

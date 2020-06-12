@@ -30,7 +30,7 @@
     <div id="AccountSettings" class="container tab-pane active" style="position: relative"><br>
 
       <div class="text-center mb-2 " style="position: absolute; top: 10px ;right: 30px">
-        <img id="profileImage" [src]="url ? url : 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'" width="150px" height="150px" class="avatar rounded-circle img-thumbnail " alt="avatar" (click)="clickPic()">
+        <img id="profileImage" [src]="url ? url : 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'" style="width: 150px; height: 150px" width="150px" height="150px" class="avatar rounded-circle img-thumbnail " alt="avatar" (click)="clickPic()">
         <input type='file' id="imageUpload" name="profilePictureUpload" style="display: none" (change)="onUploadPicture( $event);">
       </div>
 
@@ -126,7 +126,7 @@
         </button>
         <div class="row">
           <div class="col-1 my-auto">
-            <img src="assets/img/standardImage.jpg" width="70px " height="70px" class="rounded-circle m-auto" alt="profilePicture">
+            <img [src]=' message.imageURL' width="70px " height="70px" class="rounded-circle m-auto" alt="profilePicture">
           </div>
 
           <div class="ml-2 mt-1 col-10">
@@ -241,21 +241,27 @@
             </div>
           </div>
           <button class="btn btn-info btn-md form-control mb-2 mt-2"  (click)="addKid('', '','', '', false); parentProfile.addKid()" *ngIf="parentProfile.kids.length <5">{{(!parentProfile.kids.length)? 'Add A Kid': ' Add Another Kid'}}</button>
-          <button type="submit" id="submitKids" class="btn btn-info btn-md form-control" >save</button>
+          <button type="submit" id="submitKids" class="btn btn-info btn-md form-control" >
+            <span [hidden]="savingKids">save</span>
+            <span [hidden]="!savingKids" class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </span>
+          </button>
         </div>
       </form>
 
     </div>
     <!-- ===================================== END KIDS TABLE =======================================-->
 
+    <!-- ===================================== FAVOURITES TABLE =======================================-->
 
     <div id="Favourite" class="container tab-pane fade"><br>
       <h2 class="font-weight-bold text-center" *ngIf="!parentProfile.favourites.length">No Favourites Have Been Found.</h2>
       <div class=" bg-white mx-auto" >
-        <div class="card-header shadow mb-4" style="background-color: rgb(247, 247, 247); border-radius: 10px" *ngFor="let sitter of parentProfile.favourites;  let i = index">
+        <div class="card-header shadow mb-4 mx-auto" style="background-color: rgb(247, 247, 247); border-radius: 10px; width: 95%" *ngFor="let sitter of parentProfile.favourites;  let i = index">
           <div class="row">
             <div class="col-2" >
-              <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="rounded-circle" width="100%" alt="sitterPicture">
+              <img [src]="sitter.imageUrl" style="width: 150px; height: 150px" class="rounded-circle" width="100%" alt="sitterPicture">
             </div>
             <div class="col-7">
               <h1 class="text-left"><a class="text-dark" [routerLink]="'/viewprofile/sitter/'+sitter.id">{{sitter.firstName}} {{sitter.lastName}}</a></h1>
@@ -331,6 +337,7 @@
       </div>
 
     </div>
+    <!-- ===================================== END FAVOURITES TABLE =======================================-->
 
   </div>
 

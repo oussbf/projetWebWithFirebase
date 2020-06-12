@@ -179,7 +179,7 @@
       <div class="card-header shadow mb-3" style="background-color:  rgb(247, 247, 247); border-radius: 10px" *ngFor="let sitter of filteredSitters | sortBy: sortOrder:sortColumn ;  let i = index">
         <div class="row">
           <div class="col-2" >
-            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="rounded-circle" width="100%" alt="sitterPicture">
+            <img [src]="sitter.imageUrl" class="rounded-circle" style="width: 110px; height: 110px" width="100%" alt="sitterPicture">
           </div>
           <div class="col-7">
             <h1 class="text-left" ><a class="text-dark" [routerLink]="'/viewprofile/sitter/'+sitter.id">{{sitter.firstName}} {{sitter.lastName}}</a></h1>

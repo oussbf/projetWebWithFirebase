@@ -30,7 +30,8 @@ export class SitterModalService {
     firstNameRev: string,
     reviewDate: string,
     review: string,
-    reviewText: string
+    reviewText: string,
+    imageURL: string
   } [];
   avgRate: number;
   starCounts: number [];
@@ -46,6 +47,7 @@ export class SitterModalService {
     openFRJ: boolean,
     jobStatus: boolean
   } [];
+  imageUrl: string;
 
   constructor(firstName , lastName, email, phoneNumber, jobEducation, city, ZIP, age,
               numberOfChildrenHandling, childAge, displacement, experienceYears, certificates, aboutMe,

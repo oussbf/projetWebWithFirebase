@@ -21,6 +21,7 @@ export class SitterComponent implements OnInit {
   addedToFavourites = false;
   sitterProfile: SitterModalService;
   sitterId: string;
+  profileImage = 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png';
   star1 = true;
   star2 = false;
   star3 = false;
@@ -93,6 +94,10 @@ export class SitterComponent implements OnInit {
       this.sitterProfile.age = res.exportVal().age;
       this.sitterProfile.jobEducation = res.exportVal().jobEducation;
       this.sitterProfile.aboutMe = res.exportVal().aboutMe;
+      this.sitterProfile.imageUrl = res.exportVal().imageURL;
+      if (this.sitterProfile.imageUrl) {
+        this.profileImage = this.sitterProfile.imageUrl;
+      }
       res.child('certificates').forEach(x => {if (x.exportVal()) {this.sitterProfile.certificates.push(x.key.toString()); } });
       res.child('childAge').forEach(x => {if (x.exportVal()) {this.sitterProfile.childAge.push(x.key.toString()); } });
       this.sitterProfile.availability = res.exportVal().availability;
@@ -105,7 +110,8 @@ export class SitterComponent implements OnInit {
           firstNameRev: x.exportVal().firstNameRev,
           reviewDate: x.exportVal().reviewDate,
           review: x.exportVal().review,
-          reviewText: x.exportVal().reviewText
+          reviewText: x.exportVal().reviewText,
+          imageURL: x.exportVal().imageURL
         };
         this.sitterProfile.starCounts[+x.exportVal().review - 1]++;
         this.sitterProfile.reviews.push(reviewerInfo);

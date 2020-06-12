@@ -19,15 +19,13 @@ export class SitterRatingService {
         idRev: this.authService.userId,
         review: starRating,
         reviewDate: new Date(now()).toLocaleDateString(),
-        reviewText: formValue.reviewText
-      }).then(r  => {
+        reviewText: formValue.reviewText,
+        imageURL: parent.exportVal().imageURL
+      }).then(()  => {
         firebase.database().ref(`sitters/${sitterId}`).once('value', sitter => {
           if (sitter.exportVal().avgRate) {
             const y = ((+sitter.exportVal().avgRate * (sitter.child('reviews').numChildren() - 1)) + starRating)
               / (sitter.child('reviews').numChildren());
-            console.log(sitter.exportVal().avgRate);
-            console.log(sitter.child('reviews').numChildren());
-            console.log(y);
             firebase.database().ref((`sitters/${sitterId}`)).update({
               avgRate: y
             });
@@ -39,7 +37,7 @@ export class SitterRatingService {
 
         });
       });
-    }).then(r => {
+    }).then(() => {
       window.location.reload();
     });
   }

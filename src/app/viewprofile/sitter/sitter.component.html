@@ -18,7 +18,7 @@
     <div id="profile" class="container tab-pane active"><br>
       <div class="row">
         <div class="col-3 text-center">
-          <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" width="247px" height="247px" alt="profilePicture" class="mx-auto">
+          <img [src]="profileImage" width="247px" height="247px" alt="profilePicture" class="mx-auto">
           <button class="btn btn-info form-control mx-auto mt-2" *ngIf="authService.isParent" data-toggle="modal" data-target="#requestModal" id="RequestJobButton" name="RequestJobButton">Request Job</button>
           <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -161,7 +161,7 @@
       </div>
       <div class="mx-auto row mt-3 p-2 bg-light mb-2" style="width: 870px; position:relative ;border: 1px solid #EAEAEA; border-radius: 2px" *ngFor="let rating of sitterProfile.reviews ; let i= index">
         <div class="col-2 position-relative ">
-          <img class="rounded-circle position-relative top" src="assets/img/oussama.jpg" width="70px" height="70px" alt="reviewerPicture">
+          <img class="rounded-circle position-relative top" [src]="rating.imageURL" style="width: 70px; height: 70px" width="70px" height="70px" alt="reviewerPicture">
           <a [routerLink]="'viewProfile/parent/'+rating.idRev" style="text-underline: none; color: black" class="text-center">{{rating.firstNameRev}}</a>
           <div class="mb-2 ml-n2" style="width: 90px ;font-size: 9px">
             <i class="fa-star mx-1 text-info" [ngClass]="{'fa': +rating.review > 0, 'far': +rating.review <= 0}"></i>

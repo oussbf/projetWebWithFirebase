@@ -18,7 +18,8 @@ export class ParentModal {
     firstNameSender: string,
     lastNameSender: string,
     status: string,
-    phoneNumber: string
+    phoneNumber: string,
+    imageURL: string
   } [];
   kids: {
     idKid: string
@@ -38,8 +39,10 @@ export class ParentModal {
     description: string,
     rating: number,
     certificates: string[],
-    avgRate: number
+    avgRate: number,
+    imageUrl: string
   } [];
+    imageUrl: string;
   constructor(firstName , lastName, email, phoneNumber, notifications, city, ZIP, messages, kids,
               favourites) {
     this.firstName = firstName;

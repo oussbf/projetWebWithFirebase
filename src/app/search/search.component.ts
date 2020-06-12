@@ -116,6 +116,7 @@ export class SearchComponent implements OnInit {
         , '', x.city, '', x.age, x.numberOfChildrenHandling, [], x.displacement.toString() , x.experienceYears
         , [], x.aboutMe, {}, x.gender, x.availability.toString(), x.availabilityDate, x.availabilityDuration,
           '', [], x.avgRate, 0, x.availablityOpenForRegularJob.toString(), []);
+        sitt.imageUrl = x.imageURL;
         sitter.payload.child('certificates').forEach(certif => {
           if (certif.exportVal()) {sitt.certificates.push(certif.key); }
         });

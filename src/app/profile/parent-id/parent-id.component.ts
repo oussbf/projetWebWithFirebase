@@ -4,6 +4,7 @@ import {ParentAccountService} from '../../services/parent-account.service';
 import {AuthService} from '../../services/auth.service';
 import {ParentModal} from '../../services/parentModal.service';
 import * as firebase from 'firebase';
+import {AngularFireDatabase} from '@angular/fire/database';
 
 @Component({
   selector: 'app-parent-id',
@@ -15,6 +16,7 @@ export class ParentIdComponent implements OnInit {
   @ViewChild('favouriteSubmit') favouriteSubmit: HTMLButtonElement;
   savingPI = false;
   savingNP = false;
+  savingKids = false;
   personalInfoForm: FormGroup;
   newPasswordForm: FormGroup;
   kidsForm: FormGroup;
@@ -48,22 +50,27 @@ export class ParentIdComponent implements OnInit {
     document.getElementById('imageUpload').click();
   }
 
-  onUploadPicture(event) {
+  onUploadPicture(event: any) {
     if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
-
-      // tslint:disable-next-line:no-shadowed-variable
-      reader.onload = (event) => { // called once readAsDataURL is completed
-        this.url = event.target.result;
-        this.parentAccountService.uploadPicture(this.url).then(() => {
-          window.location.reload();
-        }, err => console.log(err));
-      };
-    }
+      const file: File = event.target.files[0];
+      const metaData = {contentType: file.type};
+      const storageRef = firebase.storage().ref(`/pictures/${this.authService.userId}/`);
+      storageRef.put(file, metaData).then(res =>
+        res.ref.getDownloadURL().then(downloadLink => {
+          this.url = downloadLink;
+          firebase.database().ref(`parents/${this.authService.userId}`).update({
+            imageURL: 'https://firebasestorage.googleapis.com/v0/b/webprojectbackend.appspot.com/o/pictures%2F'
+              + this.authService.userId + '?alt=media'
+          });
+        })
+      );
+    } else {alert('No Picture Has Been Selected'); }
   }
-  constructor(private formBuilder: FormBuilder, private parentAccountService: ParentAccountService, private authService: AuthService) {
+
+  constructor(private formBuilder: FormBuilder,
+              private parentAccountService: ParentAccountService,
+              private authService: AuthService,
+              private db: AngularFireDatabase) {
   }
 
   ngOnInit(): void {
@@ -92,6 +99,10 @@ export class ParentIdComponent implements OnInit {
           messagesReceived: this.parentProfile.notifications.messagesReceived,
           favsAvailability: this.parentProfile.notifications.favsAvailability
         });
+      this.parentProfile.imageUrl = res.exportVal().imageURL;
+      if (this.parentProfile.imageUrl) {
+        this.url = this.parentProfile.imageUrl;
+      }
 
 
       /* ********************************************** FILLING KIDS INFO *************************************************/
@@ -134,7 +145,8 @@ export class ParentIdComponent implements OnInit {
             description: sitter.exportVal().aboutMe,
             rating: 0,
             certificates : y,
-            avgRate: +sitter.exportVal().avgRate
+            avgRate: +sitter.exportVal().avgRate,
+            imageUrl: sitter.exportVal().imageURL
           };
           this.parentProfile.favourites.push(x);
         });
@@ -143,7 +155,7 @@ export class ParentIdComponent implements OnInit {
       /* ********************************************** END FILLING FAVOURITES INFO *************************************************/
 
     } );
-    /* **************************************** END FILLING ACCOUNT SETTINGS********************************* */
+    /* **************************************** MESSAGES SETTINGS ********************************* */
     firebase.database().ref().child(`parents/${this.authService.userId}/messages`).once('value' , (res) => {
     res.forEach(msg => {
       const x = {
@@ -152,7 +164,8 @@ export class ParentIdComponent implements OnInit {
         firstNameSender: msg.exportVal().firstNameSender,
         lastNameSender: msg.exportVal().lastNameSender,
         status: msg.exportVal().status,
-        phoneNumber: msg.exportVal().phoneNumber
+        phoneNumber: msg.exportVal().phoneNumber,
+        imageURL: msg.exportVal().imageURL
       };
       this.parentProfile.messages.push(x);
     });
@@ -236,11 +249,13 @@ export class ParentIdComponent implements OnInit {
   }
 
   onSaveKid(kids) {
+    this.savingKids = true;
     if (this.kidsForm.valid) {
       this.parentAccountService.addKid(this.parentProfile.kids, kids);
     } else {
       for (let i = 0 ; i < this.changedKid.length; i++) { this.changedKid[i] = true; }
     }
+    this.savingKids = false;
   }
 
   subscribeChange(formValue) {

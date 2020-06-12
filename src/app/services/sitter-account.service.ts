@@ -104,7 +104,7 @@ export class SitterAccountService {
     }
   }
 
-  acceptClick(idJob, firstName, lastName, phoneNbr, idParent) {
+  acceptClick(idJob, firstName, lastName, phoneNbr, idParent, imageUrl) {
     firebase.database().ref(`sitters/${this.authService.userId}/jobs`).child(idJob).update({jobStatus: true});
     const x = firebase.database().ref(`parents/${idParent}`).child('messages').push();
     x.set({
@@ -113,12 +113,13 @@ export class SitterAccountService {
       firstNameSender: firstName,
       lastNameSender: lastName,
       status: 'accepted',
-      phoneNumber: phoneNbr
-        }).then(success => {window.location.reload(); });
+      phoneNumber: phoneNbr,
+      imageURL: imageUrl
+        }).then(() => {window.location.reload(); });
 
   }
 
-  rejectClick(idJob, firstName, lastName, idParent) {
+  rejectClick(idJob, firstName, lastName, idParent, imageUrl) {
     firebase.database().ref(`sitters/${this.authService.userId}/jobs`).child(idJob).update({jobStatus: false});
     const x = firebase.database().ref(`parents/${idParent}`).child('messages').push();
     x.set({
@@ -127,7 +128,8 @@ export class SitterAccountService {
       firstNameSender: firstName,
       lastNameSender: lastName,
       status: 'declined',
-    }).then(success => {window.location.reload(); });
+      imageURL: imageUrl
+    }).then(() => {window.location.reload(); });
   }
 
   deleteJob(idJob) {

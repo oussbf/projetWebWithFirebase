@@ -12,7 +12,7 @@ export class ParentComponent implements OnInit {
   parentProfile: ParentModal;
   parentId: string;
   pageReady = false;
-
+  profileImage = 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png';
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -23,6 +23,10 @@ export class ParentComponent implements OnInit {
       this.parentProfile.lastName = res.exportVal().lastName;
       this.parentProfile.city = res.exportVal().city;
       this.parentProfile.ZIP = res.exportVal().ZIP;
+      this.parentProfile.imageUrl = res.exportVal().imageURL;
+      if (this.parentProfile.imageUrl) {
+        this.profileImage = this.parentProfile.imageUrl;
+      }
       res.child('kids').forEach(kid => {
         const y = [];
         kid.child('specialNeeds').forEach(specialNeed => {

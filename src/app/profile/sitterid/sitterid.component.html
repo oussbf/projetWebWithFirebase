@@ -24,8 +24,8 @@
     <div id="AccountSettings" class="container tab-pane active" style="position: relative"><br>
 
       <div class="text-center mb-2 " style="position: absolute; top: 10px ;right: 10px">
-        <img id="profileImage" [src]="url ? url : 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'" width="150px" height="150px" class="avatar rounded-circle img-thumbnail " alt="avatar" (click)="clickPic()">
-        <input type='file' id="imageUpload" name="profilePictureUpload" style="display: none" (change)="onSelectFile( $event);">
+        <img id="profileImage" [src]="url ? url : 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'" style="height: 150px; width: 150px" width="150px" height="150px" class="avatar rounded-circle img-thumbnail " alt="avatar" (click)="clickPic()">
+        <input type='file' id="imageUpload" name="profilePictureUpload" style="display: none" (change)="onUploadPicture($event);">
       </div>
 
       <h1> <i class="fas fa-user-cog"></i> Modify my settings</h1>
@@ -369,7 +369,7 @@
       </div>
       <div class="mx-auto row mt-3 p-2 bg-light mb-2" style="width: 870px; position:relative ;border: 1px solid #EAEAEA; border-radius: 2px" *ngFor="let rating of sitterProfile.reviews ; let i= index">
         <div class="col-2 position-relative ">
-          <img class="rounded-circle position-relative top" src="assets/img/oussama.jpg" width="70px" height="70px" alt="reviewerPicture">
+          <img class="rounded-circle position-relative top" [src]="rating.imageURL" style="width: 70px; height: 70px" width="70px" height="70px" alt="reviewerPicture">
           <a [routerLink]="'/viewProfile/parent/'+rating.idRev" style="text-underline: none; color: black" class="text-center">{{rating.firstNameRev}}</a>
           <div class="mb-2 ml-n2" style="width: 90px ;font-size: 9px">
             <i class="fa fa-star mx-1 text-info"> </i>
